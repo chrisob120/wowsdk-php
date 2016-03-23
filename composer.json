@@ -1,0 +1,21 @@
+{
+	"name": "chrisob120/php-wow-api",
+	"description": "World of Warcraft API SDK",
+	"license": "MIT",
+	"keywords": ["api", "wow", "wowapi", "php"],
+	"authors": [
+		{
+			"name": "Chris O'Brien",
+			"email": "chris@chrisob.com"
+		}
+	],
+	"require": {},
+	"require-dev": {
+		"phpunit/phpunit": "4.0.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"WowApi\\": "src"
+		}
+	}
+}
