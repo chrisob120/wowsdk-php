@@ -5,8 +5,8 @@
   "keywords": ["api", "wow", "wowapi", "php"],
   "authors": [
 	{
-		"name": "Chris O'Brien",
-		"email": "chris@chrisob.com"
+	  "name": "Chris O'Brien",
+	  "email": "chris@chrisob.com"
 	}
   ],
   "require": {},
