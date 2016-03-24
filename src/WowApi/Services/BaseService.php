@@ -1,7 +1,10 @@
 <?php namespace WowApi\Services;
 
+use WowApi\Exceptions\WowApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\TransferStats;
+use GuzzleHttp\Exception\ClientException;
 use WowApi\Util\Utilities;
 
 /**
@@ -33,6 +36,8 @@ abstract class BaseService {
      */
     protected $parameters = [];
 
+    protected $effectiveUri;
+
     /**
      * BaseService constructor assigning the Guzzle rest client and API Key
      *
@@ -43,10 +48,12 @@ abstract class BaseService {
         $this->_client = new Client(['base_uri' => self::BASE_URI]);
 
         // set the default parameters
-        $this->parameters['timeout'] = 2;
-        $this->parameters['query'] = [
-            'locale' => 'en_US',
-            'apikey' => $this->_apiKey
+        $this->parameters = [
+            'timeout' => 2,
+            'query' => [
+                'locale' => 'en_US',
+                'apikey' => $this->_apiKey
+            ]
         ];
     }
 
@@ -81,6 +88,19 @@ abstract class BaseService {
     }
 
     /**
+     * Throw WowApi exception from ClientException
+     *
+     * @param ClientException $clientEx
+     * @return WowApiException
+     */
+    protected function toWowApiException($clientEx) {
+        $wowApiEx = new WowApiException($clientEx->getResponse()->getReasonPhrase(), $clientEx->getCode());
+        $wowApiEx->setErrors(json_decode($clientEx->getResponse()->getBody()));
+
+        return $wowApiEx;
+    }
+
+    /**
      * Set the rest of the API call path
      *
      * @param string $path
@@ -98,19 +118,44 @@ abstract class BaseService {
     }
 
     /**
-     * @param array $fields
+     * Set the field(s) to be passed the request query option
+     *
+     * @param mixed $fields
      * @return void
      */
     protected function setFields($fields) {
         if (is_array($fields)) {
-            foreach ($fields as $field) {
+            $fieldStr = implode(',', $fields);
+        } else if (is_scalar($fields)) {
+            $fieldStr = $fields;
+        } else {
+            $fieldStr = false;
+        }
 
-            }
+        if ($fieldStr) {
+            $fieldsArr['fields'] = $fieldStr;
+            $this->setParameter('query', $fieldsArr);
         }
     }
 
-    protected function setParameters() {
-
+    /**
+     * Set a single parameter to be passed to the request
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    protected function setParameter($key, $value) {
+        if (is_array($value)) {
+            if (count($value) == 1) {
+                $arrKey = key($value);
+                $this->parameters[$key][$arrKey] = $value[$arrKey];
+            } else {
+                // throw incorrectly set param exception
+            }
+        } else {
+            $this->parameters[$key] = $value;
+        }
     }
 
 }

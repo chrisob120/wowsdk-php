@@ -1,7 +1,11 @@
 <?php namespace WowApi\Services;
 
+use Exception;
+
+use GuzzleHttp\Exception\ServerException;
 use WowApi\Components\Characters\Character;
 use GuzzleHttp\Exception\ClientException;
+use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Utilities;
 
 
@@ -15,10 +19,13 @@ use WowApi\Util\Utilities;
 class CharacterService extends BaseService {
 
     /**
+     * Get character service
+     *
      * @param string $realm
      * @param string $character
      * @param array $params
      * @return Character
+     * @throws WowApiException
      */
     public function getCharacter($realm, $character, $params = []) {
         $this->setFields($params);
@@ -33,8 +40,7 @@ class CharacterService extends BaseService {
         try {
             $response = parent::doRequest($request);
         } catch (ClientException $e) {
-            Utilities::print_rci($e->getResponse());
-            die;
+            throw parent::toWowApiException($e);
         }
 
         return new Character($response->getBody());
