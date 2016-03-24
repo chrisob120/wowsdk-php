@@ -33,13 +33,8 @@ require_once '../../vendor/autoload.php';
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
 
 try {
-    $t->characterService->getCharacter('Hyjal', 'Ardeel', ['guild', 'jonhdoe', 'pets']);
+    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['appearance']);
+    Utilities::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
 }
-
-//echo $g->test;
-
-echo '<pre>';
-//print_r($t);
-echo '</pre>';

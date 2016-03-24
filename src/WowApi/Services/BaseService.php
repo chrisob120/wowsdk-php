@@ -38,7 +38,11 @@ abstract class BaseService {
      */
     protected $parameters = [];
 
-    protected $effectiveUri;
+    /**
+     * Set the maximum amount of fields for a service. Default to null means any amount of fields can be called
+     * @var mixed $maxFields
+     */
+    protected $maxFields = null;
 
     /**
      * BaseService constructor assigning the Guzzle rest client and API Key
@@ -124,14 +128,24 @@ abstract class BaseService {
      *
      * @param mixed $fields
      * @return void
+     * @throws IllegalArgumentException
      */
     protected function setFields($fields) {
+        $fieldStr = false;
+
         if (is_array($fields)) {
-            $fieldStr = implode(',', $fields);
-        } else if (is_scalar($fields)) {
-            $fieldStr = $fields;
-        } else {
-            $fieldStr = false;
+            // use closure to check if there is more than one field per array item. if there is, remove the item from the array
+            $fields = array_filter($fields, function ($val) {
+                return (strpos($val, ',') !== false) ? false : true;
+            });
+
+            if ($this->maxFields === null) {
+                $fieldStr = implode(',', $fields);
+            } else {
+                if (count($fields) > $this->maxFields) {
+                    throw new IllegalArgumentException(sprintf('The maximum amount of fields per request for this service is %s.', $this->maxFields));
+                }
+            }
         }
 
         if ($fieldStr) {

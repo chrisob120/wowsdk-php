@@ -10,15 +10,19 @@
 abstract class BaseComponent {
 
     /**
-     * Get the values and assign them as an array
+     * Assign the values to an object
      *
-     * @param array $array
-     * @param $item
+     * @param object $componentObj
+     * @param object $apiObj
      * @param null $default
-     * @return mixed
+     * @return object;
      */
-    protected static function getValue(array $array, $item, $default = null) {
-        return (isset($array[$item])) ? $array[$item] : $default;
+    protected static function assignValues($componentObj, $apiObj, $default = null) {
+        foreach ($componentObj as $prop => $val) {
+            $componentObj->$prop = (isset($apiObj->$prop)) ? $apiObj->$prop : $default;
+        }
+
+        return $componentObj;
     }
 
 }
