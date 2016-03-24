@@ -10,7 +10,7 @@
 abstract class BaseComponent {
 
     /**
-     * Base Component
+     * Get the values and assign them as an array
      *
      * @param array $array
      * @param $item

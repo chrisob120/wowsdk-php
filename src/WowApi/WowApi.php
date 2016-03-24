@@ -26,8 +26,10 @@ require_once '../../vendor/autoload.php';
 
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
 
-$t->characterService->getCharacter('Hyjal', 'Ardeel');
+$g = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+
+echo $g->test;
 
 echo '<pre>';
-print_r($t);
+//print_r($t);
 echo '</pre>';

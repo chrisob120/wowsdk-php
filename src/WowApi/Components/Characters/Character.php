@@ -12,7 +12,7 @@ use WowApi\Components\BaseComponent;
 class Character extends BaseComponent {
 
     public function __construct($t) {
-        var_dump($t);
+        echo $t;
     }
 
     public $test = 'ya';

@@ -2,6 +2,7 @@
 
 use WowApi\Components\Characters\Character;
 use GuzzleHttp\Exception\ClientException;
+use WowApi\Util\Utilities;
 
 
 /**
@@ -13,20 +14,27 @@ use GuzzleHttp\Exception\ClientException;
  */
 class CharacterService extends BaseService {
 
-    public function getCharacter($realm, $character) {
+    /**
+     * @param string $realm
+     * @param string $character
+     * @param array $params
+     * @return Character
+     */
+    public function getCharacter($realm, $character, $params = []) {
+        $this->setFields($params);
+        
         $url = $this->getPath('character/:realm/:character', [
             'realm' => $realm,
             'character' => $character
         ]);
 
-        echo $url;
-
         $request = parent::createRequest('GET', $url);
 
         try {
-            $response = parent::getClient()->send($request);
+            $response = parent::doRequest($request);
         } catch (ClientException $e) {
-            var_dump($e);die;
+            Utilities::print_rci($e->getResponse());
+            die;
         }
 
         return new Character($response->getBody());

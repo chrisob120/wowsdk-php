@@ -1,6 +1,7 @@
 <?php namespace WowApi\Services;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use WowApi\Util\Utilities;
 
 /**
@@ -27,6 +28,12 @@ abstract class BaseService {
     private $_apiKey;
 
     /**
+     * Extra parameters to be optionally set
+     * @var array $parameters
+     */
+    protected $parameters = [];
+
+    /**
      * BaseService constructor assigning the Guzzle rest client and API Key
      *
      * @param string $apiKey Battle.net API Key
@@ -34,6 +41,13 @@ abstract class BaseService {
     public function __construct($apiKey) {
         $this->_apiKey = $apiKey;
         $this->_client = new Client(['base_uri' => self::BASE_URI]);
+
+        // set the default parameters
+        $this->parameters['timeout'] = 2;
+        $this->parameters['query'] = [
+            'locale' => 'en_US',
+            'apikey' => $this->_apiKey
+        ];
     }
 
     /**
@@ -50,18 +64,29 @@ abstract class BaseService {
      *
      * @param string $method
      * @param string $url
-     * @return Client
+     * @return Request
      */
     protected function createRequest($method, $url) {
-        $request = $this->_client->request($method, $url, [
-            'query' =>
-                ["locale=en_US"],
-                ["apikey=$this->_apiKey"]
-        ]);
-
-        return $request;
+        return new Request($method, $url);
     }
 
+    /**
+     * Do the request
+     *
+     * @param $request
+     * @return mixed|\Psr\Http\Message\ResponseInterface
+     */
+    protected function doRequest($request) {
+        return $this->_client->send($request, $this->parameters);
+    }
+
+    /**
+     * Set the rest of the API call path
+     *
+     * @param string $path
+     * @param array $params
+     * @return string
+     */
     protected function getPath($path, $params = []) {
         $add = [];
 
@@ -70,6 +95,22 @@ abstract class BaseService {
         }
 
         return strtr($path, $add);
+    }
+
+    /**
+     * @param array $fields
+     * @return void
+     */
+    protected function setFields($fields) {
+        if (is_array($fields)) {
+            foreach ($fields as $field) {
+
+            }
+        }
+    }
+
+    protected function setParameters() {
+
     }
 
 }

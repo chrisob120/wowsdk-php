@@ -7,4 +7,10 @@ class Utilities {
         return urlencode($input);
     }
 
+    public static function print_rci($array = []) {
+        echo '<pre>';
+        print_r($array);
+        echo '</pre>';
+    }
+
 }
