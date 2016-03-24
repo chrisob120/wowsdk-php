@@ -1,6 +1,5 @@
 # wowapi-php [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
-
 PHP 5.6 API client for Blizzard's WoW API
 
 ## Main features ##
