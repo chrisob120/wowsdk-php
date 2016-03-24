@@ -22,16 +22,20 @@ class WowApi {
 
 }
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // example
 require_once 'autoload.php';
 require_once '../../vendor/autoload.php';
 
-$t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb1');
+$t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
 
 try {
-    $g = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['guild', 'jonhdoe', 'pets']);
+    $t->characterService->getCharacter('Hyjal', 'Ardeel', ['guild', 'jonhdoe', 'pets']);
 } catch (WowApiException $ex) {
-    Utilities::print_rci($ex->getErrors());
+    echo $ex->getError();
 }
 
 //echo $g->test;

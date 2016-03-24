@@ -1,5 +1,7 @@
 <?php namespace WowApi\Services;
 
+use WowApi\Exceptions\IllegalArgumentException;
+use WowApi\Exceptions\NotFoundException;
 use WowApi\Exceptions\WowApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
@@ -95,7 +97,7 @@ abstract class BaseService {
      */
     protected function toWowApiException($clientEx) {
         $wowApiEx = new WowApiException($clientEx->getResponse()->getReasonPhrase(), $clientEx->getCode());
-        $wowApiEx->setErrors(json_decode($clientEx->getResponse()->getBody()));
+        $wowApiEx->setError(json_decode($clientEx->getResponse()->getBody()));
 
         return $wowApiEx;
     }
@@ -144,6 +146,7 @@ abstract class BaseService {
      * @param string $key
      * @param mixed $value
      * @return void
+     * @throws IllegalArgumentException
      */
     protected function setParameter($key, $value) {
         if (is_array($value)) {
@@ -151,7 +154,7 @@ abstract class BaseService {
                 $arrKey = key($value);
                 $this->parameters[$key][$arrKey] = $value[$arrKey];
             } else {
-                // throw incorrectly set param exception
+                throw new IllegalArgumentException('Parameter was set incorrectly.');
             }
         } else {
             $this->parameters[$key] = $value;

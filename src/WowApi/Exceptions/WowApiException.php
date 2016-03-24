@@ -11,51 +11,38 @@ use Exception;
  */
 class WowApiException extends Exception {
     /**
-     * @var array $_errors
+     * @var array $_error
      */
-    private $_errors;
+    private $_error;
 
     /**
-     * @var string $_url
-     */
-    private $_url;
-
-    /**
-     * Errors setter
+     * Error setter
      *
      * @param array $errors
      * @return void
      */
-    public function setErrors($errors = []) {
-        $this->_errors = $errors;
+    public function setError($errors) {
+        $this->_error = 'Error: ';
+        $this->_error.= "<pre>{\n";
+
+        foreach ($errors as $key => $val) {
+            if ($val == 'Account Inactive') {
+                $this->_error.= "&nbsp;&nbsp;&nbsp;<strong>$key</strong>: $val (probably means bad API key)\n";
+            } else {
+                $this->_error.= "&nbsp;&nbsp;&nbsp;<strong>$key</strong>: $val\n";
+            }
+        }
+
+        $this->_error.= '}</pre>';
     }
 
     /**
-     * Errors getter
+     * Error getter
      *
      * @return array
      */
-    public function getErrors() {
-        return $this->_errors;
-    }
-
-    /**
-     * URL setter
-     *
-     * @param string $url
-     * @return void
-     */
-    public function setUrl($url) {
-        $this->_url = $url;
-    }
-
-    /**
-     * URL getter
-     *
-     * @return string
-     */
-    public function getUrl() {
-        return $this->_url;
+    public function getError() {
+        return $this->_error;
     }
 
 
