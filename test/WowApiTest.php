@@ -1,6 +1,6 @@
 <?php
 
-use WowApi\WowApi;
+use GuzzleHttp\Client;
 
 /**
  * WoW API Test Class
@@ -11,5 +11,7 @@ use WowApi\WowApi;
  * @version     1.0.0
  */
 class WowApiTest extends PHPUnit_Framework_TestCase {
+
+    
 
 }

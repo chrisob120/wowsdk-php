@@ -11,7 +11,7 @@
          syntaxCheck="false">
     <testsuites>
         <testsuite name="WowApi Test Suite">
-            <directory suffix=".php">./tests/</directory>
+            <directory suffix=".php">./test/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
