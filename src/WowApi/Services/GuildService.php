@@ -1,34 +1,34 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Character;
+use WowApi\Components\Guild;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
 
 /**
- * Character services
+ * Guild services
  *
  * @package     Services
  * @author      Chris O'Brien <chris@diobie.com>
  * @version     1.0.0
  */
-class CharacterService extends BaseService {
+class GuildService extends BaseService {
 
     /**
      * Get character service
      *
      * @param string $realm
-     * @param string $character
+     * @param string $guild
      * @param array $params
-     * @return Character
+     * @return Guild
      * @throws WowApiException
      */
-    public function getCharacter($realm, $character, $params = []) {
+    public function getGuild($realm, $guild, $params = []) {
         $this->setFields($params);
         
-        $url = $this->getPath('character/:realm/:character', [
+        $url = $this->getPath('guild/:realm/:guild', [
             'realm' => $realm,
-            'character' => $character
+            'guild' => $guild
         ]);
 
         $request = parent::createRequest('GET', $url);
@@ -39,7 +39,7 @@ class CharacterService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Character($response->getBody());
+        return new Guild($response->getBody());
     }
 
 }

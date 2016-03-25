@@ -1,5 +1,4 @@
 <?php namespace WowApi\Components;
-use WowApi\Util\Helper;
 
 /**
  * Super class for all components
@@ -24,7 +23,7 @@ abstract class BaseComponent {
             // check if there special conditions
             $checkProp = ($specialCheck != null && array_key_exists($prop, $specialCheck)) ? $specialCheck[$prop] : $prop;
             // update the component object
-            $componentObj->$prop = ($apiObj->$checkProp) ? $apiObj->$checkProp : $componentObj->$prop = $default;
+            $componentObj->$prop = (isset($apiObj->$checkProp)) ? $apiObj->$checkProp : $default;
         }
 
         return $componentObj;

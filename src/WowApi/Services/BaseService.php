@@ -2,9 +2,9 @@
 
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Exception\ClientException;
 use WowApi\Util\Helper;
 
 /**
@@ -53,7 +53,7 @@ abstract class BaseService {
 
         // set the default parameters
         $this->parameters = [
-            'timeout' => 2,
+            'timeout' => 5,
             'query' => [
                 'locale' => 'en_US',
                 'apikey' => $this->_apiKey

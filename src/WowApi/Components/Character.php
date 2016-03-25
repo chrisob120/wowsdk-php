@@ -1,6 +1,4 @@
-<?php namespace WowApi\Components\Characters;
-
-use WowApi\Components\BaseComponent;
+<?php namespace WowApi\Components;
 
 /**
  * Represents a single Character

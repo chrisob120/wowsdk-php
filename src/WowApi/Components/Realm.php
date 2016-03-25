@@ -1,7 +1,4 @@
-<?php namespace WowApi\Components\Realms;
-
-use WowApi\Components\BaseComponent;
-use WowApi\Util\Helper;
+<?php namespace WowApi\Components;
 
 /**
  * Represents a single Realm

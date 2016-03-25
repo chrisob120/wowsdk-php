@@ -2,6 +2,7 @@
 
 use WowApi\Exceptions\WowApiException;
 use WowApi\Services\CharacterService;
+use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
 use WowApi\Util\Helper;
 
@@ -15,12 +16,25 @@ use WowApi\Util\Helper;
  */
 class WowApi {
 
+    /**
+     * @var CharacterService $characterService
+     */
     public $characterService;
+
+    /**
+     * @var RealmService $realmService
+     */
     public $realmService;
+
+    /**
+     * @var GuildService $guildService
+     */
+    public $guildService;
 
     public function __construct($apiKey) {
         $this->characterService = new CharacterService($apiKey);
         $this->realmService = new RealmService($apiKey);
+        $this->guildService = new GuildService($apiKey);
     }
 
 }
@@ -36,9 +50,10 @@ require_once '../../vendor/autoload.php';
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
 
 try {
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['appearance']);
+    //$z = $t->characterService->getCharacter('Hyjal', 'Khaiman', ['mounts']);
     //$z = $t->realmService->getRealm('The Forgotten Coast');
-    $z = $t->realmService->getRealms(['hyjal']);
+    //$z = $t->realmService->getRealms(['hyjal', 'alterac-mountains', 'stormrage']);
+    $z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
     Helper::print_rci($z);
     //Helper::print_rci($g);
 } catch (WowApiException $ex) {
