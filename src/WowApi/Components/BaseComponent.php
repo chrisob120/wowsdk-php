@@ -1,4 +1,5 @@
 <?php namespace WowApi\Components;
+use WowApi\Util\Helper;
 
 /**
  * Super class for all components
@@ -14,12 +15,16 @@ abstract class BaseComponent {
      *
      * @param object $componentObj
      * @param object $apiObj
-     * @param null $default
+     * @param null $specialCheck If there are any poorly named keys from the API, use the special case array to replace on key check
+     * @param null $default Default value if nothing is assigned
      * @return object;
      */
-    protected static function assignValues($componentObj, $apiObj, $default = null) {
+    protected static function assignValues($componentObj, $apiObj, $specialCheck = null, $default = null) {
         foreach ($componentObj as $prop => $val) {
-            $componentObj->$prop = (isset($apiObj->$prop)) ? $apiObj->$prop : $default;
+            // check if there special conditions
+            $checkProp = ($specialCheck != null && array_key_exists($prop, $specialCheck)) ? $specialCheck[$prop] : $prop;
+            // update the component object
+            $componentObj->$prop = ($apiObj->$checkProp) ? $apiObj->$checkProp : $componentObj->$prop = $default;
         }
 
         return $componentObj;

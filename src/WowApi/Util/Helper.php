@@ -1,7 +1,7 @@
 <?php namespace WowApi\Util;
 
 
-class Utilities {
+class Helper {
 
     public static function urlEncode($input) {
         return urlencode($input);

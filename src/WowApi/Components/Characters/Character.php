@@ -1,7 +1,6 @@
 <?php namespace WowApi\Components\Characters;
 
 use WowApi\Components\BaseComponent;
-use WowApi\Util\Utilities;
 
 /**
  * Represents a single Character
@@ -157,15 +156,19 @@ class Character extends BaseComponent {
      */
     public $audit;
 
-
-
     /**
      * @var
      */
     public $totalHonorableKills;
 
-    public function __construct($data) {
-        return parent::assignValues($this, json_decode($data));
+    /**
+     * Character constructor - creates the character object based on the returned service data
+     *
+     * @param string $jsonData
+     * @return Character
+     */
+    public function __construct($jsonData) {
+        return parent::assignValues($this, json_decode($jsonData));
     }
 
 }

@@ -2,7 +2,8 @@
 
 use WowApi\Exceptions\WowApiException;
 use WowApi\Services\CharacterService;
-use WowApi\Util\Utilities;
+use WowApi\Services\RealmService;
+use WowApi\Util\Helper;
 
 /**
  * WoW API Class
@@ -15,9 +16,11 @@ use WowApi\Util\Utilities;
 class WowApi {
 
     public $characterService;
+    public $realmService;
 
     public function __construct($apiKey) {
         $this->characterService = new CharacterService($apiKey);
+        $this->realmService = new RealmService($apiKey);
     }
 
 }
@@ -33,8 +36,9 @@ require_once '../../vendor/autoload.php';
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
 
 try {
-    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['appearance']);
-    Utilities::print_rci($z);
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['appearance']);
+    $z = $t->realmService->getRealm('Hyjal');
+    Helper::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
 }

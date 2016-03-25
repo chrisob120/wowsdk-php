@@ -1,13 +1,11 @@
 <?php namespace WowApi\Services;
 
 use WowApi\Exceptions\IllegalArgumentException;
-use WowApi\Exceptions\NotFoundException;
 use WowApi\Exceptions\WowApiException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\TransferStats;
 use GuzzleHttp\Exception\ClientException;
-use WowApi\Util\Utilities;
+use WowApi\Util\Helper;
 
 /**
  * Super class for all services
@@ -117,7 +115,7 @@ abstract class BaseService {
         $add = [];
 
         foreach ($params as $key => $param) {
-            $add[':' .$key] = Utilities::urlEncode($param);
+            $add[':' .$key] = Helper::urlEncode($param);
         }
 
         return strtr($path, $add);
@@ -150,7 +148,15 @@ abstract class BaseService {
 
         if ($fieldStr) {
             $fieldsArr['fields'] = $fieldStr;
-            $this->setParameter('query', $fieldsArr);
+            $this->setQuery($fieldsArr);
+        }
+    }
+
+    protected function setQuery($qryArr = []) {
+        if (is_array($qryArr)) {
+            $this->setParameter('query', $qryArr);
+        } else {
+            throw new IllegalArgumentException('Query parameter was set incorrectly. Value must an array.');
         }
     }
 
