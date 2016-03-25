@@ -15,7 +15,7 @@ use WowApi\Exceptions\WowApiException;
 class GuildService extends BaseService {
 
     /**
-     * Get character service
+     * Get guild service
      *
      * @param string $realm
      * @param string $guild

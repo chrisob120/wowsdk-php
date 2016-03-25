@@ -1,9 +1,11 @@
 <?php namespace WowApi;
 
+use WowApi\Components\Mount;
 use WowApi\Exceptions\WowApiException;
 use WowApi\Services\CharacterService;
 use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
+use WowApi\Services\MountService;
 use WowApi\Util\Helper;
 
 /**
@@ -31,10 +33,16 @@ class WowApi {
      */
     public $guildService;
 
+    /**
+     * @var MountService $mountService
+     */
+    public $mountService;
+
     public function __construct($apiKey) {
         $this->characterService = new CharacterService($apiKey);
         $this->realmService = new RealmService($apiKey);
         $this->guildService = new GuildService($apiKey);
+        $this->mountService = new MountService($apiKey);
     }
 
 }
@@ -53,7 +61,8 @@ try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Khaiman', ['mounts']);
     //$z = $t->realmService->getRealm('The Forgotten Coast');
     //$z = $t->realmService->getRealms(['hyjal', 'alterac-mountains', 'stormrage']);
-    $z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
+    //$z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
+    $z = $t->mountService->getMounts();
     Helper::print_rci($z);
     //Helper::print_rci($g);
 } catch (WowApiException $ex) {
