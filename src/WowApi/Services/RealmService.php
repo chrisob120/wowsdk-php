@@ -17,6 +17,23 @@ use WowApi\Exceptions\WowApiException;
 class RealmService extends BaseService {
 
     /**
+     * @var array $ruleSets
+     */
+    public $ruleSets;
+
+    /**
+     * @var array $populationTypes
+     */
+    public $populationTypes;
+
+    public function __construct($apiKey) {
+        parent::__construct($apiKey);
+
+        $this->ruleSets = ['pve', 'pvp', 'rp', 'rppvp'];
+        $this->populationTypes = ['high', 'medium', 'low'];
+    }
+
+    /**
      * Get realm service
      *
      * @param string $realm Realm slug
@@ -25,7 +42,7 @@ class RealmService extends BaseService {
      * @throws NotFoundException
      */
     public function getRealm($realm) {
-        $this->setQuery(['realm' => self::formatSlug($realm)]);
+        $this->setQuery(['realm' => parent::formatSlug($realm)]);
 
         $request = parent::createRequest('GET', 'realm/status');
 
@@ -47,17 +64,18 @@ class RealmService extends BaseService {
      * Gets the realm(s)
      *
      * @param null $realms
-     * @return array
-     * @throws IllegalArgumentException
+     * @return RealmService $this
      * @throws WowApiException
+     * @throws IllegalArgumentException
      */
     public function getRealms($realms = null) {
         $error = false;
 
+        // realms check
         if (is_array($realms)) {
             if (!empty($realms)) {
                 // format each array item slug
-                foreach ($realms as $key => $realm) $realms[$key] = self::formatSlug($realm);
+                foreach ($realms as $key => $realm) $realms[$key] = parent::formatSlug($realm);
                 $this->setQuery(['realms' => implode(',', $realms)]);
             } else {
                 $error = true;
@@ -83,13 +101,16 @@ class RealmService extends BaseService {
     }
 
     /**
-     * Replaces all spaces with dashes and puts the string to lower case. This way both the realm name or slug can be entered
      *
-     * @param string $slug
-     * @return string
+     *
+     * @param string $key
+     * @param string $val
+     * @return array
      */
-    private static function formatSlug($slug) {
-        return strtolower(str_replace(' ', '-', $slug));
+    public function sortRealms($key, $val) {
+        $this->sortWhitelist = ['type', 'population', 'status'];
+
+        return $this->sortData($this->getRealms(), [$key => $val]);
     }
 
 }

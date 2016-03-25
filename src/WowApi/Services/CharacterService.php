@@ -41,5 +41,4 @@ class CharacterService extends BaseService {
 
         return new Character($response->getBody());
     }
-
 }

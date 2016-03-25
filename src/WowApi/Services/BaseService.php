@@ -43,6 +43,11 @@ abstract class BaseService {
     protected $maxFields = null;
 
     /**
+     * @var array $sortWhitelist
+     */
+    protected $sortWhitelist = [];
+
+    /**
      * BaseService constructor assigning the Guzzle rest client and API Key
      *
      * @param string $apiKey Battle.net API Key
@@ -85,7 +90,7 @@ abstract class BaseService {
      * Do the request
      *
      * @param $request
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return mixed
      */
     protected function doRequest($request) {
         return $this->_client->send($request, $this->parameters);
@@ -178,6 +183,57 @@ abstract class BaseService {
             }
         } else {
             $this->parameters[$key] = $value;
+        }
+    }
+
+    /**
+     * Replaces all spaces with dashes and puts the string to lower case. This way both the realm name or slug can be entered
+     *
+     * @param string $slug
+     * @return string
+     */
+    protected static function formatSlug($slug) {
+        return strtolower(str_replace(' ', '-', $slug));
+    }
+
+    /**
+     * Sort returned results
+     *
+     * @param object $dataArr
+     * @param array $sortArr
+     * @return array
+     */
+    public function sortData($dataArr, $sortArr) {
+        $returnArr = [];
+        $this->checkSort($sortArr);
+
+        foreach ($dataArr as $data) {
+            $key = key($sortArr);
+
+            if ($data->$key == $sortArr[$key]) {
+                $returnArr[] = $data;
+            }
+        }
+
+        return $returnArr;
+    }
+
+    /**
+     * Check the sort key
+     *
+     * @param array $sortArr
+     * @throws IllegalArgumentException
+     */
+    protected function checkSort($sortArr = []) {
+        if ($sortArr != null) {
+            if (is_array($sortArr) && count($sortArr) == 1) {
+                if (!in_array(key($sortArr), $this->sortWhitelist)) {
+                    $allowedKeys = (!empty($this->sortWhitelist)) ? implode(', ', $this->sortWhitelist) : 'No allowed keys found';
+                    throw new IllegalArgumentException(sprintf('You may only choose the following sort keys: %s', $allowedKeys));
+                }
+            } else {
+                throw new IllegalArgumentException('Parameter was set incorrectly.');
+            }
         }
     }
 
