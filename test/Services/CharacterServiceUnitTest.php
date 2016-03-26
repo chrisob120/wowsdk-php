@@ -14,7 +14,7 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
     private $_access;
 
     protected function setUp() {
-        $this->_access = Auth::getClient()->characterService;
+        $this->_access = API::getClient()->characterService;
     }
 
     protected function tearDown() {

@@ -6,4 +6,4 @@ require_once(realpath(dirname(__FILE__) . '/../') . "/src/WowApi/autoload.php");
 require_once(realpath(dirname(__FILE__) . '/../') . "/vendor/autoload.php");
 
 // auth file
-require_once ('Auth.php');
+require_once('API.php');

@@ -69,6 +69,14 @@ class Config {
             } else {
                 throw new NotFoundException('Config item not found.');
             }
+        } else if (count($indexArr) == 1) {
+            $catKey = $indexArr[0];
+
+            if (isset($configArr[$catKey])) {
+                return $configArr[$catKey];
+            } else {
+                throw new NotFoundException('Config item not found.');
+            }
         } else {
             throw new IllegalArgumentException('Config parameters incorrectly set.');
         }

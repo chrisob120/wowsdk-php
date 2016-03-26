@@ -62,7 +62,8 @@ require_once 'autoload.php';
 require_once '../../vendor/autoload.php';
 
 $options = [
-    
+    'region' => 'us',
+    'locale' => 'cat'
 ];
 
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
