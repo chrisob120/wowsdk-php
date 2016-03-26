@@ -1,9 +1,5 @@
 <?php
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use WowApi\Util\Helper;
-
 /**
  * Character Unit Tests
  *
@@ -13,20 +9,12 @@ use WowApi\Util\Helper;
 class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
 
     /**
-     * @var \WowApi\Services\CharacterService $access
+     * @var \WowApi\Services\CharacterService $_access
      */
     private $_access;
 
-
-    /**
-     * @var Client $_client
-     */
-    private $_client;
-
-
     protected function setUp() {
         $this->_access = Auth::getClient()->characterService;
-        $this->_client = new Client();
     }
 
     protected function tearDown() {
@@ -37,14 +25,33 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
     public function testGetCharacter() {
         $character = $this->_access->getCharacter('Hyjal', 'Ardeel');
         $this->assertInstanceOf('\WowApi\Components\Character', $character);
+
+        // check the default fields
+        $this->assertNotNull($character->lastModified);
+        $this->assertNotNull($character->name);
+        $this->assertNotNull($character->realm);
+        $this->assertNotNull($character->battlegroup);
+        $this->assertNotNull($character->class);
+        $this->assertNotNull($character->race);
+        $this->assertNotNull($character->gender);
+        $this->assertNotNull($character->level);
+        $this->assertNotNull($character->achievementPoints);
+        $this->assertNotNull($character->thumbnail);
+        $this->assertNotNull($character->calcClass);
+        $this->assertNotNull($character->faction);
+        $this->assertNotNull($character->totalHonorableKills);
+    }
+
+    public function testGetCharacterWithAchievements() {
+        $character = $this->_access->getCharacter('Hyjal', 'Ardeel', ['achievements']);
+        $this->assertNotNull($character->achievements, 'Achievements is null.');
     }
 
     /**
      * @expectedException \WowApi\Exceptions\WowApiException
      */
     public function testCharacterNotFound() {
-        $t = $this->_access->getCharacter('FakeRealm', 'FakeChar');
-        Helper::print_rci($t);
+        $this->_access->getCharacter('FakeRealm', 'FakeChar');
     }
 
 }
