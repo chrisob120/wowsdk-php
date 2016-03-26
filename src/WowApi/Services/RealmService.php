@@ -5,6 +5,7 @@ use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\NotFoundException;
 use WowApi\Exceptions\WowApiException;
+use WowApi\Util\Helper;
 
 
 /**
@@ -26,8 +27,13 @@ class RealmService extends BaseService {
      */
     public $populationTypes;
 
-    public function __construct($apiKey) {
-        parent::__construct($apiKey);
+    /**
+     * RealmService constructor.
+     * @param string $apiKey
+     * @param array|null $options
+     */
+    public function __construct($apiKey, $options = null) {
+        parent::__construct($apiKey, $options);
 
         $this->ruleSets = ['pve', 'pvp', 'rp', 'rppvp'];
         $this->populationTypes = ['high', 'medium', 'low'];
@@ -42,7 +48,7 @@ class RealmService extends BaseService {
      * @throws NotFoundException
      */
     public function getRealm($realm) {
-        $this->setQuery(['realm' => parent::formatSlug($realm)]);
+        $this->setQuery(['realm' => Helper::formatSlug($realm)]);
 
         $request = parent::createRequest('GET', 'realm/status');
 
@@ -75,7 +81,7 @@ class RealmService extends BaseService {
         if (is_array($realms)) {
             if (!empty($realms)) {
                 // format each array item slug
-                foreach ($realms as $key => $realm) $realms[$key] = parent::formatSlug($realm);
+                foreach ($realms as $key => $realm) $realms[$key] = Helper::formatSlug($realm);
                 $this->setQuery(['realms' => implode(',', $realms)]);
             } else {
                 $error = true;

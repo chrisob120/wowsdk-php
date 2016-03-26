@@ -1,12 +1,10 @@
 <?php namespace WowApi;
 
-use WowApi\Components\Mount;
-use WowApi\Exceptions\WowApiException;
 use WowApi\Services\CharacterService;
 use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
 use WowApi\Services\MountService;
-use WowApi\Util\Helper;
+use WowApi\Util\Config;
 
 /**
  * WoW API Class
@@ -17,6 +15,9 @@ use WowApi\Util\Helper;
  * @version     1.0.0
  */
 class WowApi {
+
+
+    private $_clientOptions = [];
 
     /**
      * @var CharacterService $characterService
@@ -39,6 +40,12 @@ class WowApi {
     public $mountService;
 
     public function __construct($apiKey) {
+        echo Config::get('client.url');
+        // default client options
+        $this->_clientOptions = [
+
+        ];
+
         $this->characterService = new CharacterService($apiKey);
         $this->realmService = new RealmService($apiKey);
         $this->guildService = new GuildService($apiKey);
@@ -46,6 +53,12 @@ class WowApi {
     }
 
 }
+
+use WowApi\Components\Mount;
+use WowApi\Exceptions\WowApiException;
+use WowApi\Util\Helper;
+
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -60,12 +73,12 @@ $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
 try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Khaiman', ['mounts']);
     //$z = $t->realmService->getRealm('The Forgotten Coast');
-    //$z = $t->realmService->getRealms();
-    $z = $t->realmService->sortRealms('type', 'rppvp');
+    $z = $t->realmService->getRealms();
+    //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
     //$z = $t->mountService->getMounts();
-    echo count($z);
-    Helper::print_rci($z);
+    //echo count($z);
+    //Helper::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
 }

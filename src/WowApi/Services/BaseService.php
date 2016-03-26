@@ -51,8 +51,10 @@ abstract class BaseService {
      * BaseService constructor assigning the Guzzle rest client and API Key
      *
      * @param string $apiKey Battle.net API Key
+     * @param array|null $options
      */
-    public function __construct($apiKey) {
+    public function __construct($apiKey, $options = null) {
+
         $this->_apiKey = $apiKey;
         $this->_client = new Client(['base_uri' => self::BASE_URI]);
 
@@ -187,23 +189,13 @@ abstract class BaseService {
     }
 
     /**
-     * Replaces all spaces with dashes and puts the string to lower case. This way both the realm name or slug can be entered
-     *
-     * @param string $slug
-     * @return string
-     */
-    protected static function formatSlug($slug) {
-        return strtolower(str_replace(' ', '-', $slug));
-    }
-
-    /**
      * Sort returned results
      *
      * @param object $dataArr
      * @param array $sortArr
      * @return array
      */
-    public function sortData($dataArr, $sortArr) {
+    protected function sortData($dataArr, $sortArr) {
         $returnArr = [];
         $this->checkSort($sortArr);
 
