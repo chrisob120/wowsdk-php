@@ -95,7 +95,7 @@ abstract class BaseService {
     /**
      * Get the Guzzle client
      *
-     * @return Client - Guzzle client
+     * @return Client
      */
     protected function getClient() {
         return $this->_client;

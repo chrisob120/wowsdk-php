@@ -7,7 +7,7 @@ use WowApi\Exceptions\NotFoundException;
 class Config {
 
     /**
-     * @var array - array of default configuration properties
+     * @var array $props Default configuration properties
      */
     private static $props = [
         /**

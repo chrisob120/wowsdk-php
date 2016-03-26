@@ -28,7 +28,8 @@ class RealmService extends BaseService {
     public $populationTypes;
 
     /**
-     * RealmService constructor.
+     * RealmService constructor
+     *
      * @param string $apiKey
      * @param array|null $options
      */
