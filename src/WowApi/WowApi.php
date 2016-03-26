@@ -50,6 +50,7 @@ class WowApi {
 
 }
 
+/*
 use WowApi\Components\Mount;
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
@@ -67,9 +68,9 @@ require_once '../../vendor/autoload.php';
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', ['region' => 'eu']);
 
 try {
-    //$z = $t->characterService->getCharacter('Hyjal', 'Khaiman', ['mounts']);
+    $z = $t->characterService->getCharacter('Hyjal', 'Khaiman2');
     //$z = $t->realmService->getRealm('The Forgotten Coast');
-    $z = $t->realmService->getRealms();
+    //$z = $t->realmService->getRealms();
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
     //$z = $t->mountService->getMounts();
