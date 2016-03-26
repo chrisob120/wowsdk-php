@@ -8,6 +8,15 @@
  */
 class ClientTest extends PHPUnit_Framework_TestCase {
 
+    /**
+     * @var array $_clientOptions
+     */
+    private $_clientOptions = [];
+
+    protected function setUp() {
+        $this->_clientOptions = ['region', 'locale'];
+    }
+
     public function testGetClient() {
         $client = API::getClient();
         $this->assertInstanceOf('\WoWApi\WowApi', $client);
@@ -21,8 +30,8 @@ class ClientTest extends PHPUnit_Framework_TestCase {
     /**
      * @expectedException \WowApi\Exceptions\WowApiException
      */
-    public function testCharacterNotFound() {
-        $this->_access->getCharacter('FakeRealm', 'FakeChar');
+    public function testClientBadRegion() {
+
     }
 
 }

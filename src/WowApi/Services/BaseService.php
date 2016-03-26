@@ -75,7 +75,7 @@ abstract class BaseService {
         $this->_locale = (isset($options['locale'])) ? $options['locale'] : Config::get('client.locale');
 
         // check the current region and locale before submitting a request
-        $this->checkRegionLocale();
+        $this->checkOptionalParameters();
 
         $baseUri = $this->getPath(Config::get('client.base_uri'), [
             'protocol' => Helper::checkProtocol($this->_protocol),
@@ -94,11 +94,18 @@ abstract class BaseService {
         ];
     }
 
-    private function checkRegionLocale() {
+    /**
+     * Check the optional parameters given when instantiating the API
+     *
+     * @return void
+     * @throws IllegalArgumentException
+     */
+    private function checkOptionalParameters() {
         // get the regions
         $allowedRegions = array_keys(Config::get('regions'));
         $allowedLocaleByRegion = Config::get("regions.$this->_region");
 
+        if ($this->_protocol != 'http' && $this->_protocol != 'https') throw new IllegalArgumentException('Protocol must be either http or https');
         if (!in_array($this->_region, $allowedRegions)) throw new IllegalArgumentException(sprintf('Region must be one of the following: %s', implode(', ', $allowedRegions)));
         if (!in_array($this->_locale, $allowedLocaleByRegion)) throw new IllegalArgumentException(sprintf('Locale must be one of the following for the %s region: %s', $this->_region, implode(', ', $allowedLocaleByRegion)));
     }
