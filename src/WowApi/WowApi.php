@@ -50,6 +50,7 @@ class WowApi {
 
 }
 
+/*
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
 
