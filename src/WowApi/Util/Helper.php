@@ -38,4 +38,14 @@ class Helper {
         return strtolower(str_replace(' ', '-', $slug));
     }
 
+    /**
+     * Checks the protocol to confirm colon
+     *
+     * @param string $protocol
+     * @return string
+     */
+    public static function checkProtocol($protocol) {
+        return (substr($protocol, -1) == ':') ? $protocol : "$protocol:";
+    }
+
 }

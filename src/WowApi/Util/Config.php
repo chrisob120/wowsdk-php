@@ -17,7 +17,8 @@ class Config {
             'protocol' => 'https',
             'region' => 'us',
             'locale' => 'en_US',
-            'url' => ':protocol//:region.api.battle.net/wow/:path'
+            'base_uri' => ':protocol//:region.api.battle.net/wow/',
+            'path' => ':path'
         ],
         /**
          * OAuth2 Authorization related configuration options

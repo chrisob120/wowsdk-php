@@ -4,7 +4,6 @@ use WowApi\Services\CharacterService;
 use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
 use WowApi\Services\MountService;
-use WowApi\Util\Config;
 
 /**
  * WoW API Class
@@ -15,9 +14,6 @@ use WowApi\Util\Config;
  * @version     1.0.0
  */
 class WowApi {
-
-
-    private $_clientOptions = [];
 
     /**
      * @var CharacterService $characterService
@@ -39,17 +35,17 @@ class WowApi {
      */
     public $mountService;
 
-    public function __construct($apiKey) {
-        echo Config::get('client.url');
-        // default client options
-        $this->_clientOptions = [
-
-        ];
-
-        $this->characterService = new CharacterService($apiKey);
-        $this->realmService = new RealmService($apiKey);
-        $this->guildService = new GuildService($apiKey);
-        $this->mountService = new MountService($apiKey);
+    /**
+     * WowApi constructor
+     *
+     * @param string $apiKey
+     * @param array|null $options
+     */
+    public function __construct($apiKey, $options = null) {
+        $this->characterService = new CharacterService($apiKey, $options);
+        $this->realmService = new RealmService($apiKey, $options);
+        $this->guildService = new GuildService($apiKey, $options);
+        $this->mountService = new MountService($apiKey, $options);
     }
 
 }
@@ -68,7 +64,7 @@ error_reporting(E_ALL);
 require_once 'autoload.php';
 require_once '../../vendor/autoload.php';
 
-$t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb');
+$t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', ['region' => 'eu']);
 
 try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Khaiman', ['mounts']);
@@ -78,7 +74,7 @@ try {
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
     //$z = $t->mountService->getMounts();
     //echo count($z);
-    //Helper::print_rci($z);
+    Helper::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
 }

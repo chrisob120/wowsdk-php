@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use WowApi\Util\Helper;
+use WowApi\Util\Config;
 
 /**
  * Super class for all services
@@ -15,8 +16,6 @@ use WowApi\Util\Helper;
  * @version     1.0.0
  */
 abstract class BaseService {
-
-    const BASE_URI = 'https://us.api.battle.net/wow/';
 
     /**
      * GuzzleHttp client
@@ -29,6 +28,21 @@ abstract class BaseService {
      * @var string $_apiKey
      */
     private $_apiKey;
+
+    /**
+     * @var string $_protocol
+     */
+    protected $_protocol;
+
+    /**
+     * @var string $_region
+     */
+    protected $_region;
+
+    /**
+     * @var string $_locale
+     */
+    protected $_locale;
 
     /**
      * Extra parameters to be optionally set
@@ -54,15 +68,25 @@ abstract class BaseService {
      * @param array|null $options
      */
     public function __construct($apiKey, $options = null) {
-
         $this->_apiKey = $apiKey;
-        $this->_client = new Client(['base_uri' => self::BASE_URI]);
+
+        $this->_protocol = (isset($options['protocol'])) ? $options['protocol'] : Config::get('client.protocol');
+        $this->_region = (isset($options['region'])) ? $options['region'] : Config::get('client.region');
+        $this->_locale = (isset($options['locale'])) ? $options['locale'] : Config::get('client.locale');
+
+        // set up the base URI
+        $baseUri = $this->getPath(Config::get('client.base_uri'), [
+            'protocol' => Helper::checkProtocol($this->_protocol),
+            'region' => $this->_region
+        ]);
+
+        $this->_client = new Client(['base_uri' => $baseUri]);
 
         // set the default parameters
         $this->parameters = [
             'timeout' => 5,
             'query' => [
-                'locale' => 'en_US',
+                'locale' => $this->_locale,
                 'apikey' => $this->_apiKey
             ]
         ];
@@ -122,7 +146,7 @@ abstract class BaseService {
         $add = [];
 
         foreach ($params as $key => $param) {
-            $add[':' .$key] = Helper::urlEncode($param);
+            $add[':' .$key] = $param;
         }
 
         return strtr($path, $add);
