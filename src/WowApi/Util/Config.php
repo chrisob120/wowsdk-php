@@ -14,11 +14,10 @@ class Config {
          * Client options
          */
         'client' => [
+            'base_uri' => ':protocol//:region.api.battle.net/wow/',
             'protocol' => 'https',
             'region' => 'us',
-            'locale' => 'en_US',
-            'base_uri' => ':protocol//:region.api.battle.net/wow/',
-            'path' => ':path'
+            'locale' => 'en_US'
         ],
         /**
          * OAuth2 Authorization related configuration options
@@ -27,6 +26,15 @@ class Config {
             'base_url' => 'oauth',
             'response_type_code' => 'code',
             'response_type_token' => 'token'
+        ],
+        /**
+         * Regions and their allowed locales
+         */
+        'regions' => [
+            'us' => ['en_US', 'es_MX', 'pt_BR'],
+            'eu' => ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT', 'it_IT'],
+            'kr' => ['ko_KR'],
+            'tw' => ['zh_TW']
         ]
     ];
 
@@ -37,8 +45,9 @@ class Config {
      * @return mixed
      */
     public static function get($index) {
-        $index = explode('.', strtolower($index));
-        return self::getSingle($index, self::$props);
+        $indexArr = explode('.', strtolower($index));
+
+        return self::getSingle($indexArr, self::$props);
     }
 
     /**

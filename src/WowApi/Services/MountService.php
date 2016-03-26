@@ -34,4 +34,17 @@ class MountService extends BaseService {
         return Mount::getMounts($response->getBody());
     }
 
+    /**
+     * Sort mounts by given key val pair
+     *
+     * @param string $key
+     * @param string $val
+     * @return array
+     */
+    public function sortMounts($key, $val) {
+        $this->sortWhitelist = ['isGround', 'isFlying', 'isAquatic', 'isJumping'];
+
+        return $this->sortData($this->getMounts(), [$key => $val]);
+    }
+
 }

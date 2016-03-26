@@ -74,7 +74,6 @@ abstract class BaseService {
         $this->_region = (isset($options['region'])) ? $options['region'] : Config::get('client.region');
         $this->_locale = (isset($options['locale'])) ? $options['locale'] : Config::get('client.locale');
 
-        // set up the base URI
         $baseUri = $this->getPath(Config::get('client.base_uri'), [
             'protocol' => Helper::checkProtocol($this->_protocol),
             'region' => $this->_region
@@ -215,7 +214,7 @@ abstract class BaseService {
     /**
      * Sort returned results
      *
-     * @param object $dataArr
+     * @param array $dataArr
      * @param array $sortArr
      * @return array
      */

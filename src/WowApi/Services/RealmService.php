@@ -2,6 +2,7 @@
 
 use WowApi\Components\Realm;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\BadResponseException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\NotFoundException;
 use WowApi\Exceptions\WowApiException;
@@ -71,7 +72,7 @@ class RealmService extends BaseService {
      * Gets the realm(s)
      *
      * @param null $realms
-     * @return RealmService $this
+     * @return array
      * @throws WowApiException
      * @throws IllegalArgumentException
      */
@@ -108,7 +109,7 @@ class RealmService extends BaseService {
     }
 
     /**
-     *
+     * Sort realms by given key val pair
      *
      * @param string $key
      * @param string $val
