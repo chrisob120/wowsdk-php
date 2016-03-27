@@ -40,7 +40,7 @@ class RealmService extends BaseService {
     }
 
     /**
-     * Get realm service
+     * Get Realm component
      *
      * @param string $realm Realm slug
      * @return Realm

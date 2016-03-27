@@ -1,34 +1,28 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Guild;
+use WowApi\Components\Achievement;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
 /**
- * Guild services
+ * Boss services
  *
  * @package     Services
  * @author      Chris O'Brien <chris@diobie.com>
  * @version     1.0.0
  */
-class GuildService extends BaseService {
+class BossService extends BaseService {
 
     /**
-     * Get Guild component
+     * Get Boss component
      *
-     * @param string $realm
-     * @param string $guild
-     * @param array $params
-     * @return Guild
+     * @param int $achievementId
+     * @return Achievement
      * @throws WowApiException
      */
-    public function getGuild($realm, $guild, $params = []) {
-        $this->setFields($params);
+    public function getAchievement($achievementId) {
         
-        $url = $this->getPath('guild/:realm/:guild', [
-            'realm' => $realm,
-            'guild' => $guild
-        ]);
+        $url = $this->getPath(sprintf('achievement/%s', (int)$achievementId));
 
         $request = parent::createRequest('GET', $url);
 
@@ -38,7 +32,6 @@ class GuildService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Guild($response->getBody());
+        return new Achievement($response->getBody());
     }
-
 }

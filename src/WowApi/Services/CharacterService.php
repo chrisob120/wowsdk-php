@@ -14,7 +14,7 @@ use WowApi\Exceptions\WowApiException;
 class CharacterService extends BaseService {
 
     /**
-     * Get character service
+     * Get Character component
      *
      * @param string $realm
      * @param string $character

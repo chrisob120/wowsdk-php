@@ -14,7 +14,7 @@ use WowApi\Exceptions\WowApiException;
 class AuctionService extends BaseService {
 
     /**
-     * Get auction service
+     * Get Auction component
      *
      * @param string $realm
      * @return Auction

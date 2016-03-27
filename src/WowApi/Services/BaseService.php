@@ -203,6 +203,12 @@ abstract class BaseService {
         }
     }
 
+    /**
+     * Set query
+     *
+     * @param array $qryArr
+     * @throws IllegalArgumentException
+     */
     protected function setQuery($qryArr = []) {
         if (is_array($qryArr)) {
             $this->setParameter('query', $qryArr);

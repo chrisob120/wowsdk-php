@@ -14,7 +14,7 @@ use WowApi\Exceptions\WowApiException;
 class AchievementService extends BaseService {
 
     /**
-     * Get achievement service
+     * Get Achievement component
      *
      * @param int $achievementId
      * @return Achievement
