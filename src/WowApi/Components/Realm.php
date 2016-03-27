@@ -70,7 +70,7 @@ class Realm extends BaseComponent {
     public $connected_realms;
 
     /**
-     * Realm constructor - creates the realm object based on the returned service data
+     * Realm constructor - creates the Realm object based on the returned service data
      *
      * @param object $jsonData
      * @return Realm

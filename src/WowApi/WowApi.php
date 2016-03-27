@@ -6,6 +6,7 @@ use WowApi\Services\RealmService;
 use WowApi\Services\MountService;
 use WowApi\Services\AchievementService;
 use WowApi\Services\AuctionService;
+use WowApi\Services\BossService;
 
 /**
  * WoW API Class
@@ -48,6 +49,11 @@ class WowApi {
     public $auctionService;
 
     /**
+     * @var BossService $bossService
+     */
+    public $bossService;
+
+    /**
      * WowApi constructor
      *
      * @param string $apiKey
@@ -60,6 +66,7 @@ class WowApi {
         $this->mountService = new MountService($apiKey, $options);
         $this->achievementService = new AchievementService($apiKey, $options);
         $this->auctionService = new AuctionService($apiKey, $options);
+        $this->bossService = new BossService($apiKey, $options);
     }
 
 }
@@ -90,7 +97,8 @@ try {
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->achievementService->getAchievement(2144);
-    $z = $t->auctionService->getAuction('Hyjal');
+    //$z = $t->auctionService->getAuction('Hyjal');
+    $z = $t->bossService->getBoss(24723);
     echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {

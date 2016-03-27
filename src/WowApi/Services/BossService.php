@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Achievement;
+use WowApi\Components\Boss;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -16,13 +16,13 @@ class BossService extends BaseService {
     /**
      * Get Boss component
      *
-     * @param int $achievementId
-     * @return Achievement
+     * @param int $bossId
+     * @return Boss
      * @throws WowApiException
      */
-    public function getAchievement($achievementId) {
+    public function getBoss($bossId) {
         
-        $url = $this->getPath(sprintf('achievement/%s', (int)$achievementId));
+        $url = $this->getPath(sprintf('boss/%s', (int)$bossId));
 
         $request = parent::createRequest('GET', $url);
 
@@ -32,6 +32,6 @@ class BossService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Achievement($response->getBody());
+        return new Boss($response->getBody());
     }
 }

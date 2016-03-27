@@ -60,7 +60,7 @@ class Achievement extends BaseComponent {
     public $factionId;
 
     /**
-     * Achievement constructor - creates the achievement object based on the returned service data
+     * Achievement constructor - creates the Achievement object based on the returned service data
      *
      * @param string $jsonData
      * @return Achievement

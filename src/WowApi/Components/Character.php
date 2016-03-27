@@ -160,7 +160,7 @@ class Character extends BaseComponent {
     public $totalHonorableKills;
 
     /**
-     * Character constructor - creates the character object based on the returned service data
+     * Character constructor - creates the Character object based on the returned service data
      *
      * @param string $jsonData
      * @return Character

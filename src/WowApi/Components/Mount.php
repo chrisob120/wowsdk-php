@@ -55,7 +55,7 @@ class Mount extends BaseComponent {
     public $isJumping;
 
     /**
-     * Mount constructor - creates the mount object based on the returned service data
+     * Mount constructor - creates the Mount object based on the returned service data
      *
      * @param object $jsonData
      * @return Mount

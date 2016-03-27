@@ -65,7 +65,7 @@ class Guild extends BaseComponent {
     public $challenge;
 
     /**
-     *  Guild constructor - creates the guild object based on the returned service data
+     *  Guild constructor - creates the Guild object based on the returned service data
      *
      * @param object $jsonData
      * @return Guild

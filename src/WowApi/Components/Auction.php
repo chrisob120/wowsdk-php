@@ -1,7 +1,7 @@
 <?php namespace WowApi\Components;
 
 /**
- * Represents a single Achievement
+ * Represents a single Auction
  *
  * @package     Components
  * @author      Chris O'Brien <chris@diobie.com>
@@ -15,7 +15,7 @@ class Auction extends BaseComponent {
     public $files;
 
     /**
-     * Achievement constructor - creates the achievement object based on the returned service data
+     * Auction constructor - creates the Auction object based on the returned service data
      *
      * @param string $jsonData
      * @return Auction

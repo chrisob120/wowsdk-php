@@ -70,7 +70,7 @@ class Boss extends BaseComponent {
     public $npcs;
 
     /**
-     * Achievement constructor - creates the achievement object based on the returned service data
+     * Boss constructor - creates the Boss object based on the returned service data
      *
      * @param string $jsonData
      * @return Boss
