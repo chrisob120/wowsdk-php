@@ -1,7 +1,6 @@
 <?php namespace WowApi\Components\Pets;
 
 use WowApi\Components\BaseComponent;
-use WowApi\Util\Helper;
 
 /**
  * Represents a single PetAbility

@@ -139,6 +139,7 @@ abstract class BaseService {
      * @return mixed
      */
     protected function doRequest($request) {
+        Helper::print_rci($this->parameters);
         return $this->_client->send($request, $this->parameters);
     }
 
@@ -204,14 +205,20 @@ abstract class BaseService {
     }
 
     /**
-     * Set query
+     * Recursive set query method that allows for multiple queries to be set at once
      *
      * @param array $qryArr
      * @throws IllegalArgumentException
      */
     protected function setQuery($qryArr = []) {
         if (is_array($qryArr)) {
-            $this->setParameter('query', $qryArr);
+            $key = current(array_keys($qryArr));
+            $this->setParameter('query', [$key => $qryArr[$key]]);
+
+            if (count($qryArr) > 1) {
+                array_shift($qryArr);
+                $this->setQuery($qryArr);
+            }
         } else {
             throw new IllegalArgumentException('Query parameter was set incorrectly. Value must an array.');
         }

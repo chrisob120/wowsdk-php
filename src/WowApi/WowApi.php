@@ -103,8 +103,9 @@ try {
     //$z = $t->achievementService->getAchievement(2144);
     //$z = $t->auctionService->getAuction('Hyjal');
     //$z = $t->bossService->getBoss(24723);
-    $z = $t->petService->getPets();
+    //$z = $t->petService->getPets();
     //$z = $t->petService->getSpecies(258);
+    $z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
     echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {

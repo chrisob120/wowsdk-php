@@ -22,7 +22,9 @@ class AchievementService extends BaseService {
      */
     public function getAchievement($achievementId) {
         
-        $url = $this->getPath(sprintf('achievement/%s', (int)$achievementId));
+        $url = $this->getPath('achievement/:achievementId', [
+            'achievementId' => (int)$achievementId
+        ]);
 
         $request = parent::createRequest('GET', $url);
 

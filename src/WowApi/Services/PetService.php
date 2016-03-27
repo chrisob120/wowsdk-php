@@ -2,6 +2,7 @@
 
 use WowApi\Components\Pet;
 use WowApi\Components\Pets\PetSpecies;
+use WowApi\Components\Pets\PetSpeciesStats;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -32,8 +33,19 @@ class PetService extends BaseService {
         return Pet::getPets($response->getBody());
     }
 
+    /**
+     * Get Species component
+     * 
+     * @param int $speciesId
+     * @return PetSpecies
+     * @throws WowApiException
+     */
     public function getSpecies($speciesId) {
-        $request = parent::createRequest('GET', "pet/species/$speciesId");
+        $url = $this->getPath('pet/species/:species', [
+            'species' => (int)$speciesId
+        ]);
+
+        $request = parent::createRequest('GET', $url);
 
         try {
             $response = parent::doRequest($request);
@@ -42,6 +54,33 @@ class PetService extends BaseService {
         }
 
         return new PetSpecies($response->getBody());
+    }
+
+    /**
+     * Get species stats based on different parameters
+     *
+     * @param int $speciesId
+     * @param array $options
+     * @return PetSpeciesStats
+     * @throws WowApiException
+     * @throws \WowApi\Exceptions\IllegalArgumentException
+     */
+    public function getSpeciesStats($speciesId, $options = []) {
+        $this->setQuery($options);
+
+        $url = $this->getPath('pet/stats/:species', [
+            'species' => (int)$speciesId
+        ]);
+
+        $request = parent::createRequest('GET', $url);
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return new PetSpeciesStats($response->getBody());
     }
 
 }

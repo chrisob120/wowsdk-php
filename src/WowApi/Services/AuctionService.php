@@ -22,7 +22,9 @@ class AuctionService extends BaseService {
      */
     public function getAuction($realm) {
         
-        $url = $this->getPath(sprintf('auction/data/%s', $realm));
+        $url = $this->getPath('auction/data/:realm', [
+            'realm' => $realm
+        ]);
 
         $request = parent::createRequest('GET', $url);
 

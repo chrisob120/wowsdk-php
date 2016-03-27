@@ -21,8 +21,9 @@ class BossService extends BaseService {
      * @throws WowApiException
      */
     public function getBoss($bossId) {
-        
-        $url = $this->getPath(sprintf('boss/%s', (int)$bossId));
+        $url = $this->getPath(sprintf('boss/:boss', [
+            'boss' => (int)$bossId
+        ]));
 
         $request = parent::createRequest('GET', $url);
 
