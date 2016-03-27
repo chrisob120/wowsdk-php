@@ -26,20 +26,10 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
         $character = $this->_access->getCharacter('Hyjal', 'Ardeel');
         $this->assertInstanceOf('\WowApi\Components\Character', $character);
 
-        // check the default fields
+        // check the a default field
         $this->assertNotNull($character->lastModified);
-        $this->assertNotNull($character->name);
-        $this->assertNotNull($character->realm);
-        $this->assertNotNull($character->battlegroup);
-        $this->assertNotNull($character->class);
-        $this->assertNotNull($character->race);
-        $this->assertNotNull($character->gender);
-        $this->assertNotNull($character->level);
-        $this->assertNotNull($character->achievementPoints);
-        $this->assertNotNull($character->thumbnail);
-        $this->assertNotNull($character->calcClass);
-        $this->assertNotNull($character->faction);
-        $this->assertNotNull($character->totalHonorableKills);
+        // check an unassigned (should be null) field
+        $this->assertNull($character->achievements);
     }
 
     public function testGetCharacterWithAchievements() {
