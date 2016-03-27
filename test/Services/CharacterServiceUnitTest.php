@@ -49,6 +49,7 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @expectedException \WowApi\Exceptions\WowApiException
+     * @expectedExceptionMessage Not Found
      */
     public function testCharacterNotFound() {
         $this->_access->getCharacter('FakeRealm', 'FakeChar');
