@@ -1,6 +1,5 @@
 <?php namespace WowApi\Util;
 
-
 /**
  * Class Helper
  *

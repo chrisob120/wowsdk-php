@@ -4,7 +4,6 @@ use WowApi\Components\Character;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
-
 /**
  * Character services
  *

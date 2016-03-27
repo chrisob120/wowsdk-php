@@ -2,12 +2,10 @@
 
 use WowApi\Components\Realm;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\BadResponseException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\NotFoundException;
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
-
 
 /**
  * Realm services

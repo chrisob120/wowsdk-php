@@ -5,7 +5,6 @@ use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 
-
 /**
  * Mount services
  *

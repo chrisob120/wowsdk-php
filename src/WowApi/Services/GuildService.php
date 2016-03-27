@@ -4,7 +4,6 @@ use WowApi\Components\Guild;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
-
 /**
  * Guild services
  *

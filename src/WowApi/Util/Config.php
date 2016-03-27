@@ -1,9 +1,15 @@
 <?php namespace WowApi\Util;
 
-
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\NotFoundException;
 
+/**
+ * Config Helper
+ *
+ * @package     Util
+ * @author      Chris O'Brien <chris@diobie.com>
+ * @version     1.0.0
+ */
 class Config {
 
     /**
