@@ -155,7 +155,7 @@ class Character extends BaseComponent {
     public $audit;
 
     /**
-     * @var
+     * @var int $totalHonorableKills
      */
     public $totalHonorableKills;
 

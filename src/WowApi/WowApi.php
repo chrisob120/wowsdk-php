@@ -4,6 +4,7 @@ use WowApi\Services\CharacterService;
 use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
 use WowApi\Services\MountService;
+use WowApi\Services\AchievementService;
 
 /**
  * WoW API Class
@@ -36,6 +37,11 @@ class WowApi {
     public $mountService;
 
     /**
+     * @var AchievementService $achievementService
+     */
+    public $achievementService;
+
+    /**
      * WowApi constructor
      *
      * @param string $apiKey
@@ -46,11 +52,11 @@ class WowApi {
         $this->realmService = new RealmService($apiKey, $options);
         $this->guildService = new GuildService($apiKey, $options);
         $this->mountService = new MountService($apiKey, $options);
+        $this->achievementService = new AchievementService($apiKey, $options);
     }
 
 }
 
-/*
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
 
@@ -68,14 +74,15 @@ $options = [
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
 
 try {
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->realmService->getRealm('The Forgotten Coast');
     //$z = $t->realmService->getRealms();
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
     //$z = $t->mountService->getMounts();
-    $z = $t->mountService->sortMounts('isAquatic', false);
-    echo count($z);
+    //$z = $t->mountService->sortMounts('isAquatic', false);
+    //$z = $t->achievementService->getAchievement(2144);
+    echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
