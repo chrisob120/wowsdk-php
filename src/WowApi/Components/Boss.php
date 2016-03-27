@@ -15,12 +15,12 @@ class Boss extends BaseComponent {
     public $id;
 
     /**
-     * @var string $name;
+     * @var string $name
      */
     public $name;
 
     /**
-     * @var string $urlSlug;
+     * @var string $urlSlug
      */
     public $urlSlug;
 

@@ -7,6 +7,7 @@ use WowApi\Services\MountService;
 use WowApi\Services\AchievementService;
 use WowApi\Services\AuctionService;
 use WowApi\Services\BossService;
+use WowApi\Services\PetService;
 
 /**
  * WoW API Class
@@ -53,6 +54,8 @@ class WowApi {
      */
     public $bossService;
 
+    public $petService;
+
     /**
      * WowApi constructor
      *
@@ -67,6 +70,7 @@ class WowApi {
         $this->achievementService = new AchievementService($apiKey, $options);
         $this->auctionService = new AuctionService($apiKey, $options);
         $this->bossService = new BossService($apiKey, $options);
+        $this->petService = new PetService($apiKey, $options);
     }
 
 }
@@ -98,7 +102,9 @@ try {
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->achievementService->getAchievement(2144);
     //$z = $t->auctionService->getAuction('Hyjal');
-    $z = $t->bossService->getBoss(24723);
+    //$z = $t->bossService->getBoss(24723);
+    $z = $t->petService->getPets();
+    //$z = $t->petService->getSpecies(258);
     echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {

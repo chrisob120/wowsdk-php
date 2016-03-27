@@ -30,7 +30,7 @@ class Mount extends BaseComponent {
     public $qualityId;
 
     /**
-     * @var string $icon;
+     * @var string $icon
      */
     public $icon;
 
@@ -65,7 +65,7 @@ class Mount extends BaseComponent {
     }
 
     /**
-     * Gets an array of Mount items based on which realms were sent to the method
+     * Gets an array of Mount items
      *
      * @param string $jsonData
      * @return array
