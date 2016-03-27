@@ -101,12 +101,14 @@ abstract class BaseService {
      * @throws IllegalArgumentException
      */
     private function checkOptionalParameters() {
+        if ($this->_protocol != 'http' && $this->_protocol != 'https') throw new IllegalArgumentException('Protocol must be either http or https');
+
         // get the regions
         $allowedRegions = array_keys(Config::get('regions'));
-        $allowedLocaleByRegion = Config::get("regions.$this->_region");
-
-        if ($this->_protocol != 'http' && $this->_protocol != 'https') throw new IllegalArgumentException('Protocol must be either http or https');
         if (!in_array($this->_region, $allowedRegions)) throw new IllegalArgumentException(sprintf('Region must be one of the following: %s', implode(', ', $allowedRegions)));
+
+        // get the locales
+        $allowedLocaleByRegion = Config::get("regions.$this->_region");
         if (!in_array($this->_locale, $allowedLocaleByRegion)) throw new IllegalArgumentException(sprintf('Locale must be one of the following for the %s region: %s', $this->_region, implode(', ', $allowedLocaleByRegion)));
     }
 
