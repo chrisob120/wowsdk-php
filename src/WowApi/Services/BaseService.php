@@ -113,15 +113,6 @@ abstract class BaseService {
     }
 
     /**
-     * Get the Guzzle client
-     *
-     * @return Client
-     */
-    protected function getClient() {
-        return $this->_client;
-    }
-
-    /**
      * Create the client request
      *
      * @param string $method
@@ -139,7 +130,6 @@ abstract class BaseService {
      * @return mixed
      */
     protected function doRequest($request) {
-        Helper::print_rci($this->parameters);
         return $this->_client->send($request, $this->parameters);
     }
 

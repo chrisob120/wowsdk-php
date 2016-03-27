@@ -1,28 +1,28 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Boss;
+use WowApi\Components\Quest;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
 /**
- * Boss services
+ * Quest services
  *
  * @package     Services
  * @author      Chris O'Brien <chris@diobie.com>
  * @version     1.0.0
  */
-class BossService extends BaseService {
+class QuestService extends BaseService {
 
     /**
-     * Get Boss component
+     * Get Quest component
      *
-     * @param int $bossId
-     * @return Boss
+     * @param int $questId
+     * @return Quest
      * @throws WowApiException
      */
-    public function getBoss($bossId) {
-        $url = $this->getPath('boss/:boss', [
-            'boss' => (int)$bossId
+    public function getQuest($questId) {
+        $url = $this->getPath('quest/:quest', [
+            'quest' => (int)$questId
         ]);
 
         $request = parent::createRequest('GET', $url);
@@ -33,6 +33,6 @@ class BossService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Boss($response->getBody());
+        return new Quest($response->getBody());
     }
 }

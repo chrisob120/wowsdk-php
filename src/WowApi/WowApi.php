@@ -8,6 +8,7 @@ use WowApi\Services\AchievementService;
 use WowApi\Services\AuctionService;
 use WowApi\Services\BossService;
 use WowApi\Services\PetService;
+use WowApi\Services\QuestService;
 
 /**
  * WoW API Class
@@ -54,7 +55,15 @@ class WowApi {
      */
     public $bossService;
 
+    /**
+     * @var PetService $petService
+     */
     public $petService;
+
+    /**
+     * @var QuestService $questService
+     */
+    public $questService;
 
     /**
      * WowApi constructor
@@ -71,6 +80,7 @@ class WowApi {
         $this->auctionService = new AuctionService($apiKey, $options);
         $this->bossService = new BossService($apiKey, $options);
         $this->petService = new PetService($apiKey, $options);
+        $this->questService = new QuestService($apiKey, $options);
     }
 
 }
@@ -105,7 +115,8 @@ try {
     //$z = $t->bossService->getBoss(24723);
     //$z = $t->petService->getPets();
     //$z = $t->petService->getSpecies(258);
-    $z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
+    //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
+    $z = $t->questService->getQuest(13146);
     echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
