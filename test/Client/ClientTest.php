@@ -8,15 +8,6 @@
  */
 class ClientTest extends PHPUnit_Framework_TestCase {
 
-    /**
-     * @var array $_clientOptions
-     */
-    private $_clientOptions = [];
-
-    protected function setUp() {
-        $this->_clientOptions = ['region', 'locale'];
-    }
-
     public function testGetClient() {
         $client = API::getClient();
         $this->assertInstanceOf('\WoWApi\WowApi', $client);
@@ -28,10 +19,27 @@ class ClientTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @expectedException \WowApi\Exceptions\WowApiException
+     * @expectedException \WowApi\Exceptions\IllegalArgumentException
+     * @expectedExceptionMessage Region must be one of the following
      */
     public function testClientBadRegion() {
+        API::getClient(null, ['region' => 'catDog']);
+    }
 
+    /**
+     * @expectedException \WowApi\Exceptions\IllegalArgumentException
+     * @expectedExceptionMessage Locale must be one of the following
+     */
+    public function testClientBadLocale() {
+        API::getClient(null, ['locale' => 'catDog']);
+    }
+
+    /**
+     * @expectedException \WowApi\Exceptions\IllegalArgumentException
+     * @expectedExceptionMessage Protocol must be either http or https
+     */
+    public function testClientBadProtocol() {
+        API::getClient(null, ['protocol' => 'catDog']);
     }
 
 }
