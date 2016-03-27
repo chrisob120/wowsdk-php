@@ -9,6 +9,7 @@ use WowApi\Services\AuctionService;
 use WowApi\Services\BossService;
 use WowApi\Services\PetService;
 use WowApi\Services\QuestService;
+use WowApi\Services\RecipeService;
 
 /**
  * WoW API Class
@@ -65,6 +66,8 @@ class WowApi {
      */
     public $questService;
 
+    public $recipeService;
+
     /**
      * WowApi constructor
      *
@@ -81,6 +84,7 @@ class WowApi {
         $this->bossService = new BossService($apiKey, $options);
         $this->petService = new PetService($apiKey, $options);
         $this->questService = new QuestService($apiKey, $options);
+        $this->recipeService = new RecipeService($apiKey, $options);
     }
 
 }
@@ -116,7 +120,8 @@ try {
     //$z = $t->petService->getPets();
     //$z = $t->petService->getSpecies(258);
     //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
-    $z = $t->questService->getQuest(13146);
+    //$z = $t->questService->getQuest(13146);
+    $z = $t->recipeService->getRecipe(33994);
     echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
