@@ -3,7 +3,7 @@
 /**
  * Client Unit Tests
  *
- * @author		Chris O'Brien <chris@diobie.com>
+ * @author      Chris O'Brien <chris@diobie.com>
  * @version     1.0.0
  */
 class ClientTest extends PHPUnit_Framework_TestCase {
