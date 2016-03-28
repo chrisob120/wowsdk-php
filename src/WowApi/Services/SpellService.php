@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Spell;
+use WowApi\Components\Spells\Spell;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 

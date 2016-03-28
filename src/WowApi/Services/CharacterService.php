@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Character;
+use WowApi\Components\Characters\Character;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 

@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Realm;
+use WowApi\Components\Realms\Realm;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\NotFoundException;

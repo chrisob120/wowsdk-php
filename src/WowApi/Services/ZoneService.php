@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Zone;
+use WowApi\Components\Zones\Zone;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\NotFoundException;

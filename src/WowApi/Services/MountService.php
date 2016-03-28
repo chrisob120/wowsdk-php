@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Mount;
+use WowApi\Components\Mounts\Mount;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;

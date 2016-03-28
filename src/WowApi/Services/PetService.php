@@ -1,6 +1,6 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Pet;
+use WowApi\Components\Pets\Pet;
 use WowApi\Components\Pets\PetSpecies;
 use WowApi\Components\Pets\PetSpeciesStats;
 use GuzzleHttp\Exception\ClientException;
