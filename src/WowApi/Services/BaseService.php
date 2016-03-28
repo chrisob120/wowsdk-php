@@ -135,12 +135,7 @@ abstract class BaseService {
         try {
             $send = $this->_client->send($request, $this->parameters);
         } catch (ConnectException $e) { // catch the timeout error
-            $options = [
-                'msg' => $e->getMessage(),
-                'code' => 200
-            ];
-
-            throw $this->toWowApiException($options);
+            throw $this->toWowApiException([$e->getMessage(), 200]);
         }
 
         return $send;
@@ -154,8 +149,7 @@ abstract class BaseService {
      */
     protected function toWowApiException($response) {
         if (is_array($response)) {
-            $msg = $response['msg'];
-            $code = $response['code'];
+            list($msg, $code) = $response;
 
             $wowApiEx = new WowApiException($msg, $code);
             $wowApiEx->setError([
