@@ -28,13 +28,15 @@ class Helper {
     }
 
     /**
-     * Replaces all spaces with dashes and puts the string to lower case. This way both the realm name or slug can be entered
+     * Replaces all spaces with dashes, all apostrophe's with empty strings, and puts the string to lower case.
+     * This allows for both the realm name or slug to be entered.
      *
      * @param string $slug
      * @return string
      */
     public static function formatSlug($slug) {
-        return strtolower(str_replace(' ', '-', $slug));
+        $returnStr = str_replace(' ', '-', $slug);
+        return strtolower(str_replace("'", '', $returnStr));
     }
 
     /**
