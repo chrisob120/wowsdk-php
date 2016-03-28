@@ -7,7 +7,7 @@ use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
 
 /**
- * Mount services
+ * Challenge services
  *
  * @package     Services
  * @author      Chris O'Brien
@@ -73,9 +73,16 @@ class ChallengeService extends BaseService {
         return $returnArr;
     }
 
-    public function getRegionChallenges() {
+    /**
+     * Get the challenge ladder for the current region
+     *
+     * @return array
+     * @throws IllegalArgumentException
+     * @throws WowApiException
+     */
+    public function getRegionLadder() {
         // allow for longer timeout because it's a big call
-        $this->setParameter('timeout', 15);
+        $this->setParameter('timeout', 10);
 
         $request = parent::createRequest('GET', 'challenge/region');
 

@@ -126,8 +126,8 @@ $options = [
     'locale' => 'en_US'
 ];*/
 
-//$options = ['region' => 'us', 'locale' => 'en_US'];
-$options = ['region' => 'eu', 'locale' => 'en_GB'];
+$options = ['region' => 'us', 'locale' => 'en_US'];
+//$options = ['region' => 'eu', 'locale' => 'en_GB'];
 
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
 
@@ -150,9 +150,9 @@ try {
     //$z = $t->spellService->getSpell(8056);
     //$z = $t->zoneService->getZones();
     //$z = $t->zoneService->getZone(4131);
-    //$z = $t->challengeService->getLadder('Hyjal');
+    $z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
-    $z = $t->challengeService->getRegionChallenges();
+    //$z = $t->challengeService->getRegionLadder();
     echo 'Returned: ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
