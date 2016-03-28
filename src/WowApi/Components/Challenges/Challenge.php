@@ -1,4 +1,7 @@
-<?php namespace WowApi\Components;
+<?php namespace WowApi\Components\Challenges;
+
+use WowApi\Components\BaseComponent;
+use WowApi\Components\Realms\Realm;
 
 /**
  * Represents a single Challenge

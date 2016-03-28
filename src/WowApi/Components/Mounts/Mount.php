@@ -1,4 +1,6 @@
-<?php namespace WowApi\Components;
+<?php namespace WowApi\Components\Mounts;
+
+use WowApi\Components\BaseComponent;
 
 /**
  * Represents a single Mount

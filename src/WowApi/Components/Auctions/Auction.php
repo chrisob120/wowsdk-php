@@ -1,4 +1,6 @@
-<?php namespace WowApi\Components;
+<?php namespace WowApi\Components\Auctions;
+
+use WowApi\Components\BaseComponent;
 
 /**
  * Represents a single Auction

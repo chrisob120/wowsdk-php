@@ -1,6 +1,6 @@
-<?php namespace WowApi\Components;
+<?php namespace WowApi\Components\Leaderboard;
 
-use WowApi\Components\Leaderboard\Row;
+use WowApi\Components\BaseComponent;
 
 /**
  * Represents a single Leaderboard

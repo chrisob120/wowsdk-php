@@ -1,5 +1,6 @@
 <?php namespace WowApi;
 
+use WowApi\Components\Items\Item;
 use WowApi\Services\CharacterService;
 use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
@@ -14,6 +15,7 @@ use WowApi\Services\SpellService;
 use WowApi\Services\ZoneService;
 use WowApi\Services\ChallengeService;
 use WowApi\Services\LeaderboardService;
+use WowApi\Services\ItemService;
 
 /**
  * WoW API Class
@@ -96,6 +98,11 @@ class WowApi {
     public $leaderboardService;
 
     /**
+     * @var ItemService $itemService
+     */
+    public $itemService;
+
+    /**
      * WowApi constructor
      *
      * @param string $apiKey
@@ -116,10 +123,12 @@ class WowApi {
         $this->zoneService = new ZoneService($apiKey, $options);
         $this->challengeService = New ChallengeService($apiKey, $options);
         $this->leaderboardService = New LeaderboardService($apiKey, $options);
+        $this->itemService = new ItemService($apiKey, $options);
     }
 
 }
 
+/*
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
 
@@ -159,7 +168,9 @@ try {
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    $z = $t->leaderboardService->getLeaderboard('rbg');
+    //$z = $t->leaderboardService->getLeaderboard('rbg');
+    //$z = $t->itemService->getItem(18803);
+    $z = $t->itemService->getItemSet(1060);
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
