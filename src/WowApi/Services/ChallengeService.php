@@ -2,7 +2,6 @@
 
 use WowApi\Components\Challenge;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ConnectException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;

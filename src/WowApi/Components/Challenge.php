@@ -1,5 +1,4 @@
 <?php namespace WowApi\Components;
-use WowApi\Util\Helper;
 
 /**
  * Represents a single Challenge
