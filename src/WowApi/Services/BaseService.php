@@ -154,11 +154,14 @@ abstract class BaseService {
      */
     protected function toWowApiException($response) {
         if (is_array($response)) {
-            $msg = strstr($response['msg'], ':');
-            $msg = trim(preg_replace('/:/', '', $msg, 1));
+            $msg = $response['msg'];
+            $code = $response['code'];
 
-            $wowApiEx = new WowApiException($msg, $response['code']);
-            $wowApiEx->setError(['connectError' => $msg]);
+            $wowApiEx = new WowApiException($msg, $code);
+            $wowApiEx->setError([
+                'code' => $code,
+                'reason' => $msg
+            ]);
         } else {
             $wowApiEx = new WowApiException($response->getResponse()->getReasonPhrase(), $response->getCode());
             $wowApiEx->setError(json_decode($response->getResponse()->getBody()));
