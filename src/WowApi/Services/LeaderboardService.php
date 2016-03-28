@@ -1,11 +1,11 @@
 <?php namespace WowApi\Services;
 
-use WowApi\Components\Leaderboard;
+use WowApi\Components\Leaderboard\Leaderboard;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
 /**
- * Leaderboard services
+ * PVP Leaderboard services
  *
  * @package     Services
  * @author      Chris O'Brien
