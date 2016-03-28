@@ -78,8 +78,8 @@ class PetSpecies extends BaseComponent {
     private function getAbilities($abilityArr = []) {
         $returnArr = [];
 
-        foreach ($abilityArr as $ab) {
-            $returnArr[] = new PetAbility($ab);
+        foreach ($abilityArr as $ability) {
+            $returnArr[] = new PetAbility($ability);
         }
 
         return $returnArr;
