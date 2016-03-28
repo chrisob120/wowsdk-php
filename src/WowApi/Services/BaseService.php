@@ -3,6 +3,7 @@
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use WowApi\Util\Helper;
@@ -128,22 +129,41 @@ abstract class BaseService {
      *
      * @param $request
      * @return mixed
+     * @throws WowApiException
      */
     protected function doRequest($request) {
-        return $this->_client->send($request, $this->parameters);
+        try {
+            $send = $this->_client->send($request, $this->parameters);
+        } catch (ConnectException $e) { // catch the timeout error
+            $options = [
+                'msg' => $e->getMessage(),
+                'code' => 200
+            ];
+            
+            throw $this->toWowApiException($options);
+        }
+
+        return $send;
     }
 
     /**
      * Throw WowApi exception from ClientException
      *
-     * @param ClientException $clientEx
+     * @param ClientException|array $response
      * @return WowApiException
      */
-    protected function toWowApiException($clientEx) {
-        $wowApiEx = new WowApiException($clientEx->getResponse()->getReasonPhrase(), $clientEx->getCode());
-        $wowApiEx->setError(json_decode($clientEx->getResponse()->getBody()));
+    protected function toWowApiException($response) {
+        if (is_array($response)) {
+            $msg = $response['msg'];
 
-        return $wowApiEx;
+            $response = new WowApiException($msg, $response['code']);
+            $response->setError(['connectError' => $msg]);
+        } else {
+            $response = new WowApiException($response->getResponse()->getReasonPhrase(), $response->getCode());
+            $response->setError(json_decode($response->getResponse()->getBody()));
+        }
+
+        return $response;
     }
 
     /**
