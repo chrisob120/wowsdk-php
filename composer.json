@@ -2,11 +2,11 @@
   "name": "chrisob120/php-wow-api",
   "description": "World of Warcraft API SDK",
   "license": "MIT",
-  "keywords": ["api", "wow", "wowapi", "php"],
+  "keywords": ["api", "wow", "wowapi", "php", "sdk", "World of Warcraft"],
   "authors": [
 	{
 	  "name": "Chris O'Brien",
-	  "email": "chris@diobie.com"
+	  "email": "chris@chrisob.com"
 	}
   ],
   "require": {
