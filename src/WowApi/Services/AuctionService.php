@@ -21,7 +21,6 @@ class AuctionService extends BaseService {
      * @throws WowApiException
      */
     public function getAuction($realm) {
-        
         $url = $this->getPath('auction/data/:realm', [
             'realm' => $realm
         ]);

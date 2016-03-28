@@ -21,7 +21,6 @@ class AchievementService extends BaseService {
      * @throws WowApiException
      */
     public function getAchievement($achievementId) {
-        
         $url = $this->getPath('achievement/:achievementId', [
             'achievementId' => (int)$achievementId
         ]);
