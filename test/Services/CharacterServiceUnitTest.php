@@ -21,10 +21,9 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
         $this->_access = null;
     }
 
-
     public function testGetCharacter() {
         $character = $this->_access->getCharacter('Hyjal', 'Ardeel');
-        $this->assertInstanceOf('\WowApi\Components\Character', $character);
+        $this->assertInstanceOf('\WowApi\Components\Characters\Character', $character);
 
         // check the a default field
         $this->assertNotNull($character->lastModified);
