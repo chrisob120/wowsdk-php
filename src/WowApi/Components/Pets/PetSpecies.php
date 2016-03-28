@@ -79,7 +79,7 @@ class PetSpecies extends BaseComponent {
         $returnArr = [];
 
         foreach ($abilityArr as $ability) {
-            $returnArr[] = new PetAbility($ability);
+            $returnArr[] = new PetAbility(json_encode($ability));
         }
 
         return $returnArr;

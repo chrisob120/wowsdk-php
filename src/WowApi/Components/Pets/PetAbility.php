@@ -53,7 +53,7 @@ class PetAbility extends BaseComponent {
      * @return PetAbility
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, $jsonData);
+        return parent::assignValues($this, json_decode($jsonData));
     }
 
 }
