@@ -13,6 +13,7 @@ use WowApi\Services\RecipeService;
 use WowApi\Services\SpellService;
 use WowApi\Services\ZoneService;
 use WowApi\Services\ChallengeService;
+use WowApi\Services\LeaderboardService;
 
 /**
  * WoW API Class
@@ -84,7 +85,15 @@ class WowApi {
      */
     public $zoneService;
 
+    /**
+     * @var ChallengeService $challengeService
+     */
     public $challengeService;
+
+    /**
+     * @var LeaderboardService $leaderboardService
+     */
+    public $leaderboardService;
 
     /**
      * WowApi constructor
@@ -106,6 +115,7 @@ class WowApi {
         $this->spellService = new SpellService($apiKey, $options);
         $this->zoneService = new ZoneService($apiKey, $options);
         $this->challengeService = New ChallengeService($apiKey, $options);
+        $this->leaderboardService = New LeaderboardService($apiKey, $options);
     }
 
 }
@@ -120,19 +130,15 @@ error_reporting(E_ALL);
 require_once 'autoload.php';
 require_once '../../vendor/autoload.php';
 
-/*
 $options = [
     'region' => 'us',
     'locale' => 'en_US'
-];*/
-
-$options = ['region' => 'us', 'locale' => 'en_US'];
-//$options = ['region' => 'eu', 'locale' => 'en_GB'];
+];
 
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
 
 try {
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel22');
     //$z = $t->realmService->getRealm('The Forgotten Coast');
     //$z = $t->realmService->getRealms();
     //$z = $t->realmService->sortRealms('type', 'rppvp');
@@ -150,10 +156,11 @@ try {
     //$z = $t->spellService->getSpell(8056);
     //$z = $t->zoneService->getZones();
     //$z = $t->zoneService->getZone(4131);
-    $z = $t->challengeService->getLadder('Hyjal');
+    //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    echo 'Returned: ' .count($z);
+    $z = $t->leaderboardService->getLeaderboard('rbg');
+    echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
