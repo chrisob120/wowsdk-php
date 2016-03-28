@@ -4,7 +4,7 @@
  * Super class for all components
  *
  * @package     Components
- * @author      Chris O'Brien <chris@diobie.com>
+ * @author      Chris O'Brien
  * @version     1.0.0
  */
 abstract class BaseComponent {

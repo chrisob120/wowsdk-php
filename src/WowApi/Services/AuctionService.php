@@ -8,7 +8,7 @@ use WowApi\Exceptions\WowApiException;
  * Auction services
  *
  * @package     Services
- * @author      Chris O'Brien <chris@diobie.com>
+ * @author      Chris O'Brien
  * @version     1.0.0
  */
 class AuctionService extends BaseService {

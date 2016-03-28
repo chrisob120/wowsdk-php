@@ -7,7 +7,7 @@ use WowApi\Exceptions\NotFoundException;
  * Config Helper
  *
  * @package     Util
- * @author      Chris O'Brien <chris@diobie.com>
+ * @author      Chris O'Brien
  * @version     1.0.0
  */
 class Config {
