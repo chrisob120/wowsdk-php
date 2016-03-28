@@ -60,7 +60,7 @@ class RealmService extends BaseService {
 
         // if there is more than one result from a getRealm request, that means it was not found. the API returns all realms if the query string search does not find one
         if (count(json_decode($response->getBody())->realms) > 1) {
-            throw new NotFoundException(sprintf("The realm '%s' could not be retrieved.", $realm));
+            throw parent::toWowApiException(['Realm Not Found', 404]);
         } else {
             return new Realm($response->getBody());
         }
@@ -92,7 +92,7 @@ class RealmService extends BaseService {
 
         // if there is a parameter error, throw an exception
         if ($error) {
-            throw new IllegalArgumentException('The realms parameter must be an array with at least one value or null.');
+            throw parent::toWowApiException(['The realms parameter must be an array with at least one value or null.', 10]);
         }
 
         $request = parent::createRequest('GET', 'realm/status');
@@ -115,7 +115,7 @@ class RealmService extends BaseService {
      */
     public function sortRealms($key, $val) {
         $this->sortWhitelist = ['type', 'population', 'status'];
-
+        
         return $this->sortData($this->getRealms(), [$key => $val]);
     }
 
