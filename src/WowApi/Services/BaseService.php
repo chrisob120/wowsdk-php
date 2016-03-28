@@ -154,7 +154,7 @@ abstract class BaseService {
             $wowApiEx = new WowApiException($msg, $code);
             $wowApiEx->setError([
                 'code' => $code,
-                'reason' => $msg
+                'detail' => $msg
             ]);
         } else {
             $wowApiEx = new WowApiException($response->getResponse()->getReasonPhrase(), $response->getCode());
