@@ -139,7 +139,7 @@ abstract class BaseService {
                 'msg' => $e->getMessage(),
                 'code' => 200
             ];
-            
+
             throw $this->toWowApiException($options);
         }
 
@@ -154,7 +154,8 @@ abstract class BaseService {
      */
     protected function toWowApiException($response) {
         if (is_array($response)) {
-            $msg = $response['msg'];
+            $msg = strstr($response['msg'], ':');
+            $msg = trim(preg_replace('/:/', '', $msg, 1));
 
             $response = new WowApiException($msg, $response['code']);
             $response->setError(['connectError' => $msg]);
