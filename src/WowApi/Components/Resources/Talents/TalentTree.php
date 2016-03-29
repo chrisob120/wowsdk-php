@@ -1,7 +1,5 @@
 <?php namespace WowApi\Components\Resources\Talents;
 
-use WowApi\Components\BaseComponent;
-
 /**
  * Represents the TalentTree
  *
@@ -9,7 +7,7 @@ use WowApi\Components\BaseComponent;
  * @author      Chris O'Brien
  * @version     1.0.0
  */
-class TalentTree extends BaseComponent {
+class TalentTree {
 
     /**
      * @var array $tree

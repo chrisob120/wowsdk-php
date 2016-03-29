@@ -1,7 +1,5 @@
 <?php namespace WowApi\Components\Resources\Talents;
 
-use WowApi\Components\BaseComponent;
-
 /**
  * Represents the TalentTree
  *
@@ -9,7 +7,7 @@ use WowApi\Components\BaseComponent;
  * @author      Chris O'Brien
  * @version     1.0.0
  */
-class Branch extends BaseComponent {
+class Branch {
 
     /**
      * @var array $glyphs
@@ -30,11 +28,5 @@ class Branch extends BaseComponent {
      * @var array $specs
      */
     public $specs;
-
-    /**
-     * Branch constructor - creates the Branch object based on the returned service data
-     */
-    public function __construct() {
-    }
 
 }
