@@ -11,7 +11,7 @@ use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 
 /**
- * Mount services
+ * Resource services
  *
  * @package     Services
  * @author      Chris O'Brien
