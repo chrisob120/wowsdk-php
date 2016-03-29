@@ -78,7 +78,24 @@ class Boss extends BaseComponent {
      * @return Boss
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        $boss = parent::assignValues($this, json_decode($jsonData));
+        if (isset($boss->npcs)) $boss->npcs = $this->getNPCs($boss->npcs);
+
+        return $boss;
+    }
+
+    /**
+     * @param array $npcArr
+     * @return array
+     */
+    private function getNPCs($npcArr = []) {
+        $returnArr = [];
+
+        foreach ($npcArr as $npc) {
+            $returnArr[] = new NPC(json_encode($npc));
+        }
+
+        return $returnArr;
     }
 
 }
