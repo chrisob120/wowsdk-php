@@ -159,7 +159,7 @@ try {
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['achievements']);
     //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
-    $z = $t->guildService->getGuildAchievements();
+    //$z = $t->guildService->getGuildAchievements();
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->achievementService->getAchievement(2144);
@@ -180,6 +180,7 @@ try {
     //$z = $t->leaderboardService->getLeaderboard('rbg');
     //$z = $t->itemService->getItem(71033);
     //$z = $t->itemService->getItemSet(1060);
+    $z = $t->itemService->getItemClasses();
     //$z = $t->resourceService->getBattlegroups();
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);

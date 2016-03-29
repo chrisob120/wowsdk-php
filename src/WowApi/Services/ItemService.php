@@ -2,6 +2,7 @@
 
 use WowApi\Components\Items\Item;
 use WowApi\Components\Items\ItemSet;
+use WowApi\Components\Items\ItemClass;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -64,6 +65,8 @@ class ItemService extends BaseService {
     }
 
     /**
+     * Gets an array of Items for an ItemSet
+     *
      * @param array $itemArr
      * @return array
      */
@@ -77,5 +80,23 @@ class ItemService extends BaseService {
         }
 
         return $returnArr;
+    }
+
+    /**
+     * Get ItemClass component
+     *
+     * @return ItemSet
+     * @throws WowApiException
+     */
+    public function getItemClasses() {
+        $request = parent::createRequest('GET', 'data/item/classes');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+        
+        return ItemClass::getItemClasses($response->getBody());
     }
 }
