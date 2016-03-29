@@ -1,7 +1,9 @@
 <?php namespace WowApi\Services;
 
 use WowApi\Components\Characters\Character;
+use WowApi\Components\Characters\CharacterClass;
 use GuzzleHttp\Exception\ClientException;
+use WowApi\Components\Characters\CharacterRace;
 use WowApi\Exceptions\WowApiException;
 
 /**
@@ -39,5 +41,29 @@ class CharacterService extends BaseService {
         }
 
         return new Character($response->getBody());
+    }
+
+    public function getCharacterClasses() {
+        $request = parent::createRequest('GET', 'data/character/classes');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return CharacterClass::getCharacterClasses($response->getBody());
+    }
+
+    public function getCharacterRaces() {
+        $request = parent::createRequest('GET', 'data/character/races');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return CharacterRace::getCharacterRaces($response->getBody());
     }
 }
