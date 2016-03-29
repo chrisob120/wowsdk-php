@@ -110,19 +110,15 @@ class ResourceService extends BaseService {
         $returnArr = [];
 
         foreach ($tierArr as $tier) {
-            $tierArr = [];
-
+            $rTierArr = [];
             foreach ($tier as $tierTalents) {
                 $talentArr = [];
-
                 foreach ($tierTalents as $talent) {
                     $talentArr[] = new Talent(json_encode($talent));
                 }
-
-                $tierArr[] = $talentArr;
+                $rTierArr[] = $talentArr;
             }
-
-            $returnArr[] = $tierArr;
+            $returnArr[] = $rTierArr;
         }
 
         return $returnArr;
