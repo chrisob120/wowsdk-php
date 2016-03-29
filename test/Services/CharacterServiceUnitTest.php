@@ -25,7 +25,7 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
         $character = $this->_access->getCharacter('Hyjal', 'Ardeel');
         $this->assertInstanceOf('\WowApi\Components\Characters\Character', $character);
 
-        // check a field
+        // check a default field
         $this->assertNotNull($character->name);
 
         // check non default field as not set

@@ -25,19 +25,8 @@ class RealmServiceUnitTest extends PHPUnit_Framework_TestCase {
         $realm = $this->_access->getRealm('Hyjal');
         $this->assertInstanceOf('\WowApi\Components\Realms\Realm', $realm);
 
-        // check the fields
+        // check a field
         $this->assertNotNull($realm->type);
-        $this->assertNotNull($realm->population);
-        $this->assertNotNull($realm->queue);
-        $this->assertNotNull($realm->wintergrasp);
-        $this->assertNotNull($realm->tol_barad);
-        $this->assertNotNull($realm->status);
-        $this->assertNotNull($realm->name);
-        $this->assertNotNull($realm->slug);
-        $this->assertNotNull($realm->battlegroup);
-        $this->assertNotNull($realm->locale);
-        $this->assertNotNull($realm->timezone);
-        $this->assertNotNull($realm->connected_realms);
     }
 
     /**
