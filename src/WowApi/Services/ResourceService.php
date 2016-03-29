@@ -9,7 +9,6 @@ use WowApi\Components\Resources\Talents\TalentTree;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
-use WowApi\Util\Helper;
 
 /**
  * Mount services
