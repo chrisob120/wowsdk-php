@@ -1,6 +1,7 @@
 <?php namespace WowApi\Components\Zones;
 
 use WowApi\Components\BaseComponent;
+use WowApi\Components\Bosses\Boss;
 
 /**
  * Represents a single Zone
@@ -112,27 +113,10 @@ class Zone extends BaseComponent {
         $realObj = (!property_exists(json_decode($jsonData), 'zones')) ? json_decode($jsonData) : json_decode($jsonData)->zones[0];
         $zoneObj = parent::assignValues($this, $realObj);
 
+        $zoneObj->location = $this->getZoneLocation($zoneObj->location);
         if (count($zoneObj->bosses)) $zoneObj->bosses = $this->getBosses($zoneObj->bosses);
 
         return $zoneObj;
-    }
-
-    /**
-     * Gets an array of Zone items based on which zones were sent to the method
-     *
-     * @param string $jsonData
-     * @return array
-     */
-    public static function getZones($jsonData) {
-        //Helper::print_rci(json_decode($jsonData));exit;
-        $returnArr = [];
-        $zones = json_decode($jsonData)->zones;
-
-        foreach ($zones as $zone) {
-            $returnArr[] = new Zone(json_encode($zone));
-        }
-
-        return $returnArr;
     }
 
     /**
@@ -146,6 +130,31 @@ class Zone extends BaseComponent {
 
         foreach ($bossArr as $boss) {
             $returnArr[] = new Boss(json_encode($boss));
+        }
+
+        return $returnArr;
+    }
+
+    /**
+     * @param object $zoneLocObj
+     * @return ZoneLocation
+     */
+    private function getZoneLocation($zoneLocObj) {
+        return new ZoneLocation(json_encode($zoneLocObj));
+    }
+
+    /**
+     * Gets an array of Zone items based on which zones were sent to the method
+     *
+     * @param string $jsonData
+     * @return array
+     */
+    public static function getZones($jsonData) {
+        $returnArr = [];
+        $zones = json_decode($jsonData)->zones;
+
+        foreach ($zones as $zone) {
+            $returnArr[] = new Zone(json_encode($zone));
         }
 
         return $returnArr;
