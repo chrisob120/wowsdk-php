@@ -25,17 +25,8 @@ class AchievementServiceUnitTest extends PHPUnit_Framework_TestCase {
         $achievement = $this->_access->getAchievement(150);
         $this->assertInstanceOf('\WowApi\Components\Achievements\Achievement', $achievement);
 
-        // check the fields
+        // check a field
         $this->assertNotNull($achievement->id);
-        $this->assertNotNull($achievement->title);
-        $this->assertNotNull($achievement->points);
-        $this->assertNotNull($achievement->description);
-        $this->assertNotNull($achievement->reward);
-        $this->assertNotNull($achievement->rewardItems);
-        $this->assertNotNull($achievement->icon);
-        $this->assertNotNull($achievement->criteria);
-        $this->assertNotNull($achievement->accountWide);
-        $this->assertNotNull($achievement->factionId);
     }
 
     /**
