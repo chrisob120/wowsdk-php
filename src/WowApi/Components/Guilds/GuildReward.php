@@ -3,7 +3,6 @@
 use WowApi\Components\BaseComponent;
 use WowApi\Components\Achievements\Achievement;
 use WowApi\Components\Items\Item;
-use WowApi\Util\Helper;
 
 /**
  * Represents a single GuildReward
