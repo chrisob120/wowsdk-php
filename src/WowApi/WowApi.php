@@ -1,6 +1,5 @@
 <?php namespace WowApi;
 
-use WowApi\Components\Items\Item;
 use WowApi\Services\CharacterService;
 use WowApi\Services\GuildService;
 use WowApi\Services\RealmService;
@@ -128,7 +127,6 @@ class WowApi {
 
 }
 
-/*
 use WowApi\Exceptions\WowApiException;
 use WowApi\Util\Helper;
 
@@ -148,9 +146,9 @@ $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
 
 try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel22');
-    //$z = $t->realmService->getRealm('The Forgotten Coast');
-    //$z = $t->realmService->getRealms();
-    //$z = $t->realmService->sortRealms('type', 'rppvp');
+    //$z = $t->realmService->getRealm('hyjal');
+    //$z = $t->realmService->getRealms([]);
+    $z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
@@ -160,6 +158,7 @@ try {
     //$z = $t->petService->getPets();
     //$z = $t->petService->getSpecies(258);
     //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
+    $z = $t->petService->getPetTypes();
     //$z = $t->questService->getQuest(13146);
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->spellService->getSpell(8056);
@@ -170,7 +169,7 @@ try {
     //$z = $t->challengeService->getRegionLadder();
     //$z = $t->leaderboardService->getLeaderboard('rbg');
     //$z = $t->itemService->getItem(18803);
-    $z = $t->itemService->getItemSet(1060);
+    //$z = $t->itemService->getItemSet(1060);
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {

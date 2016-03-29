@@ -3,6 +3,7 @@
 use WowApi\Components\Pets\Pet;
 use WowApi\Components\Pets\PetSpecies;
 use WowApi\Components\Pets\PetSpeciesStats;
+use WowApi\Components\Pets\PetType;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -16,7 +17,7 @@ use WowApi\Exceptions\WowApiException;
 class PetService extends BaseService {
 
     /**
-     * Gets all pets
+     * Gets all Pets
      *
      * @return array
      * @throws WowApiException
@@ -81,6 +82,24 @@ class PetService extends BaseService {
         }
 
         return new PetSpeciesStats($response->getBody());
+    }
+
+    /**
+     * Gets all PetTypes
+     *
+     * @return array
+     * @throws WowApiException
+     */
+    public function getPetTypes() {
+        $request = parent::createRequest('GET', 'data/pet/types');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return PetType::getPetTypes($response->getBody());
     }
 
 }
