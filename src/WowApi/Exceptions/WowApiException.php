@@ -22,6 +22,9 @@ class WowApiException extends Exception {
      * @return void
      */
     public function setError($errors) {
+        //$this->_error = $errors;
+
+        // use this format while in experimental phase
         $this->_error = 'Error: ';
         $this->_error.= "<pre>{\n";
 
