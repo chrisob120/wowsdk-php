@@ -1,6 +1,7 @@
 <?php namespace WowApi\Services;
 
 use WowApi\Components\Guilds\Guild;
+use WowApi\Components\Guilds\GuildReward;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -39,6 +40,24 @@ class GuildService extends BaseService {
         }
 
         return new Guild($response->getBody());
+    }
+
+    /**
+     * Gets all GuildRewards
+     *
+     * @return array
+     * @throws WowApiException
+     */
+    public function getGuildRewards() {
+        $request = parent::createRequest('GET', 'data/guild/rewards');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return GuildReward::getGuildReward($response->getBody());
     }
 
 }

@@ -163,7 +163,8 @@ try {
     //$z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms([]);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
-    $z = $t->guildService->getGuild('hyjal', 'tf', ['news']);
+    //$z = $t->guildService->getGuild('hyjal', 'tf', ['achievements']);
+    $z = $t->guildService->getGuildRewards();
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->achievementService->getAchievement(2144);
@@ -182,7 +183,7 @@ try {
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
     //$z = $t->leaderboardService->getLeaderboard('rbg');
-    //$z = $t->itemService->getItem(18803);
+    //$z = $t->itemService->getItem(71033);
     //$z = $t->itemService->getItemSet(1060);
     //$z = $t->resourceService->getBattlegroups();
     echo '<strong>Returned:</strong> ' .count($z);

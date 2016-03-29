@@ -2,7 +2,6 @@
 
 use WowApi\Components\Mounts\Mount;
 use GuzzleHttp\Exception\ClientException;
-use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 
 /**
@@ -15,10 +14,9 @@ use WowApi\Exceptions\WowApiException;
 class MountService extends BaseService {
 
     /**
-     * Gets all mounts
+     * Gets all Mounts
      *
      * @return array
-     * @throws IllegalArgumentException
      * @throws WowApiException
      */
     public function getMounts() {
@@ -34,7 +32,7 @@ class MountService extends BaseService {
     }
 
     /**
-     * Sort mounts by given key val pair
+     * Sort Mounts by given key val pair
      *
      * @param string $key
      * @param string $val
