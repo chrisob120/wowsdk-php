@@ -22,8 +22,18 @@ abstract class BaseComponent {
         foreach ($componentObj as $prop => $val) {
             // check if there special conditions
             $checkProp = ($specialCheck != null && array_key_exists($prop, $specialCheck)) ? $specialCheck[$prop] : $prop;
+
             // update the component object
-            $componentObj->$prop = (isset($apiObj->$checkProp)) ? $apiObj->$checkProp : $default;
+            if (isset($apiObj->$checkProp)) {
+                $componentObj->$prop = $apiObj->$checkProp;
+            } else {
+                if ($default != null) {
+                    $componentObj->$prop = $default;
+                } else {
+                    // if there is no default value provided and no property set by the API, unset the component property
+                    unset($componentObj->$prop);
+                }
+            }
         }
 
         return $componentObj;
