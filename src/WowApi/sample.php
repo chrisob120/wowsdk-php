@@ -41,7 +41,7 @@ try {
     //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
     //$z = $t->petService->getPetTypes();
     //$z = $t->questService->getQuest(13146);
-    $z = $t->realmService->getRealm('hyjalz');
+    $z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms([]);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->recipeService->getRecipe(33994);
