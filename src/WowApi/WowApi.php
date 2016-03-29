@@ -153,6 +153,7 @@ try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
+    $z = $t->characterService->getCharacterAchievements();
     //$z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms([]);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
@@ -180,7 +181,7 @@ try {
     //$z = $t->leaderboardService->getLeaderboard('rbg');
     //$z = $t->itemService->getItem(71033);
     //$z = $t->itemService->getItemSet(1060);
-    $z = $t->itemService->getItemClasses();
+    //$z = $t->itemService->getItemClasses();
     //$z = $t->resourceService->getBattlegroups();
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);

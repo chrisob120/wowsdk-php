@@ -71,12 +71,14 @@ class Achievement extends BaseComponent {
     public function __construct($jsonData) {
         $achievement = parent::assignValues($this, json_decode($jsonData));
         $achievement->rewardItems = $this->getAchievementItems($achievement->rewardItems);
-
+        if (isset($achievement->criteria)) $achievement->criteria = $this->getAchievementCriteria($achievement->criteria);
 
         return $achievement;
     }
 
     /**
+     * Get array of Items
+     *
      * @param array $itemArr
      * @return array
      */
@@ -85,6 +87,22 @@ class Achievement extends BaseComponent {
 
         foreach ($itemArr as $itemObj) {
             $returnArr[] = new Item(json_encode($itemObj));
+        }
+
+        return $returnArr;
+    }
+
+    /**
+     * Get array of criteria (Criterion)
+     *
+     * @param array $itemArr
+     * @return array
+     */
+    private function getAchievementCriteria($itemArr = []) {
+        $returnArr = [];
+
+        foreach ($itemArr as $itemObj) {
+            $returnArr[] = new AchievementCriterion(json_encode($itemObj));
         }
 
         return $returnArr;

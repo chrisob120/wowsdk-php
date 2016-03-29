@@ -36,7 +36,7 @@ class GuildAchievement extends BaseComponent {
     public function __construct($jsonData) {
         $guildAchievement = parent::assignValues($this, json_decode($jsonData));
 
-        // add if statement to account for some GuildRewards not having an achievement
+        // add if statement to account for some GuildAchievements not having an achievement
         if (isset($guildAchievement->achievements)) $guildAchievement->achievements = $this->getAchievements($guildAchievement->achievements);
 
         return $guildAchievement;

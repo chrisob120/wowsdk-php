@@ -2,6 +2,7 @@
 
 use WowApi\Components\Characters\Character;
 use WowApi\Components\Characters\CharacterClass;
+use WowApi\Components\Characters\CharacterAchievement;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Components\Characters\CharacterRace;
 use WowApi\Exceptions\WowApiException;
@@ -43,6 +44,12 @@ class CharacterService extends BaseService {
         return new Character($response->getBody());
     }
 
+    /**
+     * Get all CharacterClass components
+     *
+     * @return array
+     * @throws WowApiException
+     */
     public function getCharacterClasses() {
         $request = parent::createRequest('GET', 'data/character/classes');
 
@@ -55,6 +62,12 @@ class CharacterService extends BaseService {
         return CharacterClass::getCharacterClasses($response->getBody());
     }
 
+    /**
+     * Get all CharacterRace components
+     *
+     * @return array
+     * @throws WowApiException
+     */
     public function getCharacterRaces() {
         $request = parent::createRequest('GET', 'data/character/races');
 
@@ -65,5 +78,25 @@ class CharacterService extends BaseService {
         }
 
         return CharacterRace::getCharacterRaces($response->getBody());
+    }
+
+    /**
+     * Gets all CharacterAchievement components
+     *
+     * @return array
+     * @throws WowApiException
+     */
+    public function getCharacterAchievements() {
+        $this->setParameter('timeout', 8);
+        
+        $request = parent::createRequest('GET', 'data/character/achievements');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return CharacterAchievement::getCharacterAchievements($response->getBody());
     }
 }
