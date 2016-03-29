@@ -1,6 +1,7 @@
 <?php namespace WowApi\Components\Achievements;
 
 use WowApi\Components\BaseComponent;
+use WowApi\Components\Items\Item;
 
 /**
  * Represents a single Achievement
@@ -68,7 +69,25 @@ class Achievement extends BaseComponent {
      * @return Achievement
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        $achievement = parent::assignValues($this, json_decode($jsonData));
+        $achievement->rewardItems = $this->getAchievementItems($achievement->rewardItems);
+
+
+        return $achievement;
+    }
+
+    /**
+     * @param array $itemArr
+     * @return array
+     */
+    private function getAchievementItems($itemArr = []) {
+        $returnArr = [];
+
+        foreach ($itemArr as $itemObj) {
+            $returnArr[] = new Item(json_encode($itemObj));
+        }
+
+        return $returnArr;
     }
 
 }
