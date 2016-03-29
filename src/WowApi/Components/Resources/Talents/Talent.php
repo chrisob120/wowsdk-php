@@ -39,7 +39,7 @@ class Talent extends BaseComponent {
      * @return Talent
      */
     public function __construct($jsonData) {
-        $talent = parent::assignValues($this, json_decode($jsonData));
+        $talent = parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
         $talent->spell = $this->getSpell($talent->spell);
         if (isset($talent->spec)) $talent->spec = $this->getSpec($talent->spec);
 
