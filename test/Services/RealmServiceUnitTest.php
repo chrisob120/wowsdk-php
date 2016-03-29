@@ -25,8 +25,19 @@ class RealmServiceUnitTest extends PHPUnit_Framework_TestCase {
         $realm = $this->_access->getRealm('Hyjal');
         $this->assertInstanceOf('\WowApi\Components\Realms\Realm', $realm);
 
-        // check the a required field
+        // check the fields
         $this->assertNotNull($realm->type);
+        $this->assertNotNull($realm->population);
+        $this->assertNotNull($realm->queue);
+        $this->assertNotNull($realm->wintergrasp);
+        $this->assertNotNull($realm->tol_barad);
+        $this->assertNotNull($realm->status);
+        $this->assertNotNull($realm->name);
+        $this->assertNotNull($realm->slug);
+        $this->assertNotNull($realm->battlegroup);
+        $this->assertNotNull($realm->locale);
+        $this->assertNotNull($realm->timezone);
+        $this->assertNotNull($realm->connected_realms);
     }
 
     /**
@@ -49,7 +60,7 @@ class RealmServiceUnitTest extends PHPUnit_Framework_TestCase {
      * @expectedException \WowApi\Exceptions\IllegalArgumentException
      * @expectedExceptionMessage You may only choose the following sort keys
      */
-    public function testSortRealmsKey() {
+    public function testSortRealmsKeyNotAllowed() {
         $this->_access->sortRealms('cat', 'dog');
     }
 
