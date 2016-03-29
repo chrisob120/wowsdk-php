@@ -27,11 +27,11 @@ abstract class BaseComponent {
             if (isset($apiObj->$checkProp)) {
                 $componentObj->$prop = $apiObj->$checkProp;
             } else {
-                if ($default != null) {
-                    $componentObj->$prop = $default;
-                } else {
-                    // if there is no default value provided and no property set by the API, unset the component property
+                if ($default == 'remove') {
+                    // unset the component property
                     unset($componentObj->$prop);
+                } else {
+                    $componentObj->$prop = $default;
                 }
             }
         }
