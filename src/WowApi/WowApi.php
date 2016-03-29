@@ -165,6 +165,7 @@ try {
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['achievements']);
     $z = $t->guildService->getGuildRewards();
+    //$z = $t->guildService->getGuildPerks();
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->achievementService->getAchievement(2144);

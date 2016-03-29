@@ -2,6 +2,7 @@
 
 use WowApi\Components\Guilds\Guild;
 use WowApi\Components\Guilds\GuildReward;
+use WowApi\Components\Guilds\GuildPerk;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -57,7 +58,25 @@ class GuildService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return GuildReward::getGuildReward($response->getBody());
+        return GuildReward::getGuildRewards($response->getBody());
+    }
+
+    /**
+     * Gets all GuildPerks
+     *
+     * @return array
+     * @throws WowApiException
+     */
+    public function getGuildPerks() {
+        $request = parent::createRequest('GET', 'data/guild/perks');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return GuildPerk::getGuildPerks($response->getBody());
     }
 
 }

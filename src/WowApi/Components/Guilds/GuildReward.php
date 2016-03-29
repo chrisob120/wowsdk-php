@@ -3,6 +3,7 @@
 use WowApi\Components\BaseComponent;
 use WowApi\Components\Achievements\Achievement;
 use WowApi\Components\Items\Item;
+use WowApi\Util\Helper;
 
 /**
  * Represents a single GuildReward
@@ -29,7 +30,7 @@ class GuildReward extends BaseComponent {
     public $achievement;
 
     /**
-     * @var object $item
+     * @var Item $item
      */
     public $item;
 
@@ -40,8 +41,11 @@ class GuildReward extends BaseComponent {
      * @return GuildReward
      */
     public function __construct($jsonData) {
+        Helper::print_rci(json_decode($jsonData));
         $guildReward = parent::assignValues($this, json_decode($jsonData));
-        $guildReward->achievement = $this->getAchievement($guildReward->achievement);
+
+        // add if statement to account for some GuildRewards not having an achievement
+        if (isset($guildReward->achievement)) $guildReward->achievement = $this->getAchievement($guildReward->achievement);
         $guildReward->item = $this->getItem($guildReward->item);
 
         return $guildReward;
@@ -69,7 +73,7 @@ class GuildReward extends BaseComponent {
      * @param string $jsonData
      * @return array
      */
-    public static function getGuildReward($jsonData) {
+    public static function getGuildRewards($jsonData) {
         $returnArr = [];
         $guildRewards = json_decode($jsonData)->rewards;
 
