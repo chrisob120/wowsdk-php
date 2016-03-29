@@ -3,6 +3,7 @@
 use WowApi\Components\Guilds\Guild;
 use WowApi\Components\Guilds\GuildReward;
 use WowApi\Components\Guilds\GuildPerk;
+use WowApi\Components\Guilds\GuildAchievement;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
 
@@ -77,6 +78,24 @@ class GuildService extends BaseService {
         }
 
         return GuildPerk::getGuildPerks($response->getBody());
+    }
+
+    /**
+     * Gets all GuildAchievements
+     *
+     * @return array
+     * @throws WowApiException
+     */
+    public function getGuildAchievements() {
+        $request = parent::createRequest('GET', 'data/guild/achievements');
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        return GuildAchievement::getGuildAchievements($response->getBody());
     }
 
 }

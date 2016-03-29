@@ -144,13 +144,6 @@ error_reporting(E_ALL);
 require_once 'autoload.php';
 require_once '../../vendor/autoload.php';
 
-/*
-$options = [
-    'region' => 'us',
-    'locale' => 'en_US'
-];
-*/
-
 $options = ['region' => 'us', 'locale' => 'en_US'];
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
 
@@ -164,8 +157,9 @@ try {
     //$z = $t->realmService->getRealms([]);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->guildService->getGuild('hyjal', 'tf', ['achievements']);
-    $z = $t->guildService->getGuildRewards();
+    //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
+    $z = $t->guildService->getGuildAchievements();
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->achievementService->getAchievement(2144);
