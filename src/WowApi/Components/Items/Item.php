@@ -219,7 +219,7 @@ class Item extends BaseComponent {
      * @return Item
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
     }
 
 }

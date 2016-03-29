@@ -58,7 +58,7 @@ class Spell extends BaseComponent {
      * @return Spell
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
     }
 
 }
