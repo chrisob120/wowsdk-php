@@ -41,7 +41,6 @@ class GuildReward extends BaseComponent {
      * @return GuildReward
      */
     public function __construct($jsonData) {
-        Helper::print_rci(json_decode($jsonData));
         $guildReward = parent::assignValues($this, json_decode($jsonData));
 
         // add if statement to account for some GuildRewards not having an achievement
