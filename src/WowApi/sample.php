@@ -16,10 +16,10 @@ $options = ['region' => 'us', 'locale' => 'en_US'];
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
 
 try {
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['achievements']);
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
-    $z = $t->characterService->getCharacterAchievements();
+    //$z = $t->characterService->getCharacterAchievements();
     //$z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms([]);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
@@ -49,6 +49,7 @@ try {
     //$z = $t->itemService->getItemSet(1060);
     //$z = $t->itemService->getItemClasses();
     //$z = $t->resourceService->getBattlegroups();
+    $z = $t->resourceService->getTalentTree();
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
