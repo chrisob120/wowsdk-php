@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Achievement Unit Tests
+ * Boss Unit Tests
  *
  * @author      Chris O'Brien
  * @version     1.0.0
