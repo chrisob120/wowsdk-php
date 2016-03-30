@@ -2,8 +2,6 @@
 
 use WowApi\Components\BaseComponent;
 use WowApi\Components\Realms\Realm;
-use WowApi\Components\Characters\Character;
-use WowApi\Components\Resources\Talents\Spec;
 
 /**
  * Represents a single Challenge
@@ -20,7 +18,7 @@ class Challenge extends BaseComponent {
     public $realm;
 
     /**
-     * @var object $map
+     * @var ChallengeMap $map
      */
     public $map;
 
@@ -40,8 +38,8 @@ class Challenge extends BaseComponent {
         $challengeObj = parent::assignValues($this, json_decode($jsonData));
         $challengeObj->realm = $this->getRealm($challengeObj->realm);
         $challengeObj->map = $this->getMap($challengeObj->map);
-        $challengeObj->groups = $this->getMembersCharSpec($challengeObj->groups);
-        
+        $challengeObj->groups = $this->getGroups($challengeObj->groups);
+
         // unset the realm property if region is true
         if ($region) unset($challengeObj->realm);
 
@@ -58,34 +56,26 @@ class Challenge extends BaseComponent {
 
     /**
      * @param object $mapObj
-     * @return Map
+     * @return ChallengeMap
      */
     private function getMap($mapObj) {
-        return new Map(json_encode($mapObj));
+        return new ChallengeMap(json_encode($mapObj));
     }
 
     /**
-     * @param array $groupsArr
+     * @param array $groupArr
      * @return array
      */
-    private function getMembersCharSpec($groupsArr = []) {
-        foreach ($groupsArr as $group) {
-            foreach ($group->members as $member) {
-                if (isset($member->spec)) $member->spec = new Spec(json_encode($member->spec));
-
-                // get the Character object and add properties not included with Character class
-                if (isset($member->character)) {
-                    $charBackObj = clone $member->character;
-
-                    $member->character = new Character(json_encode($member->character));
-                    if (isset($charBackObj->spec)) $member->character->spec = new Spec(json_encode($charBackObj->spec));
-                    if (isset($charBackObj->guild)) $member->character->guild = $charBackObj->guild;
-                    if (isset($charBackObj->guildRealm)) $member->character->guildRealm = $charBackObj->guildRealm;
-                }
+    private function getGroups($groupArr = []) {
+        $returnArr = [];
+        
+        if (is_array($groupArr)) {
+            foreach ($groupArr as $group) {
+                $returnArr[] = new ChallengeGroup(json_encode($group));
             }
         }
 
-        return $groupsArr;
+        return $returnArr;
     }
 
     /**
