@@ -34,7 +34,7 @@ class AchievementServiceUnitTest extends PHPUnit_Framework_TestCase {
      * @expectedExceptionMessage Not Found
      */
     public function testAchievementNotFound() {
-        $this->_access->getAchievement(1);
+        $this->_access->getAchievement(0);
     }
 
 }
