@@ -24,6 +24,7 @@ class BossServiceUnitTest extends PHPUnit_Framework_TestCase {
     public function testGetBoss() {
         $boss = $this->_access->getBoss(24723);
         $this->assertInstanceOf('\WowApi\Components\Bosses\Boss', $boss);
+        $this->assertInstanceOf('\WowApi\Components\Bosses\NPC', $boss->npcs[0]);
 
         // check a field
         $this->assertNotNull($boss->id);

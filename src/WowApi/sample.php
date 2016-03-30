@@ -16,17 +16,17 @@ $options = ['region' => 'us', 'locale' => 'en_US'];
 $t = new WowApi('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', $options);
 
 try {
-    //$z = $t->achievementService->getAchievement(2144);
+    //$z = $t->achievementService->getAchievement(150);
     //$z = $t->auctionService->getAuction('Hyjal');
-    //$z = $t->bossService->getBoss(24723);
+    $z = $t->bossService->getBoss(24723);
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['achievements']);
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
     //$z = $t->characterService->getCharacterAchievements();
-    //$z = $t->guildService->getGuild('hyjal', 'tf', ['achievements']);
+    //$z = $t->guildService->getGuild('hyjal', 'tf');
     //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
     //$z = $t->guildService->getGuildAchievements();
@@ -41,8 +41,8 @@ try {
     //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
     //$z = $t->petService->getPetTypes();
     //$z = $t->questService->getQuest(13146);
-    $z = $t->realmService->getRealm('hyjal');
-    //$z = $t->realmService->getRealms([]);
+    //$z = $t->realmService->getRealm('hyjal');
+    //$z = $t->realmService->getRealms(['hyjal', 'stormrage']);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->resourceService->getBattlegroups();
