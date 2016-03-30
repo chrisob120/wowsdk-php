@@ -41,8 +41,7 @@ class Challenge extends BaseComponent {
         $challengeObj->realm = $this->getRealm($challengeObj->realm);
         $challengeObj->map = $this->getMap($challengeObj->map);
         $challengeObj->groups = $this->getMembersCharSpec($challengeObj->groups);
-
-
+        
         // unset the realm property if region is true
         if ($region) unset($challengeObj->realm);
 
