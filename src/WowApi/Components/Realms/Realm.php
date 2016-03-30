@@ -80,7 +80,7 @@ class Realm extends BaseComponent {
     public function __construct($jsonData) {
         // checks which method the data is coming in from. if it's a multiple realm request, there will be no 'realms' property on the response object because it gets the Realm object one by one
         $realObj = (!property_exists(json_decode($jsonData), 'realms')) ? json_decode($jsonData) : json_decode($jsonData)->realms[0];
-        return parent::assignValues($this, $realObj, ['tol_barad' => 'tol-barad']);
+        return parent::assignValues($this, $realObj, ['tol_barad' => 'tol-barad'],  $default = 'remove');
     }
 
     /**
