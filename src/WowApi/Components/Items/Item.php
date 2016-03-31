@@ -142,7 +142,7 @@ class Item extends BaseComponent {
     public $requiredSkillRank;
 
     /**
-     * @var object $itemSource
+     * @var ItemSource $itemSource
      */
     public $itemSource;
 
@@ -207,7 +207,7 @@ class Item extends BaseComponent {
     public $availableContexts;
 
     /**
-     * @var object $bonusSummary
+     * @var BonusSummary $bonusSummary
      */
     public $bonusSummary;
 
@@ -219,7 +219,44 @@ class Item extends BaseComponent {
      * @return Item
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        $itemObj = parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        $itemObj->itemSpells = $this->getItemSpells($itemObj->itemSpells);
+        $itemObj->itemSource = $this->getItemSource($itemObj->itemSource);
+        $itemObj->bonusSummary = $this->getBonusSummary($itemObj->bonusSummary);
+
+        return $itemObj;
+    }
+
+    /**
+     * @param array $itemSpellArr
+     * @return array
+     */
+    private function getItemSpells($itemSpellArr = []) {
+        $returnArr = [];
+
+        if (is_array($itemSpellArr)) {
+            foreach ($itemSpellArr as $itemSpell) {
+                $returnArr[] = new ItemSpell(json_encode($itemSpell));
+            }
+        }
+
+        return $returnArr;
+    }
+
+    /**
+     * @param object $itemSourceObj
+     * @return ItemSource
+     */
+    private function getItemSource($itemSourceObj) {
+        return new ItemSource(json_encode($itemSourceObj));
+    }
+
+    /**
+     * @param object $bonusSummaryObj
+     * @return BonusSummary
+     */
+    private function getBonusSummary($bonusSummaryObj) {
+        return new BonusSummary(json_encode($bonusSummaryObj));
     }
 
 }

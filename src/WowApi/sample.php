@@ -20,7 +20,7 @@ try {
     //$z = $t->auctionService->getAuction('Hyjal');
     //$z = $t->bossService->getBoss(24723);
     //$z = $t->challengeService->getLadder('Hyjal');
-    $z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
+    //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacterClasses();
@@ -30,7 +30,7 @@ try {
     //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
     //$z = $t->guildService->getGuildAchievements();
-    //$z = $t->itemService->getItem(71033);
+    $z = $t->itemService->getItem(71033);
     //$z = $t->itemService->getItemSet(1060);
     //$z = $t->itemService->getItemClasses();
     //$z = $t->leaderboardService->getLeaderboard('rbg');
