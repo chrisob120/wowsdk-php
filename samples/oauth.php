@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 require_once '../src/WowApi/autoload.php';
 require_once '../vendor/autoload.php';
 
-$client = new WowOAuth('n3hfnyv46xxdu88jp4z9q54qcfmbwgpb', 'yPer5s7Bn2ES2kWDDgEbfuWDTSca8W5b', 'https://192.168.2.218/wowapi/samples/oauth.php');
+$client = new WowOAuth('key', 'key', 'https://192.168.2.218/wowapi/samples/oauth.php');
 
 if (!isset($_GET['code'])) {
     $auth_url = $client->getAuthorizationUrl();
