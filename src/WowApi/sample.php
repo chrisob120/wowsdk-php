@@ -25,7 +25,7 @@ try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
-    $z = $t->characterService->getCharacterAchievements();
+    //$z = $t->characterService->getCharacterAchievements();
     //$z = $t->guildService->getGuild('hyjal', 'tf');
     //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
@@ -43,7 +43,7 @@ try {
     //$z = $t->questService->getQuest(13146);
     //$z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms(['hyjal', 'stormrage']);
-    //$z = $t->realmService->sortRealms('type', 'rppvp');
+    $z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->resourceService->getBattlegroups();
     //$z = $t->resourceService->getTalentTree();

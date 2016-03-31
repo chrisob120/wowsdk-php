@@ -20,18 +20,11 @@ class Config {
          * Client options
          */
         'client' => [
-            'base_uri' => ':protocol//:region.api.battle.net/wow/',
-            'protocol' => 'https',
-            'region' => 'us',
-            'locale' => 'en_US'
-        ],
-        /**
-         * OAuth2 Authorization related configuration options
-         */
-        'auth' => [
-            'base_url' => 'oauth',
-            'response_type_code' => 'code',
-            'response_type_token' => 'token'
+            'base_uri'  => ':protocol//:region.api.battle.net/',
+            'wow_path'  => 'wow/',
+            'protocol'  => 'https',
+            'region'    => 'us',
+            'locale'    => 'en_US'
         ],
         /**
          * Regions and their allowed locales
@@ -41,6 +34,15 @@ class Config {
             'eu' => ['en_GB', 'es_ES', 'fr_FR', 'ru_RU', 'de_DE', 'pt_PT', 'it_IT'],
             'kr' => ['ko_KR'],
             'tw' => ['zh_TW']
+        ],
+        /**
+         * OAuth2 Authorization related configuration options
+         */
+        'oauth' => [
+            'authorization_endpoint'    => 'oauth/authorize',
+            'token_endpoint'			=> 'oauth/token',
+            'response_type'             => 'code',
+            'scope'                     => 'wow.profile'
         ]
     ];
 

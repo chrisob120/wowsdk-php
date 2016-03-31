@@ -33,17 +33,37 @@ abstract class BaseService {
     /**
      * @var string $_protocol
      */
-    protected $_protocol;
+    private $_protocol;
 
     /**
      * @var string $_region
      */
-    protected $_region;
+    private $_region;
 
     /**
      * @var string $_locale
      */
-    protected $_locale;
+    private $_locale;
+
+    /**
+     * @var string $_baseUri
+     */
+    private $_baseUri;
+
+    /**
+     * @var string $_wowUri
+     */
+    private $_wowUri;
+
+    /**
+     * @var string $_authEndpoint
+     */
+    private $_authEndpoint;
+
+    /**
+     * @var string $_tokenEndpoint
+     */
+    private $_tokenEndpoint;
 
     /**
      * Extra parameters to be optionally set
@@ -71,6 +91,13 @@ abstract class BaseService {
     public function __construct($apiKey, $options = null) {
         $this->_apiKey = $apiKey;
 
+        // assign URIs
+        $this->_baseUri = Config::get('client.base_uri');
+        $this->_wowUri = $this->_baseUri . Config::get('client.wow_path');
+        $this->_authEndpoint = $this->_baseUri . Config::get('oauth.authorization_endpoint');
+        $this->_tokenEndpoint = $this->_baseUri . Config::get('oauth.token_endpoint');
+
+        // assign parameters
         $this->_protocol = (isset($options['protocol'])) ? $options['protocol'] : Config::get('client.protocol');
         $this->_region = (isset($options['region'])) ? $options['region'] : Config::get('client.region');
         $this->_locale = (isset($options['locale'])) ? $options['locale'] : Config::get('client.locale');
@@ -78,7 +105,7 @@ abstract class BaseService {
         // check the current region and locale before submitting a request
         $this->checkOptionalParameters();
 
-        $baseUri = $this->getPath(Config::get('client.base_uri'), [
+        $baseUri = $this->getPath($this->_wowUri, [
             'protocol' => Helper::checkProtocol($this->_protocol),
             'region' => $this->_region
         ]);
@@ -121,7 +148,25 @@ abstract class BaseService {
      * @return Request
      */
     protected function createRequest($method, $url) {
-        return new Request($method, $url);
+        // keys
+        $publicKey = 'n3hfnyv46xxdu88jp4z9q54qcfmbwgpb';
+        $privateKey = 'yPer5s7Bn2ES2kWDDgEbfuWDTSca8W5b';
+
+        // signature
+        $date = gmdate(DATE_RFC1123);
+        $signStr = "$method\n$date\n$url\n";
+        $signature = base64_encode(hash_hmac('sha1', $signStr, $privateKey, true));
+
+        return new Request($method, $url, [
+            'headers' => [
+                'Accept-Charset'    => 'UTF-8',
+                'Content-Type'      => 'application/json',
+                'Accept'            => 'application/json',
+                'User-Agent'        => 'PHP WowSDK',
+                'Date'              => $date,
+                'Authorization'     => "BNET $publicKey:$signature"
+            ]
+        ]);
     }
 
     /**
