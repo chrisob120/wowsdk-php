@@ -19,8 +19,8 @@ try {
     //$z = $t->achievementService->getAchievement(150);
     //$z = $t->auctionService->getAuction('Hyjal');
     //$z = $t->bossService->getBoss(24723);
-    $z = $t->challengeService->getLadder('Hyjal');
-    //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
+    //$z = $t->challengeService->getLadder('Hyjal');
+    $z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacterClasses();

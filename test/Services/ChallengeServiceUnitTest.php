@@ -25,8 +25,18 @@ class ChallengeServiceUnitTest extends PHPUnit_Framework_TestCase {
         $challenge = $this->_access->getLadder('Hyjal');
         $this->assertInstanceOf('\WowApi\Components\Challenges\Challenge', $challenge[0]);
 
-        // check a field
-        //$this->assertNotNull($boss->id);
+        // check a field in each section
+        $this->assertNotNull($challenge[0]->realm);
+        $this->assertNotNull($challenge[0]->map);
+        $this->assertNotNull($challenge[0]->groups);
+    }
+    
+    /**
+     * @expectedException \WowApi\Exceptions\WowApiException
+     * @expectedExceptionMessage Not Found
+     */
+    public function testAchievementNotFound() {
+        $this->_access->getLadder('FakeRealm');
     }
 
 }
