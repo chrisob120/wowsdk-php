@@ -62,8 +62,8 @@ class Helper {
         $publicKey = explode('=', $file[0])[1];
         $privateKey  = explode('=', $file[1])[1];
 
-        $returnArr['api'] = $publicKey;
-        if ($secret) $returnArr['secret'] = $privateKey;
+        $returnArr['api'] = trim($publicKey);
+        if ($secret) $returnArr['secret'] = trim($privateKey);
 
         return $returnArr;
     }
