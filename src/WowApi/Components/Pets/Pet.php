@@ -42,7 +42,7 @@ class Pet extends BaseComponent {
     public $qualityId;
 
     /**
-     * @var object $stats
+     * @var PetSpeciesStats $stats
      */
     public $stats;
 
@@ -68,7 +68,18 @@ class Pet extends BaseComponent {
      * @return Pet
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        $petObj = parent::assignValues($this, json_decode($jsonData));
+        $petObj->stats = $this->getPetStats($petObj->stats);
+
+        return $petObj;
+    }
+
+    /**
+     * @param object $petStatsObj
+     * @return PetSpeciesStats
+     */
+    private function getPetStats($petStatsObj) {
+        return new PetSpeciesStats(json_encode($petStatsObj));
     }
 
     /**
