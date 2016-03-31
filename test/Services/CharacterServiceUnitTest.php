@@ -42,7 +42,7 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('\WowApi\Components\Characters\CharacterRace', $charObj);
     }
 
-    public function testGetCharacterAchievement() {
+    public function testGetCharacterAchievements() {
         $charObj = $this->_access->getCharacterAchievements()[0];
         $this->assertInstanceOf('\WowApi\Components\Characters\CharacterAchievement', $charObj);
     }
