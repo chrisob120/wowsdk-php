@@ -49,4 +49,23 @@ class Helper {
         return (substr($protocol, -1) == ':') ? $protocol : "$protocol:";
     }
 
+    /**
+     * @param string $file
+     * @param bool $secret
+     * @return mixed
+     */
+    public static function getKeys($file, $secret = false) {
+        $file = file($file);
+        $returnArr = ['api' => '', 'secret' => ''];
+
+        // get the keys
+        $publicKey = explode('=', $file[0])[1];
+        $privateKey  = explode('=', $file[1])[1];
+
+        $returnArr['api'] = $publicKey;
+        if ($secret) $returnArr['secret'] = $privateKey;
+
+        return $returnArr;
+    }
+
 }
