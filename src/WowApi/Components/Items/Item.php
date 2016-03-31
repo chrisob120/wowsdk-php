@@ -220,9 +220,9 @@ class Item extends BaseComponent {
      */
     public function __construct($jsonData) {
         $itemObj = parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
-        $itemObj->itemSpells = $this->getItemSpells($itemObj->itemSpells);
-        $itemObj->itemSource = $this->getItemSource($itemObj->itemSource);
-        $itemObj->bonusSummary = $this->getBonusSummary($itemObj->bonusSummary);
+        if (isset($itemObj->itemSpells)) $itemObj->itemSpells = $this->getItemSpells($itemObj->itemSpells);
+        if (isset($itemObj->itemSource)) $itemObj->itemSource = $this->getItemSource($itemObj->itemSource);
+        if (isset($itemObj->bonusSummary)) $itemObj->bonusSummary = $this->getBonusSummary($itemObj->bonusSummary);
 
         return $itemObj;
     }
