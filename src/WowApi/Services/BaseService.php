@@ -51,21 +51,6 @@ abstract class BaseService {
     private $_baseUri;
 
     /**
-     * @var string $_wowUri
-     */
-    private $_wowUri;
-
-    /**
-     * @var string $_authEndpoint
-     */
-    private $_authEndpoint;
-
-    /**
-     * @var string $_tokenEndpoint
-     */
-    private $_tokenEndpoint;
-
-    /**
      * Extra parameters to be optionally set
      * @var array $parameters
      */
@@ -91,11 +76,8 @@ abstract class BaseService {
     public function __construct($apiKey, $options = null) {
         $this->_apiKey = $apiKey;
 
-        // assign URIs
+        // assign baseUri
         $this->_baseUri = Config::get('client.base_uri');
-        $this->_wowUri = $this->_baseUri . Config::get('client.wow_path');
-        $this->_authEndpoint = $this->_baseUri . Config::get('oauth.authorization_endpoint');
-        $this->_tokenEndpoint = $this->_baseUri . Config::get('oauth.token_endpoint');
 
         // assign parameters
         $this->_protocol = (isset($options['protocol'])) ? $options['protocol'] : Config::get('client.protocol');
@@ -105,7 +87,7 @@ abstract class BaseService {
         // check the current region and locale before submitting a request
         $this->checkOptionalParameters();
 
-        $baseUri = $this->getPath($this->_wowUri, [
+        $baseUri = $this->getPath($this->_baseUri, [
             'protocol' => Helper::checkProtocol($this->_protocol),
             'region' => $this->_region
         ]);
@@ -148,6 +130,8 @@ abstract class BaseService {
      * @return Request
      */
     protected function createRequest($method, $url) {
+        return new Request($method, $url);
+        /*
         // keys
         $publicKey = 'n3hfnyv46xxdu88jp4z9q54qcfmbwgpb';
         $privateKey = 'yPer5s7Bn2ES2kWDDgEbfuWDTSca8W5b';
@@ -166,7 +150,7 @@ abstract class BaseService {
                 'Date'              => $date,
                 'Authorization'     => "BNET $publicKey:$signature"
             ]
-        ]);
+        ]);*/
     }
 
     /**

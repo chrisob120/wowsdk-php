@@ -6,9 +6,8 @@ use WowApi\Util\Helper;
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// example
-require_once 'autoload.php';
-require_once '../../vendor/autoload.php';
+require_once '../src/WowApi/autoload.php';
+require_once '../vendor/autoload.php';
 
 $options = ['region' => 'us', 'locale' => 'en_US'];
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
@@ -41,9 +40,9 @@ try {
     //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
     //$z = $t->petService->getPetTypes();
     //$z = $t->questService->getQuest(13146);
-    //$z = $t->realmService->getRealm('hyjal');
+    $z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms(['hyjal', 'stormrage']);
-    $z = $t->realmService->sortRealms('type', 'rppvp');
+    //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->resourceService->getBattlegroups();
     //$z = $t->resourceService->getTalentTree();
