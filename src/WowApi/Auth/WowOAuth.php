@@ -15,7 +15,7 @@ use WowApi\Util\Helper;
  * @author      Chris O'Brien
  * @version     1.0.0
  */
-class WowApiOAuth {
+class WowOAuth {
 
     /**
      * @var string $_accessToken
