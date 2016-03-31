@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Auth Tests
+ * API File
  *
  * @author      Chris O'Brien
  * @version     1.0.0
