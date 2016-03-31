@@ -25,12 +25,12 @@ try {
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
-    //$z = $t->characterService->getCharacterAchievements();
+    $z = $t->characterService->getCharacterAchievements();
     //$z = $t->guildService->getGuild('hyjal', 'tf');
     //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
     //$z = $t->guildService->getGuildAchievements();
-    $z = $t->itemService->getItem(71033);
+    //$z = $t->itemService->getItem(71033);
     //$z = $t->itemService->getItemSet(1060);
     //$z = $t->itemService->getItemClasses();
     //$z = $t->leaderboardService->getLeaderboard('rbg');

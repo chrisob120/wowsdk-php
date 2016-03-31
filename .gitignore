@@ -3,3 +3,6 @@ composer.lock
 
 #PhpStorm
 .idea/
+
+#For Testing
+src/WowApi/sample.php
