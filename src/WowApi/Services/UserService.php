@@ -2,13 +2,11 @@
 
 use WowApi\Components\Characters\Character;
 use WowApi\Components\Resources\Talents\Spec;
-use WowApi\Components\User\Profile;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
-use WowApi\Util\Helper;
 
 /**
- * User services - Utilizes OAuth2
+ * User services - Utilizes OAuth2 token
  *
  * @package     Services
  * @author      Chris O'Brien
@@ -49,6 +47,53 @@ class UserService extends BaseService {
         }
 
         return $this->getCharacters($response->getBody());
+    }
+
+    /**
+     * Get the user id
+     *
+     * @return mixed
+     * @throws WowApiException
+     */
+    public function getUserAccountId() {
+        $request = parent::createRequest('GET', 'user/id', $account = true);
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        $response = json_decode($response->getBody());
+
+        if (isset($response->id)) {
+            return $response->id;
+        } else {
+            throw parent::toWowApiException(['User id not found.', 404]);
+        }
+    }
+
+    /**
+     * Get the user battletag
+     *
+     * @return mixed
+     * @throws WowApiException
+     */
+    public function getUserBattletag() {
+        $request = parent::createRequest('GET', 'user/battletag', $account = true);
+
+        try {
+            $response = parent::doRequest($request);
+        } catch (ClientException $e) {
+            throw parent::toWowApiException($e);
+        }
+
+        $response = json_decode($response->getBody());
+        if (isset($response->battletag)) {
+            return $response->battletag;
+        } else {
+            throw parent::toWowApiException(['Battletag not found.', 404]);
+        }
     }
 
     /**
