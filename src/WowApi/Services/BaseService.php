@@ -132,9 +132,17 @@ abstract class BaseService {
      *
      * @param string $method
      * @param string $url
+     * @param bool $accountRequest
      * @return Request
      */
-    protected function createRequest($method, $url) {
+    protected function createRequest($method, $url, $accountRequest = false) {
+        // create request URI pre-fix based on type of call
+        if (!$accountRequest) {
+            $url = Config::get('client.wow_path') . $url;
+        } else {
+            $url = Config::get('client.account_path') . $url;
+        }
+
         return new Request($method, $url, $this->headers);
     }
 
