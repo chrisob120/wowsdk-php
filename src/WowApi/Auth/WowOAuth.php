@@ -109,6 +109,7 @@ class WowOAuth {
     public function getAccessToken($code) {
         $params = [
             'query' => [
+                'locale' => $this->_locale,
                 'grant_type' => Config::get('oauth.authorization_grant_type'),
                 'client_id' => $this->_clientId,
                 'client_secret' => $this->_clientSecret,

@@ -13,16 +13,16 @@ require_once '../vendor/autoload.php';
 
 $keys = Helper::getKeys('keys.txt');
 
-$client = new WowOAuth($keys['api'], $keys['secret'], 'https://192.168.2.218/wowapi/samples/oauth.php');
+$oauth = new WowOAuth($keys['api'], $keys['secret'], 'https://192.168.2.218/wowapi/samples/oauth.php');
 
 if (!isset($_SESSION['response'])) {
     if (!isset($_GET['code'])) {
-        $auth_url = $client->getAuthorizationUrl();
-        header('Location: ' . $auth_url);
-        die('Redirect');
+?>
+        <button class="btn btn-primary" type="button" onclick="window.location.href='<?php echo $oauth->getAuthorizationUrl(); ?>';">Get Access Token</button>
+<?php
     } else {
         try {
-            $response = $client->getAccessToken($_GET['code']);
+            $response = $oauth->getAccessToken($_GET['code']);
             Helper::print_rci($response);
         } catch (OAuthException $ex) {
             echo $ex->getError();
@@ -30,9 +30,5 @@ if (!isset($_SESSION['response'])) {
     }
 } else {
     echo '<strong>Token:</strong> ' .$_SESSION['response']->access_token;
-    Helper::print_rci($client->getTokenInfo($_SESSION['response']->access_token));
+    Helper::print_rci($oauth->getTokenInfo($_SESSION['response']->access_token));
 }
-
-//$z = $client->getAccessToken();
-
-//Helper::print_rci($z);

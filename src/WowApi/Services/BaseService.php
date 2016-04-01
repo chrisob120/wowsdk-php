@@ -57,6 +57,11 @@ abstract class BaseService {
     protected $parameters = [];
 
     /**
+     * @var array $headers
+     */
+    protected $headers = [];
+
+    /**
      * Set the maximum amount of fields for a service. Default to null means any amount of fields can be called
      * @var mixed $maxFields
      */
