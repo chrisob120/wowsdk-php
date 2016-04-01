@@ -51,21 +51,19 @@ class Helper {
 
     /**
      * @param string $file
-     * @param bool $secret
      * @return mixed
      */
-    public static function getKeys($file, $secret = false) {
+    public static function getKeys($file) {
         $file = file($file);
-        $returnArr = ['api' => '', 'secret' => ''];
 
         // get the keys
         $publicKey = explode('=', $file[0])[1];
         $privateKey  = explode('=', $file[1])[1];
 
-        $returnArr['api'] = trim($publicKey);
-        if ($secret) $returnArr['secret'] = trim($privateKey);
-
-        return $returnArr;
+        return [
+            'api' => trim($publicKey),
+            'secret' => trim($privateKey)
+        ];
     }
 
 }

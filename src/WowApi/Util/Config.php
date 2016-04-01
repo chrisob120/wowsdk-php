@@ -41,6 +41,7 @@ class Config {
             'base_uri'                  => 'https://:region.battle.net/oauth/',
             'authorization_endpoint'    => 'authorize',
             'token_endpoint'			=> 'token',
+            'check_token_endpoint'      => 'check_token',
             'response_type'             => 'code',
             'authorization_grant_type'  => 'authorization_code',
             'scope'                     => 'wow.profile'

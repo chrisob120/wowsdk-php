@@ -131,26 +131,6 @@ abstract class BaseService {
      */
     protected function createRequest($method, $url) {
         return new Request($method, $url);
-        /*
-        // keys
-        $publicKey = 'n3hfnyv46xxdu88jp4z9q54qcfmbwgpb';
-        $privateKey = 'yPer5s7Bn2ES2kWDDgEbfuWDTSca8W5b';
-
-        // signature
-        $date = gmdate(DATE_RFC1123);
-        $signStr = "$method\n$date\n$url\n";
-        $signature = base64_encode(hash_hmac('sha1', $signStr, $privateKey, true));
-
-        return new Request($method, $url, [
-            'headers' => [
-                'Accept-Charset'    => 'UTF-8',
-                'Content-Type'      => 'application/json',
-                'Accept'            => 'application/json',
-                'User-Agent'        => 'PHP WowSDK',
-                'Date'              => $date,
-                'Authorization'     => "BNET $publicKey:$signature"
-            ]
-        ]);*/
     }
 
     /**
@@ -275,7 +255,8 @@ abstract class BaseService {
                 $arrKey = key($value);
                 $this->parameters[$key][$arrKey] = $value[$arrKey];
             } else {
-                throw new IllegalArgumentException('Parameter was set incorrectly.');
+                $this->parameters[$key] = $value;
+                //throw new IllegalArgumentException('Parameter was set incorrectly.');
             }
         } else {
             $this->parameters[$key] = $value;

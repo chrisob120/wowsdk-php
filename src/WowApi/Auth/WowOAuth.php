@@ -6,7 +6,6 @@ use WowApi\Util\Config;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Exception\ClientException;
-use WowApi\Util\Helper;
 
 /**
  * Implements functionality to obtain an access token from a user
@@ -127,8 +126,26 @@ class WowOAuth {
             throw $this->toOAuthException($e);
         }
 
-        $_SESSION['response'] = $response->getBody()->getContents();
-        return $response->getBody()->getContents();
+        $response = json_decode($response->getBody()->getContents());
+
+        $this->_accessToken = $response->access_token;
+        $_SESSION['response'] = $response;
+        return $response;
+    }
+
+    public function getTokenInfo($token) {
+        $params['query'] = ['token' => $token];
+
+        $baseUri = $this->getPath($this->baseUri, ['region' => $this->_region]) . Config::get('oauth.check_token_endpoint');
+        $request = new Request('POST', $baseUri);
+
+        try {
+            $response = $this->_client->send($request, $params);
+        } catch (ClientException $e) {
+            throw $this->toOAuthException($e);
+        }
+
+        return json_decode($response->getBody()->getContents());
     }
 
     /**
