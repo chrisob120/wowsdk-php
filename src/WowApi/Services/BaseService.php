@@ -135,7 +135,7 @@ abstract class BaseService {
      * @return Request
      */
     protected function createRequest($method, $url) {
-        return new Request($method, $url);
+        return new Request($method, $url, $this->headers);
     }
 
     /**
@@ -176,6 +176,22 @@ abstract class BaseService {
         }
 
         return $wowApiEx;
+    }
+
+    /**
+     * Set the headers
+     *
+     * @param string $accessToken
+     * @return void
+     */
+    protected function setHeaders($accessToken) {
+        $this->headers = [
+            'Accept-Charset'    => 'UTF-8',
+            'Content-Type'      => 'application/json',
+            'Accept'            => 'application/json',
+            'User-Agent'        => 'PHP WowSDK',
+            'Authorization'     => "Bearer $accessToken"
+        ];
     }
 
     /**
