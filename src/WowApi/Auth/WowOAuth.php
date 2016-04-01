@@ -103,15 +103,19 @@ class WowOAuth {
     }
 
     /**
+     * @param string $code Access code
      * @return \Psr\Http\Message\StreamInterface
+     * @throws OAuthException
      */
-    public function getAccessToken() {
+    public function getAccessToken($code) {
         $params = [
-            'locale' => $this->_locale,
-            'grant_type' => Config::get('oauth.authorization_grant_type'),
-            'client_id' => $this->_clientId,
-            'client_secret' => $this->_clientSecret,
-            'redirect_uri' => $this->redirectUri
+            'query' => [
+                'grant_type' => Config::get('oauth.authorization_grant_type'),
+                'client_id' => $this->_clientId,
+                'client_secret' => $this->_clientSecret,
+                'code' => $code,
+                'redirect_uri' => $this->redirectUri,
+            ]
         ];
 
         $baseUri = $this->getPath($this->baseUri, ['region' => $this->_region]) . Config::get('oauth.token_endpoint');
@@ -120,10 +124,34 @@ class WowOAuth {
         try {
             $response = $this->_client->send($request, $params);
         } catch (ClientException $e) {
-            echo $e->getMessage();exit;
+            throw $this->toOAuthException($e);
         }
 
-        return $response->getBody();
+        $_SESSION['response'] = $response->getBody()->getContents();
+        return $response->getBody()->getContents();
+    }
+
+    /**
+     * Throw OAuth exception from ClientException
+     *
+     * @param ClientException|array $response
+     * @return OAuthException
+     */
+    protected function toOAuthException($response) {
+        if (is_array($response)) {
+            list($msg, $code) = $response;
+
+            $oAuthEx = new OAuthException($msg, $code);
+            $oAuthEx->setError([
+                'code' => $code,
+                'detail' => $msg
+            ]);
+        } else {
+            $oAuthEx = new OAuthException($response->getResponse()->getReasonPhrase(), $response->getCode());
+            $oAuthEx->setError(json_decode($response->getResponse()->getBody()));
+        }
+
+        return $oAuthEx;
     }
 
     /**
