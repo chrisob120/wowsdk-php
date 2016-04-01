@@ -20,7 +20,9 @@ class Config {
          * Client options
          */
         'client' => [
-            'base_uri'  => ':protocol//:region.api.battle.net/wow/',
+            'base_uri'  => ':protocol//:region.api.battle.net/',
+            'wow_path' => 'wow/',
+            'account_path' => 'account/',
             'protocol'  => 'https',
             'region'    => 'us',
             'locale'    => 'en_US'
