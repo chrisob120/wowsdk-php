@@ -29,6 +29,7 @@ if (!isset($_SESSION['response'])) {
         }
     }
 } else {
+    echo '<strong>Token:</strong> ' .$_SESSION['response']->access_token;
     Helper::print_rci($client->getTokenInfo($_SESSION['response']->access_token));
 }
 
