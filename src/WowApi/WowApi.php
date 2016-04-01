@@ -16,6 +16,7 @@ use WowApi\Services\ChallengeService;
 use WowApi\Services\LeaderboardService;
 use WowApi\Services\ItemService;
 use WowApi\Services\ResourceService;
+use WowApi\Services\UserService;
 
 /**
  * WoW API Class
@@ -108,6 +109,11 @@ class WowApi {
     public $resourceService;
 
     /**
+     * @var UserService $userService
+     */
+    public $userService;
+
+    /**
      * WowApi constructor
      *
      * @param string $apiKey
@@ -130,6 +136,7 @@ class WowApi {
         $this->leaderboardService = New LeaderboardService($apiKey, $options);
         $this->itemService = new ItemService($apiKey, $options);
         $this->resourceService = new ResourceService($apiKey, $options);
+        $this->userService = new UserService($apiKey, $options);
     }
 
 }
