@@ -1,8 +1,9 @@
 {
-  "name": "chrisob120/php-wow-api",
-  "description": "World of Warcraft API SDK",
-  "license": "MIT",
+  "name": "chrisob120/wowsdk-php",
+  "description": "PHP SDK for Blizzard's WoW API",
   "keywords": ["api", "wow", "wowapi", "php", "sdk", "World of Warcraft"],
+  "homepage": "https://github.com/chrisob120/wowsdk-php",
+  "license": "MIT",
   "authors": [
 	{
 	  "name": "Chris O'Brien",
