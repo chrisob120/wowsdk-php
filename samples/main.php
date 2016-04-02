@@ -29,7 +29,7 @@ try {
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['talents']);
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
     //$z = $t->characterService->getCharacterAchievements();
@@ -57,7 +57,7 @@ try {
     //$z = $t->spellService->getSpell(8056);
     //$z = $t->userService->getProfile();
     //$z = $t->userService->getUserAccountId();
-    $z = $t->userService->getUserBattletag();
+    //$z = $t->userService->getUserBattletag();
     //$z = $t->zoneService->getZones();
     //$z = $t->zoneService->getZone(4131);
     echo '<strong>Returned:</strong> ' .count($z);
