@@ -4,4 +4,4 @@ composer.lock
 #PhpStorm
 .idea/
 
-samples/keys.txt
+examples/keys.txt
