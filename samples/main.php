@@ -55,11 +55,11 @@ try {
     //$z = $t->resourceService->getBattlegroups();
     //$z = $t->resourceService->getTalentTree();
     //$z = $t->spellService->getSpell(8056);
-    //$z = $t->zoneService->getZones();
-    //$z = $t->zoneService->getZone(4131);
     //$z = $t->userService->getProfile();
     //$z = $t->userService->getUserAccountId();
     $z = $t->userService->getUserBattletag();
+    //$z = $t->zoneService->getZones();
+    //$z = $t->zoneService->getZone(4131);
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
