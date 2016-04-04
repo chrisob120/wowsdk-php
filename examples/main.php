@@ -10,6 +10,7 @@ session_start();
 require_once '../src/WowApi/autoload.php';
 require_once '../vendor/autoload.php';
 
+// for testing. GET RID OF THIS
 $keys = Helper::getKeys('../test/keys.txt');
 $accessToken = (isset($_SESSION['response']->access_token)) ? $_SESSION['response']->access_token : null;
 //$accessToken = '';

@@ -11,6 +11,7 @@ session_start();
 require_once '../src/WowApi/autoload.php';
 require_once '../vendor/autoload.php';
 
+// for testing. GET RID OF THIS
 $keys = Helper::getKeys('../test/keys.txt');
 
 $oauth = new WowOAuth($keys['api'], $keys['secret'], 'https://192.168.2.218/wowapi/examples/oauth.php');
