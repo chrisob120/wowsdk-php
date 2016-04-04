@@ -73,6 +73,12 @@ abstract class BaseService {
     protected $sortWhitelist = [];
 
     /**
+     * Guzzle timeout option
+     * @var null|int $timeout
+     */
+    protected $timeout = null;
+
+    /**
      * BaseService constructor assigning the Guzzle rest client and API Key
      *
      * @param string $apiKey Battle.net API Key
@@ -83,6 +89,9 @@ abstract class BaseService {
 
         // assign baseUri
         $this->_baseUri = Config::get('client.base_uri');
+
+        // allows for manual timeout times for the current instance
+        if (isset($options['timeout'])) $this->timeout = $options['timeout'];
 
         // assign parameters
         $this->_protocol = (isset($options['protocol'])) ? $options['protocol'] : Config::get('client.protocol');
@@ -101,7 +110,7 @@ abstract class BaseService {
 
         // set the default parameters
         $this->parameters = [
-            'timeout' => 5,
+            'timeout' => 10,
             'query' => [
                 'locale' => $this->_locale,
                 'apikey' => $this->_apiKey
@@ -289,6 +298,19 @@ abstract class BaseService {
             }
         } else {
             $this->parameters[$key] = $value;
+        }
+    }
+
+    /**
+     * Sets the amount of seconds for the Guzzle Client to wait before timing out
+     *
+     * @param $seconds
+     * @return void
+     */
+    protected function setTimeout($seconds) {
+        // if the timeout has not already been set in the constructor, change timeout time
+        if ($this->timeout != null) {
+            $this->setParameter('timeout', $seconds);
         }
     }
 

@@ -20,6 +20,18 @@ $options = [
 
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
 
+/*
+ * OPTIONAL FIELDS
+ *
+$options = [
+    'protocol'      => '', // sets the API protocol. Default: https
+    'region'        => '', // sets the API region. Default: US
+    'locale'        => '', // sets the API locale. Default: en_US
+    'timeout'       => '', // sets the Guzzle Client timeout for the current instance. Default: 10
+    'access_token'  => ''  // sets the Battle.net client access token
+];
+*/
+
 try {
     $t = new WowApi($keys['api'], $options);
 
@@ -29,18 +41,18 @@ try {
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['talents']);
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['talents']);
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
     //$z = $t->characterService->getCharacterAchievements();
-    //$z = $t->guildService->getGuild('hyjal', 'tf');
+    //$z = $t->guildService->getGuild('Hyjal', 'TF');
     //$z = $t->guildService->getGuildRewards();
     //$z = $t->guildService->getGuildPerks();
     //$z = $t->guildService->getGuildAchievements();
     //$z = $t->itemService->getItem(71033);
-    //$z = $t->itemService->getItemSet(1060);
+    //$z = $t->itemService->getItemSet(0);
     //$z = $t->itemService->getItemClasses();
-    //$z = $t->leaderboardService->getLeaderboard('rbg');
+    $z = $t->leaderboardService->getLeaderboard('2v2');
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->petService->getPets();
