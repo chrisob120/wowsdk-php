@@ -24,9 +24,7 @@ class RealmServiceUnitTest extends PHPUnit_Framework_TestCase {
     public function testGetRealm() {
         $realm = $this->_access->getRealm('Hyjal');
         $this->assertInstanceOf('\WowApi\Components\Realms\Realm', $realm);
-
-        // check a field
-        $this->assertNotNull($realm->type);
+        $this->assertEquals('Hyjal', $realm->name);
     }
 
     /**
