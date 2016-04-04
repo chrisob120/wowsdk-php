@@ -64,4 +64,12 @@ class ItemServiceUnitTest extends PHPUnit_Framework_TestCase {
         $this->_access->getItem(0);
     }
 
+    /**
+     * @expectedException \WowApi\Exceptions\WowApiException
+     * @expectedExceptionMessage Not Found
+     */
+    public function testItemSetNotFound() {
+        $this->_access->getItemSet(0);
+    }
+
 }
