@@ -12,9 +12,14 @@ use WowApi\Components\BaseComponent;
 class Auction extends BaseComponent {
 
     /**
-     * @var array $files
+     * @var string $url
      */
-    public $files;
+    public $url;
+
+    /**
+     * @var int $lastModified
+     */
+    public $lastModified;
 
     /**
      * Auction constructor - creates the Auction object based on the returned service data
@@ -23,7 +28,10 @@ class Auction extends BaseComponent {
      * @return Auction
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        $data = json_decode($jsonData)->files[0];
+
+        $this->url = $data->url;
+        $this->lastModified = $data->lastModified;
     }
 
 }

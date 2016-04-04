@@ -7,6 +7,8 @@ use WowApi\Exceptions\WowApiException;
 /**
  * Auction services
  *
+ * TODO: Make this actually do something
+ *
  * @package     Services
  * @author      Chris O'Brien
  * @version     1.0.0
