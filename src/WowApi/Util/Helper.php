@@ -54,16 +54,17 @@ class Helper {
      * @return mixed
      */
     public static function getKeys($file) {
+        $returnArr = [];
         $file = file($file);
 
-        // get the keys
-        $publicKey = explode('=', $file[0])[1];
-        $privateKey  = explode('=', $file[1])[1];
+        foreach ($file as $line) {
+            $lineArr = explode('=', $line);
+            list ($key, $val) = $lineArr;
 
-        return [
-            'api' => trim($publicKey),
-            'secret' => trim($privateKey)
-        ];
+            $returnArr[$key] = trim($val);
+        }
+
+        return $returnArr;
     }
 
 }
