@@ -13,9 +13,8 @@ class API {
      * @param array|null $options
      * @return \WowApi\WowApi
      */
-    public static function getClient($apiKey = null, $options = null) {
-        $key = ($apiKey != null) ? $apiKey : 'n3hfnyv46xxdu88jp4z9q54qcfmbwgpb';
-        return new \WowApi\WowApi($key, $options);
+    public static function getClient($apiKey, $options = null) {
+        return new \WowApi\WowApi($apiKey, $options);
     }
 
 }
