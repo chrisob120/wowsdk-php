@@ -24,9 +24,8 @@ class CharacterServiceUnitTest extends PHPUnit_Framework_TestCase {
     public function testGetCharacter() {
         $character = $this->_access->getCharacter('Hyjal', 'Ardeel');
         $this->assertInstanceOf('\WowApi\Components\Characters\Character', $character);
-
-        // check a default field
-        $this->assertNotNull($character->name);
+        $this->assertEquals('Hyjal', $character->realm);
+        $this->assertEquals('Ardeel', $character->name);
 
         // check non default field as not set
         $this->assertFalse(isset($character->achievements), 'Field has been set when it should not be.');
