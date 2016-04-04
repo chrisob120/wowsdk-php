@@ -25,7 +25,7 @@ class ChallengeService extends BaseService {
      */
     public function getLadder($realm) {
         // allow for longer timeout because it's a big call
-        $this->setParameter('timeout', 10);
+        $this->setTimeout(15);
 
         $url = $this->getPath('challenge/:realm', [
             'realm' => $realm
@@ -82,7 +82,7 @@ class ChallengeService extends BaseService {
      */
     public function getRegionLadder() {
         // allow for longer timeout because it's a big call
-        $this->setParameter('timeout', 10);
+        $this->setTimeout(15);
 
         $request = parent::createRequest('GET', 'challenge/region');
 

@@ -27,7 +27,7 @@ $options = [
     'protocol'      => '', // sets the API protocol. Default: https
     'region'        => '', // sets the API region. Default: US
     'locale'        => '', // sets the API locale. Default: en_US
-    'timeout'       => '', // sets the Guzzle Client timeout for the current instance. Default: 10
+    'timeout'       => '', // sets the Guzzle Client timeout for the current instance. This overrides any timeouts defined in the application. Default: 10
     'access_token'  => ''  // sets the Battle.net client access token
 ];
 */

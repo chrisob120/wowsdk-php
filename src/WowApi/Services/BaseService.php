@@ -74,9 +74,15 @@ abstract class BaseService {
 
     /**
      * Guzzle timeout option
-     * @var null|int $timeout
+     * @var int $timeout
      */
-    protected $timeout = null;
+    protected $timeout = 10;
+
+    /**
+     * Verifies if the Guzzle timeout was set when the object was made or not
+     * @var bool $_timeoutSetInConstructor
+     */
+    private $_timeoutSetInConstructor = false;
 
     /**
      * BaseService constructor assigning the Guzzle rest client and API Key
@@ -91,7 +97,10 @@ abstract class BaseService {
         $this->_baseUri = Config::get('client.base_uri');
 
         // allows for manual timeout times for the current instance
-        if (isset($options['timeout'])) $this->timeout = $options['timeout'];
+        if (isset($options['timeout'])) {
+            $this->timeout = (int)$options['timeout'];
+            $this->_timeoutSetInConstructor = true;
+        }
 
         // assign parameters
         $this->_protocol = (isset($options['protocol'])) ? $options['protocol'] : Config::get('client.protocol');
@@ -110,7 +119,7 @@ abstract class BaseService {
 
         // set the default parameters
         $this->parameters = [
-            'timeout' => 10,
+            'timeout' => $this->timeout,
             'query' => [
                 'locale' => $this->_locale,
                 'apikey' => $this->_apiKey
@@ -308,8 +317,8 @@ abstract class BaseService {
      * @return void
      */
     protected function setTimeout($seconds) {
-        // if the timeout has not already been set in the constructor, change timeout time
-        if ($this->timeout != null) {
+        // if the timeout has not already been set in the constructor, allow for timeout changes
+        if (!$this->_timeoutSetInConstructor) {
             $this->setParameter('timeout', $seconds);
         }
     }
