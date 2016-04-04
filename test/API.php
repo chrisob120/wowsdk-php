@@ -9,6 +9,8 @@
 class API {
 
     /**
+     * Get the WowApi client
+     *
      * @param string|null $apiKey
      * @param array|null $options
      * @param bool $token
