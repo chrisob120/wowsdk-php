@@ -15,6 +15,11 @@ use WowApi\Exceptions\WowApiException;
 class UserService extends BaseService {
 
     /**
+     * @var null|string $_accessToken
+     */
+    private $_accessToken = null;
+
+    /**
      * UserService constructor
      *
      * @param string $apiKey
@@ -24,8 +29,18 @@ class UserService extends BaseService {
     public function __construct($apiKey, $options = null) {
         parent::__construct($apiKey, $options);
 
-        if (isset($options['access_token'])) {
-            $this->setHeaders($options['access_token']);
+        if (isset($options['access_token'])) $this->_accessToken = $options['access_token'];
+    }
+
+    /**
+     * Check for a token on each call
+     *
+     * @return void
+     * @throws WowApiException
+     */
+    private function checkToken() {
+        if ($this->_accessToken != null) {
+            $this->setHeaders($this->_accessToken);
         } else {
             throw parent::toWowApiException(['This service requires an access token.', 110]);
         }
@@ -38,6 +53,7 @@ class UserService extends BaseService {
      * @throws WowApiException
      */
     public function getProfile() {
+        $this->checkToken();
         $request = parent::createRequest('GET', 'user/characters');
 
         try {
@@ -56,6 +72,7 @@ class UserService extends BaseService {
      * @throws WowApiException
      */
     public function getUserAccountId() {
+        $this->checkToken();
         $request = parent::createRequest('GET', 'user/id', $account = true);
 
         try {
@@ -80,6 +97,7 @@ class UserService extends BaseService {
      * @throws WowApiException
      */
     public function getUserBattletag() {
+        $this->checkToken();
         $request = parent::createRequest('GET', 'user/battletag', $account = true);
 
         try {

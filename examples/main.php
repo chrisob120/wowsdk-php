@@ -11,11 +11,11 @@ require_once '../src/WowApi/autoload.php';
 require_once '../vendor/autoload.php';
 
 $keys = Helper::getKeys('keys.txt');
+$accessToken = (isset($_SESSION['response']->access_token)) ? $_SESSION['response']->access_token : null;
+//$accessToken = '';
 
 $options = [
-    'region' => 'us',
-    'locale' => 'en_US',
-    'access_token' => $_SESSION['response']->access_token
+    'access_token' => $accessToken
 ];
 
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
