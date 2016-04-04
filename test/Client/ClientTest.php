@@ -18,6 +18,20 @@ class ClientTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('\GuzzleHttp\Client', $client);
     }
 
+    public function testGetClientWithAuth() {
+        $client = API::getClient(null, null, $token = 'good');
+        $this->assertNotNull($client->userService->getUserAccountId());
+    }
+
+    /**
+     * @expectedException \WowApi\Exceptions\WowApiException
+     * @expectedExceptionMessage Forbidden
+     */
+    public function testClientBadAPIKey() {
+        $client = API::getClient('1');
+        $client->mountService->getMounts();
+    }
+
     /**
      * @expectedException \WowApi\Exceptions\IllegalArgumentException
      * @expectedExceptionMessage Region must be one of the following
@@ -40,6 +54,15 @@ class ClientTest extends PHPUnit_Framework_TestCase {
      */
     public function testClientBadProtocol() {
         API::getClient(null, ['protocol' => 'catDog']);
+    }
+
+    /**
+     * @expectedException \WowApi\Exceptions\WowApiException
+     * @expectedExceptionMessage Unauthorized
+     */
+    public function testAuthTokenNotWorking() {
+        $client = API::getClient(null, null, $token = 'bad');
+        $client->userService->getUserAccountId();
     }
 
 }
