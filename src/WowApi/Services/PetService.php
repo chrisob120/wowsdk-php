@@ -67,7 +67,7 @@ class PetService extends BaseService {
      * @throws \WowApi\Exceptions\IllegalArgumentException
      */
     public function getSpeciesStats($speciesId, $options = []) {
-        $this->setQuery($options);
+        if (count($options)) $this->setQuery($options);
 
         $url = $this->getPath('pet/stats/:species', [
             'species' => (int)$speciesId
