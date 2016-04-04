@@ -10,7 +10,7 @@ session_start();
 require_once '../src/WowApi/autoload.php';
 require_once '../vendor/autoload.php';
 
-$keys = Helper::getKeys('keys.txt');
+$keys = Helper::getKeys('../test/keys.txt');
 $accessToken = (isset($_SESSION['response']->access_token)) ? $_SESSION['response']->access_token : null;
 //$accessToken = '';
 
@@ -52,7 +52,7 @@ try {
     //$z = $t->itemService->getItem(71033);
     //$z = $t->itemService->getItemSet(0);
     //$z = $t->itemService->getItemClasses();
-    $z = $t->leaderboardService->getLeaderboard('2v2');
+    //$z = $t->leaderboardService->getLeaderboard('2v2');
     //$z = $t->mountService->getMounts();
     //$z = $t->mountService->sortMounts('isAquatic', false);
     //$z = $t->petService->getPets();
@@ -71,7 +71,7 @@ try {
     //$z = $t->userService->getUserAccountId();
     //$z = $t->userService->getUserBattletag();
     //$z = $t->zoneService->getZones();
-    //$z = $t->zoneService->getZone(4131);
+    $z = $t->zoneService->getZone(4131);
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
 } catch (WowApiException $ex) {

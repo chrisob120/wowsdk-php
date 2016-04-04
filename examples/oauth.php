@@ -11,9 +11,9 @@ session_start();
 require_once '../src/WowApi/autoload.php';
 require_once '../vendor/autoload.php';
 
-$keys = Helper::getKeys('keys.txt');
+$keys = Helper::getKeys('../test/keys.txt');
 
-$oauth = new WowOAuth($keys['api'], $keys['secret'], 'https://192.168.2.218/wowapi/samples/oauth.php');
+$oauth = new WowOAuth($keys['api'], $keys['secret'], 'https://192.168.2.218/wowapi/examples/oauth.php');
 
 if (!isset($_SESSION['response'])) {
     if (!isset($_GET['code'])) {
