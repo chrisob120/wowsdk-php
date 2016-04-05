@@ -6,6 +6,8 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use WowApi\Cache\CacheInterface;
+use WowApi\Cache\SimpleCache;
 use WowApi\Util\Helper;
 use WowApi\Util\Config;
 
@@ -39,6 +41,11 @@ abstract class BaseService {
      * @var string $_baseUri
      */
     private $_baseUri;
+
+    /**
+     * @var CacheInterface $_cacheEngine
+     */
+    private $_cacheEngine;
 
     /**
      * @var string $_region
@@ -125,6 +132,18 @@ abstract class BaseService {
                 'apikey' => $this->_apiKey
             ]
         ];
+
+        // set the default headers
+        $this->headers = [
+            'Accept-Charset'    => 'UTF-8',
+            'Content-Type'      => 'application/json',
+            'Accept'            => 'application/json',
+            'User-Agent'        => 'PHP WowSDK'
+        ];
+
+        // set the cache engine. defaults to SimpleCache if nothing is specified
+        $engine = (isset($options['cacheEngine'])) ? $options['cacheEngine'] : new SimpleCache();
+        $this->setCacheEngine($engine);
     }
 
     /**
@@ -161,6 +180,8 @@ abstract class BaseService {
             $url = Config::get('client.account_path') . $url;
         }
 
+        //$this->setHeader('If-Modified-Since', 'Fri, 11 Mar 2016 20:29:03 GMT');
+
         return new Request($method, $url, $this->headers);
     }
 
@@ -174,6 +195,7 @@ abstract class BaseService {
     protected function doRequest($request) {
         try {
             $send = $this->_client->send($request, $this->parameters);
+            //Helper::print_rci($send);exit;
         } catch (ConnectException $e) { // catch the timeout error
             throw $this->toWowApiException([$e->getMessage(), 200]);
         }
@@ -205,22 +227,6 @@ abstract class BaseService {
     }
 
     /**
-     * Set the headers
-     *
-     * @param string $accessToken
-     * @return void
-     */
-    protected function setHeaders($accessToken) {
-        $this->headers = [
-            'Accept-Charset'    => 'UTF-8',
-            'Content-Type'      => 'application/json',
-            'Accept'            => 'application/json',
-            'User-Agent'        => 'PHP WowSDK',
-            'Authorization'     => "Bearer $accessToken"
-        ];
-    }
-
-    /**
      * Set the rest of the API call path
      *
      * @param string $path
@@ -235,6 +241,37 @@ abstract class BaseService {
         }
 
         return strtr($path, $add);
+    }
+
+    /**
+     * Set the cache engine
+     *
+     * @param CacheInterface $engine
+     * @return void
+     */
+    protected function setCacheEngine(CacheInterface $engine) {
+        $this->_cacheEngine = $engine;
+    }
+
+    /**
+     * Set a header
+     *
+     * @param string $key
+     * @param string $val
+     * @return void
+     */
+    protected function setHeader($key, $val) {
+        $this->headers[$key] = $val;
+    }
+
+    /**
+     * Set the accessToken header
+     *
+     * @param string $accessToken
+     * @return void
+     */
+    protected function setTokenHeader($accessToken) {
+        $this->setHeader('Authorization', "Bearer $accessToken");
     }
 
     /**
