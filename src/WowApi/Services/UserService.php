@@ -43,7 +43,7 @@ class UserService extends BaseService {
      */
     private function checkToken() {
         if ($this->_accessToken != null) {
-            $this->setHeaders($this->_accessToken);
+            $this->setTokenHeader($this->_accessToken);
         } else {
             throw parent::toWowApiException(['This service requires an access token.', 110]);
         }
