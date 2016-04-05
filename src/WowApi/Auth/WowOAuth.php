@@ -134,6 +134,13 @@ class WowOAuth {
         return $response;
     }
 
+    /**
+     * Get the meta information for the token
+     *
+     * @param $token
+     * @return mixed
+     * @throws OAuthException
+     */
     public function getTokenInfo($token) {
         $params['query'] = ['token' => $token];
 
