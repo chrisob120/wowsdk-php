@@ -36,19 +36,19 @@ abstract class BaseService {
     private $_protocol;
 
     /**
+     * @var string $_baseUri
+     */
+    private $_baseUri;
+
+    /**
      * @var string $_region
      */
-    private $_region;
+    protected $region;
 
     /**
      * @var string $_locale
      */
-    private $_locale;
-
-    /**
-     * @var string $_baseUri
-     */
-    private $_baseUri;
+    protected $locale;
 
     /**
      * Extra parameters to be optionally set
@@ -104,15 +104,15 @@ abstract class BaseService {
 
         // assign parameters
         $this->_protocol = (isset($options['protocol'])) ? $options['protocol'] : Config::get('client.protocol');
-        $this->_region = (isset($options['region'])) ? $options['region'] : Config::get('client.region');
-        $this->_locale = (isset($options['locale'])) ? $options['locale'] : Config::get('client.locale');
+        $this->region = (isset($options['region'])) ? $options['region'] : Config::get('client.region');
+        $this->locale = (isset($options['locale'])) ? $options['locale'] : Config::get('client.locale');
 
         // check the current region and locale before submitting a request
         $this->checkOptionalParameters();
 
         $baseUri = $this->getPath($this->_baseUri, [
             'protocol' => Helper::checkProtocol($this->_protocol),
-            'region' => $this->_region
+            'region' => $this->region
         ]);
 
         $this->_client = new Client(['base_uri' => $baseUri]);
@@ -121,7 +121,7 @@ abstract class BaseService {
         $this->parameters = [
             'timeout' => $this->timeout,
             'query' => [
-                'locale' => $this->_locale,
+                'locale' => $this->locale,
                 'apikey' => $this->_apiKey
             ]
         ];
@@ -138,11 +138,11 @@ abstract class BaseService {
 
         // get the regions
         $allowedRegions = array_keys(Config::get('regions'));
-        if (!in_array($this->_region, $allowedRegions)) throw new IllegalArgumentException(sprintf('Region must be one of the following: %s', implode(', ', $allowedRegions)));
+        if (!in_array($this->region, $allowedRegions)) throw new IllegalArgumentException(sprintf('Region must be one of the following: %s', implode(', ', $allowedRegions)));
 
         // get the locales
-        $allowedLocaleByRegion = Config::get("regions.$this->_region");
-        if (!in_array($this->_locale, $allowedLocaleByRegion)) throw new IllegalArgumentException(sprintf('Locale must be one of the following for the %s region: %s', $this->_region, implode(', ', $allowedLocaleByRegion)));
+        $allowedLocaleByRegion = Config::get("regions.$this->region");
+        if (!in_array($this->locale, $allowedLocaleByRegion)) throw new IllegalArgumentException(sprintf('Locale must be one of the following for the %s region: %s', $this->region, implode(', ', $allowedLocaleByRegion)));
     }
 
     /**
