@@ -3,7 +3,10 @@
 use WowApi\Components\Characters\Character;
 use WowApi\Components\Resources\Talents\Spec;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use WowApi\Exceptions\WowApiException;
+use WowApi\Util\Config;
 
 /**
  * User services - Utilizes OAuth2 token
@@ -112,6 +115,29 @@ class UserService extends BaseService {
         } else {
             throw parent::toWowApiException(['Battletag not found.', 404]);
         }
+    }
+
+    /**
+     * Gets the current access token meta information
+     *
+     * @return mixed
+     * @throws WowApiException
+     */
+    public function getTokenInfo() {
+        $this->checkToken();
+        $params['query'] = ['token' => $this->_accessToken];
+
+        $baseUri = $this->getPath(Config::get('oauth.base_uri'), ['region' => $this->region]) . Config::get('oauth.check_token_endpoint');
+        $request = new Request('POST', $baseUri);
+        $client = new Client();
+
+        try {
+            $response = $client->send($request, $params);
+        } catch (ClientException $e) {
+            throw $this->toWowApiException($e);
+        }
+
+        return json_decode($response->getBody()->getContents());
     }
 
     /**
