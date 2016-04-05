@@ -37,4 +37,9 @@ class UserServiceUnitTest extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_string($this->_access->getUserBattletag()));
     }
 
+    public function testGetTokenInfo() {
+        $tokenObj = $this->_access->getTokenInfo();
+        $this->assertNotNull($tokenObj->exp);
+    }
+
 }
