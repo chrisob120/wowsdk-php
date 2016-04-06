@@ -1,49 +1,74 @@
 <?php namespace WowApi\Cache;
 
 /**
- * Caching engine for storage of the current request
+ * Cache engine abstract class
  *
  * @package     Cache
  * @author      Chris O'Brien
  * @version     1.0.0
  */
-class CacheEngine {
+abstract class CacheEngine implements CacheInterface {
 
     /**
-     * Stored data
-     * @var array $_data
+     * @var string $engineName
      */
-    private $_data = [];
+    protected $engineName;
 
     /**
-     * Return the storage data if the key exists
+     * @var string|null $engineExtension
+     */
+    protected $engineExtension = null;
+
+    /**
+     * Default first part of the cache key
+     * @var string $cacheKey
+     */
+    protected $cacheKey = 'api_cache';
+
+    /**
+     * Check the engine extension if necessary
+     */
+    public function __construct() {
+        // checks if the current engine extension is enabled (if there is an extension)
+        if ($this->engineExtension != null) {
+            if (!function_exists($this->engineExtension)) {
+                throw new \Exception("The $this->engineName extension is not enabled or did not load correctly.");
+            }
+        }
+    }
+
+    /**
+     * Get the cache
      *
-     * @param string $key
+     * @param string $url
+     * @param array $params
      * @return mixed
      */
-    public function get($key) {
-        return ($this->keyExists($key)) ? $this->_data[$key] : null;
+    public function getCache($url, $params) {
+        return $this->get($this->cacheKey . $this->getHash($url, $params));
     }
 
     /**
-     * Check if the key exists
+     * Set the cache
      *
-     * @param string $key
-     * @return bool
-     */
-    public function keyExists($key) {
-        return isset($this->_data[$key]);
-    }
-
-    /**
-     * Set the data item
-     *
-     * @param string $key
-     * @param string $val
+     * @param string $url
+     * @param array $params
+     * @param string $apiResponse
      * @return void
      */
-    public function set($key, $val) {
-        $this->_data[$key] = $val;
+    public function setCache($url, $params, $apiResponse) {
+        $this->set($this->cacheKey . $this->getHash($url, $params), $apiResponse);
+    }
+
+    /**
+     * Get the md5 hash of the URL and params
+     *
+     * @param string $url
+     * @param array $params
+     * @return string
+     */
+    private function getHash($url, $params) {
+        return md5($url . json_encode($params));
     }
 
 }
