@@ -1,5 +1,6 @@
 <?php namespace WowApi\Services;
 
+use GuzzleHttp\Exception\ServerException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 use GuzzleHttp\Exception\ClientException;
@@ -46,6 +47,11 @@ abstract class BaseService {
      * @var CacheInterface $_cacheEngine
      */
     private $_cacheEngine;
+
+    /**
+     * @var mixed $_cache
+     */
+    private $_cache = false;
 
     /**
      * @var string $_region
@@ -117,12 +123,12 @@ abstract class BaseService {
         // check the current region and locale before submitting a request
         $this->checkOptionalParameters();
 
-        $baseUri = $this->getPath($this->_baseUri, [
+        $this->_baseUri = $this->getPath($this->_baseUri, [
             'protocol' => Helper::checkProtocol($this->_protocol),
             'region' => $this->region
         ]);
 
-        $this->_client = new Client(['base_uri' => $baseUri]);
+        $this->_client = new Client(['base_uri' => $this->_baseUri]);
 
         // set the default parameters
         $this->parameters = [
@@ -174,13 +180,21 @@ abstract class BaseService {
      */
     protected function createRequest($method, $url, $accountRequest = false) {
         // create request URI pre-fix based on type of call
-        if (!$accountRequest) {
-            $url = Config::get('client.wow_path') . $url;
-        } else {
-            $url = Config::get('client.account_path') . $url;
-        }
+        $url = (!$accountRequest) ? Config::get('client.wow_path') . $url : Config::get('client.account_path') . $url;
 
-        //$this->setHeader('If-Modified-Since', 'Fri, 11 Mar 2016 20:29:03 GMT');
+        $fullUrl = $this->_baseUri . $url;
+        $this->_cache = $this->isCached($fullUrl, $this->parameters);
+
+        /* See below. Disable for now.
+         *
+        // check for current request cache
+        if ($this->_cache) {
+            $cacheContent = json_decode($this->_cache->getBody());
+
+            if (isset($cacheContent->lastModified)) {
+                $this->setHeader('If-Modified-Since', gmdate(DATE_RFC1123, ($cacheContent->lastModified/1000)));
+            }
+        }*/
 
         return new Request($method, $url, $this->headers);
     }
@@ -188,19 +202,64 @@ abstract class BaseService {
     /**
      * Do the request
      *
-     * @param $request
+     * @param Request $request
      * @return mixed
      * @throws WowApiException
      */
     protected function doRequest($request) {
+        if ($this->_cache) {
+            return $this->_cache;
+        }
+
         try {
-            $send = $this->_client->send($request, $this->parameters);
-            //Helper::print_rci($send);exit;
+            $response = $this->_client->send($request, $this->parameters);
         } catch (ConnectException $e) { // catch the timeout error
             throw $this->toWowApiException([$e->getMessage(), 200]);
         }
 
-        return $send;
+        /*
+         * Come back to this later. Won't be affected unless there are different kinds of caching
+         *
+        // check if there was updates from the API. Code 304 means 'Not Modified', so return the cache
+        if ($this->_cache && $response->getStatusCode() == 304) {
+            echo 'ya11';
+            return $this->_cache;
+        }*/
+
+        $this->cacheResponse($this->_baseUri . $request->getUri(), $this->parameters, $response);
+
+        return $response;
+    }
+
+    /**
+     * Check if the current call is already cached
+     *
+     * @param string $url
+     * @param array $params
+     * @return mixed
+     */
+    private function isCached($url, $params) {
+        $cache = $this->_cacheEngine->getCache($url, $params);
+
+        if ($cache) {
+            return $cache;
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the cache
+     *
+     * @param string $url
+     * @param array $params
+     * @param mixed $response
+     */
+    private function cacheResponse($url, $params, $response) {
+        $response->cacheTime = time();
+        //$cache = json_encode($response);
+
+        $this->_cacheEngine->setCache($url, $params, $response);
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php namespace WowApi;
 
 use WowApi\Exceptions\WowApiException;
+use WowApi\Cache\Apc;
 use WowApi\Util\Helper;
 
 ini_set('display_errors', 1);
@@ -15,8 +16,11 @@ $keys = Helper::getKeys('../test/keys.txt');
 $accessToken = (isset($_SESSION['response']->access_token)) ? $_SESSION['response']->access_token : null;
 //$accessToken = '';
 
+//$apc = new Apc();
+
 $options = [
-    'access_token' => $accessToken
+    'access_token' => $accessToken,
+    //'cacheEngine' => $apc
 ];
 
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
@@ -29,7 +33,8 @@ $options = [
     'region'        => '', // sets the API region. Default: US
     'locale'        => '', // sets the API locale. Default: en_US
     'timeout'       => '', // sets the Guzzle Client timeout for the current instance. This overrides any timeouts defined in the application. Default: 10
-    'access_token'  => ''  // sets the Battle.net client access token
+    'access_token'  => '', // sets the Battle.net client access token
+    'cacheEngine'   => ''  // sets the CacheEngine. Default: SimpleCache object
 ];
 */
 
@@ -42,7 +47,9 @@ try {
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['talents']);
+    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    $x = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['quests']);
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
     //$z = $t->characterService->getCharacterAchievements();
@@ -60,8 +67,9 @@ try {
     //$z = $t->petService->getSpecies(258);
     //$z = $t->petService->getSpeciesStats(258, ['level' => 80, 'breedId' => 5, 'qualityId' => 4]);
     //$z = $t->petService->getPetTypes();
-    //$z = $t->questService->getQuest(13146);
+    //$z = $t->questService->getQuest(176);
     //$z = $t->realmService->getRealm('hyjal');
+    //$z = $t->realmService->getRealms();
     //$z = $t->realmService->getRealms(['hyjal', 'stormrage']);
     //$z = $t->realmService->sortRealms('type', 'rppvp');
     //$z = $t->recipeService->getRecipe(33994);
@@ -71,10 +79,12 @@ try {
     //$z = $t->userService->getProfile();
     //$z = $t->userService->getUserAccountId();
     //$z = $t->userService->getUserBattletag();
+    //$z = $t->userService->getTokenInfo();
     //$z = $t->zoneService->getZones();
-    $z = $t->zoneService->getZone(4131);
+    //$z = $t->zoneService->getZone(4131);
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
+    Helper::print_rci($x);
 } catch (WowApiException $ex) {
     echo $ex->getError();
     //Helper::print_rci($ex->getError());
