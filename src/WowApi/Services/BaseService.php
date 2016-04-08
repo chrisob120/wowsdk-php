@@ -428,7 +428,6 @@ abstract class BaseService {
      */
     protected function sortData($dataArr, $sortArr) {
         $returnArr = [];
-        $this->checkSort($sortArr);
 
         foreach ($dataArr as $data) {
             $key = key($sortArr);

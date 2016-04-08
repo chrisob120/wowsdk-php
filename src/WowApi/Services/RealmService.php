@@ -136,20 +136,23 @@ class RealmService extends BaseService {
     }
 
     /**
-     * Real filter method
+     * Real sort method
      *
      * @param string $key
      * @param string $val
      * @return array
      * @throws IllegalArgumentException
      */
-    public function filter($key, $val) {
+    public function sort($key, $val) {
+        $sortArr = [$key => $val];
+        $this->checkSort($sortArr);
+
         if (!in_array($val, $this->schema[$key])) {
             throw new IllegalArgumentException(sprintf('The filter value %s is not allowed.', $val));
         }
 
         $this->sortWhitelist = ['type', 'queue', 'status', 'population'];
-        return $this->sortData($this->getRealms(), [$key => $val]);
+        return $this->sortData($this->getRealms(), $sortArr);
     }
 
     /**
@@ -158,7 +161,7 @@ class RealmService extends BaseService {
      * @return array
      */
     public function getRealmsDown() {
-        $this->filter('status', self::STATUS_DOWN);
+        $this->sort('status', self::STATUS_DOWN);
     }
 
     /**
@@ -167,7 +170,7 @@ class RealmService extends BaseService {
      * @return array
      */
     public function getRealmsWithQueue() {
-        $this->filter('queue', self::QUEUE_YES);
+        $this->sort('queue', self::QUEUE_YES);
     }
 
 }
