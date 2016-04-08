@@ -72,7 +72,7 @@ try {
     //$z = $t->realmService->getRealms();
     //$z = $t->realmService->filter('type', RealmService::TYPE_PVP);
     //$z = $t->realmService->getRealmsDown();
-    //$z = $t->realmService->getRealmsWithQueue();
+    $z = $t->realmService->getRealmsWithQueue();
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->resourceService->getBattlegroups();
     //$z = $t->resourceService->getTalentTree();
