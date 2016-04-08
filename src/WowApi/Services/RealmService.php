@@ -136,6 +136,8 @@ class RealmService extends BaseService {
     }
 
     /**
+     * Real filter method
+     *
      * @param string $key
      * @param string $val
      * @return array
@@ -143,7 +145,7 @@ class RealmService extends BaseService {
      */
     public function filter($key, $val) {
         if (!in_array($val, $this->schema[$key])) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(sprintf('The filter value %s is not allowed.', $val));
         }
 
         $this->sortWhitelist = ['type', 'queue', 'status', 'population'];
@@ -155,7 +157,7 @@ class RealmService extends BaseService {
      *
      * @return array
      */
-    public function getDownRealms() {
+    public function getRealmsDown() {
         $this->filter('status', self::STATUS_DOWN);
     }
 
