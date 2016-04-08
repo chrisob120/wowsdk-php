@@ -1,6 +1,5 @@
 <?php namespace WowApi\Services;
 
-use GuzzleHttp\Exception\ServerException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
 use GuzzleHttp\Exception\ClientException;
@@ -208,6 +207,7 @@ abstract class BaseService {
      */
     protected function doRequest($request) {
         if ($this->_cache) {
+            //Helper::print_rci($this->_cache);
             return $this->_cache;
         }
 
@@ -216,6 +216,8 @@ abstract class BaseService {
         } catch (ConnectException $e) { // catch the timeout error
             throw $this->toWowApiException([$e->getMessage(), 200]);
         }
+
+        //Helper::print_rci($response->getBody()->getContents());
 
         /*
          * Come back to this later. Won't be affected unless there are different kinds of caching
@@ -257,8 +259,6 @@ abstract class BaseService {
      */
     private function cacheResponse($url, $params, $response) {
         $response->cacheTime = time();
-        //$cache = json_encode($response);
-
         $this->_cacheEngine->setCache($url, $params, $response);
     }
 

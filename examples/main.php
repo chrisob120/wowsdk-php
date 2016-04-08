@@ -2,6 +2,7 @@
 
 use WowApi\Exceptions\WowApiException;
 use WowApi\Cache\Apc;
+use WowApi\Services\RealmService;
 use WowApi\Util\Helper;
 
 ini_set('display_errors', 1);
@@ -47,8 +48,7 @@ try {
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
-    $z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
-    $x = $t->characterService->getCharacter('Hyjal', 'Ardeel');
+    //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel', ['quests']);
     //$z = $t->characterService->getCharacterClasses();
     //$z = $t->characterService->getCharacterRaces();
@@ -70,8 +70,9 @@ try {
     //$z = $t->questService->getQuest(176);
     //$z = $t->realmService->getRealm('hyjal');
     //$z = $t->realmService->getRealms();
-    //$z = $t->realmService->getRealms(['hyjal', 'stormrage']);
-    //$z = $t->realmService->sortRealms('type', 'rppvp');
+    //$z = $t->realmService->filter('type', RealmService::TYPE_PVP);
+    //$z = $t->realmService->getRealmsDown();
+    //$z = $t->realmService->getRealmsWithQueue();
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->resourceService->getBattlegroups();
     //$z = $t->resourceService->getTalentTree();
@@ -84,7 +85,6 @@ try {
     //$z = $t->zoneService->getZone(4131);
     echo '<strong>Returned:</strong> ' .count($z);
     Helper::print_rci($z);
-    Helper::print_rci($x);
 } catch (WowApiException $ex) {
     echo $ex->getError();
     //Helper::print_rci($ex->getError());

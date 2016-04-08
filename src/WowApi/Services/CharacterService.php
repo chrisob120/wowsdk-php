@@ -16,6 +16,10 @@ use WowApi\Exceptions\WowApiException;
  */
 class CharacterService extends BaseService {
 
+    public function get($realms = null) {
+        
+    }
+
     /**
      * Get Character component
      *

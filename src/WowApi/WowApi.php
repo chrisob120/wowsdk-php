@@ -120,6 +120,7 @@ class WowApi {
      * @param array|null $options
      */
     public function __construct($apiKey, $options = null) {
+        /*
         $this->achievementService = new AchievementService($apiKey, $options);
         $this->auctionService = new AuctionService($apiKey, $options);
         $this->bossService = new BossService($apiKey, $options);
@@ -131,12 +132,15 @@ class WowApi {
         $this->mountService = new MountService($apiKey, $options);
         $this->petService = new PetService($apiKey, $options);
         $this->questService = new QuestService($apiKey, $options);
+        */
         $this->realmService = new RealmService($apiKey, $options);
+        /*
         $this->recipeService = new RecipeService($apiKey, $options);
         $this->resourceService = new ResourceService($apiKey, $options);
         $this->spellService = new SpellService($apiKey, $options);
         $this->userService = new UserService($apiKey, $options);
         $this->zoneService = new ZoneService($apiKey, $options);
+        */
     }
 
 }

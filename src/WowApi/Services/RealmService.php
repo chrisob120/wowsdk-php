@@ -76,7 +76,7 @@ class RealmService extends BaseService {
      * @throws WowApiException
      * @throws IllegalArgumentException
      */
-    public function get($realms = null) {
+    public function getRealms($realms = null) {
         $error = false;
 
         // realms check
@@ -116,7 +116,7 @@ class RealmService extends BaseService {
      * @throws WowApiException
      * @throws NotFoundException
      */
-    public function find($realm) {
+    public function getRealm($realm) {
         $this->setQuery(['realm' => Helper::formatSlug($realm)]);
 
         $request = parent::createRequest('GET', 'realm/status');
@@ -149,7 +149,7 @@ class RealmService extends BaseService {
         }
 
         $this->sortWhitelist = ['type', 'queue', 'status', 'population'];
-        return $this->sortData($this->get(), [$key => $val]);
+        return $this->sortData($this->getRealms(), [$key => $val]);
     }
 
     /**
