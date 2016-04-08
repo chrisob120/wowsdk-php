@@ -151,14 +151,18 @@ class RealmService extends BaseService {
     }
 
     /**
+     * Get realms that are currently down
      *
+     * @return array
      */
     public function getDownRealms() {
         $this->filter('status', self::STATUS_DOWN);
     }
 
     /**
+     * Get realms that have a queue
      *
+     * @return array
      */
     public function getRealmsWithQueue() {
         $this->filter('queue', self::QUEUE_YES);
