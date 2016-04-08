@@ -48,7 +48,7 @@ class RealmServiceUnitTest extends PHPUnit_Framework_TestCase {
      * @expectedExceptionMessage You may only choose the following sort keys
      */
     public function testSortRealmsKeyNotAllowed() {
-        $this->_access->sortRealms('cat', 'dog');
+        $this->_access->sort('cat', 'dog');
     }
 
 }
