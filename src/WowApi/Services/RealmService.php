@@ -144,6 +144,8 @@ class RealmService extends BaseService {
      * @throws IllegalArgumentException
      */
     public function sort($key, $val) {
+        $this->sortWhitelist = ['type', 'queue', 'status', 'population'];
+        
         $sortArr = [$key => $val];
         $this->checkSort($sortArr);
 
@@ -151,7 +153,6 @@ class RealmService extends BaseService {
             throw new IllegalArgumentException(sprintf('The filter value %s is not allowed.', $val));
         }
 
-        $this->sortWhitelist = ['type', 'queue', 'status', 'population'];
         return $this->sortData($this->getRealms(), $sortArr);
     }
 
