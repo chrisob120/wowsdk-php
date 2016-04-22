@@ -29,11 +29,11 @@ class NPC extends BaseComponent {
     /**
      * NPC constructor - creates the NPC object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return NPC
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

@@ -3,6 +3,7 @@
 use WowApi\Components\Bosses\Boss;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\WowApiException;
+use WowApi\Util\Helper;
 
 /**
  * Boss services
@@ -33,6 +34,6 @@ class BossService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Boss($response->getBody());
+        return new Boss($response);
     }
 }

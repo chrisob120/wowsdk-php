@@ -207,12 +207,13 @@ abstract class BaseService {
      */
     protected function doRequest($request) {
         if ($this->_cache) {
-            Helper::print_rci($this->_cache);
+            //Helper::print_rci($this->_cache);
             return $this->_cache;
         }
 
         try {
             $response = $this->_client->send($request, $this->parameters);
+            $response = json_decode($response->getBody());
         } catch (ConnectException $e) { // catch the timeout error
             throw $this->toWowApiException([$e->getMessage(), 200]);
         }
