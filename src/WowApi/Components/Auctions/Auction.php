@@ -28,7 +28,7 @@ class Auction extends BaseComponent {
      * @return Auction
      */
     public function __construct($jsonData) {
-        $data = json_decode($jsonData)->files[0];
+        $data = $jsonData->files[0];
 
         $this->url = $data->url;
         $this->lastModified = $data->lastModified;

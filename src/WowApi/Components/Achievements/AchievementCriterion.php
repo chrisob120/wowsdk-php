@@ -34,11 +34,11 @@ class AchievementCriterion extends BaseComponent {
     /**
      * AchievementCriterion constructor - creates the AchievementCriterion object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return AchievementCriterion
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

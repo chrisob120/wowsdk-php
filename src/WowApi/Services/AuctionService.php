@@ -35,6 +35,6 @@ class AuctionService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Auction($response->getBody());
+        return new Auction($response);
     }
 }

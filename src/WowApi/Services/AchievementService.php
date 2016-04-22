@@ -33,6 +33,6 @@ class AchievementService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Achievement($response->getBody());
+        return new Achievement($response);
     }
 }
