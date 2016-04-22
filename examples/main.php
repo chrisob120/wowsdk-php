@@ -22,7 +22,7 @@ $fileCache = new FileCache('../test');
 
 $options = [
     'access_token' => $accessToken,
-    'cacheEngine' => $fileCache
+   // 'cacheEngine' => $fileCache
 ];
 
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
