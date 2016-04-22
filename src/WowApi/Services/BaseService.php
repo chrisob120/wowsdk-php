@@ -207,7 +207,7 @@ abstract class BaseService {
      */
     protected function doRequest($request) {
         if ($this->_cache) {
-            //Helper::print_rci($this->_cache);
+            Helper::print_rci($this->_cache);
             return $this->_cache;
         }
 
@@ -399,7 +399,6 @@ abstract class BaseService {
                 $this->parameters[$key][$arrKey] = $value[$arrKey];
             } else {
                 $this->parameters[$key] = $value;
-                //throw new IllegalArgumentException('Parameter was set incorrectly.');
             }
         } else {
             $this->parameters[$key] = $value;
