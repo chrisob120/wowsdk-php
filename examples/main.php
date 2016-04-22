@@ -1,8 +1,8 @@
 <?php namespace WowApi;
 
+use WowApi\Cache\FileCache;
 use WowApi\Exceptions\WowApiException;
 use WowApi\Cache\Apc;
-use WowApi\Services\RealmService;
 use WowApi\Util\Helper;
 
 ini_set('display_errors', 1);
@@ -18,10 +18,11 @@ $accessToken = (isset($_SESSION['response']->access_token)) ? $_SESSION['respons
 //$accessToken = '';
 
 //$apc = new Apc();
+$fileCache = new FileCache('../test');
 
 $options = [
     'access_token' => $accessToken,
-    //'cacheEngine' => $apc
+    'cacheEngine' => $fileCache
 ];
 
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
@@ -44,7 +45,7 @@ try {
 
     //$z = $t->achievementService->getAchievement(150);
     //$z = $t->auctionService->getAuction('Hyjal');
-    //$z = $t->bossService->getBoss(24723);
+    $z = $t->bossService->getBoss(24723);
     //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
@@ -72,7 +73,7 @@ try {
     //$z = $t->realmService->getRealms();
     //$z = $t->realmService->filter('type', RealmService::TYPE_PVP);
     //$z = $t->realmService->getRealmsDown();
-    $z = $t->realmService->getRealmsWithQueue();
+    //$z = $t->realmService->getRealmsWithQueue();
     //$z = $t->recipeService->getRecipe(33994);
     //$z = $t->resourceService->getBattlegroups();
     //$z = $t->resourceService->getTalentTree();
