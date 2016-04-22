@@ -25,31 +25,21 @@ class SimpleCache extends CacheEngine {
     }
 
     /**
-     * Set the data item
-     *
-     * @param string $key
-     * @param string $val
-     * @return void
+     * {@inheritdoc}
      */
     public function set($key, $val) {
         $this->_data[$key] = $val;
     }
 
     /**
-     * Return the storage data if the key exists
-     *
-     * @param string $key
-     * @return mixed
+     * {@inheritdoc}
      */
     public function get($key) {
         return ($this->keyExists($key)) ? $this->_data[$key] : null;
     }
 
     /**
-     * Check if the key exists
-     *
-     * @param string $key
-     * @return bool
+     * {@inheritdoc}
      */
     public function keyExists($key) {
         return isset($this->_data[$key]);
