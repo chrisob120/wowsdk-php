@@ -1,8 +1,6 @@
 <?php namespace WowApi;
 
-use WowApi\Cache\FileCache;
 use WowApi\Exceptions\WowApiException;
-use WowApi\Cache\Apc;
 use WowApi\Util\Helper;
 
 ini_set('display_errors', 1);
@@ -17,12 +15,8 @@ $keys = Helper::getKeys('../test/keys.txt');
 $accessToken = (isset($_SESSION['response']->access_token)) ? $_SESSION['response']->access_token : null;
 //$accessToken = '';
 
-//$apc = new Apc();
-$fileCache = new FileCache('../test');
-
 $options = [
-    'access_token' => $accessToken,
-   // 'cacheEngine' => $fileCache
+    'access_token' => $accessToken
 ];
 
 //$options = ['region' => 'eu', 'locale' => 'en_GB'];
@@ -45,8 +39,8 @@ try {
 
     //$z = $t->achievementService->getAchievement(150);
     //$z = $t->auctionService->getAuction('Hyjal');
-    //$z = $t->bossService->getBoss(24723);
-    $z = $t->challengeService->getLadder('Hyjal');
+    $z = $t->bossService->getBoss(24723);
+    //$z = $t->challengeService->getLadder('Hyjal');
     //$z = $t->challengeService->getLadderByDungeon('Hyjal', 'Auchindoun');
     //$z = $t->challengeService->getRegionLadder();
     //$z = $t->characterService->getCharacter('Hyjal', 'Ardeel');
