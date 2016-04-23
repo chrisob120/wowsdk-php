@@ -27,6 +27,15 @@ ToDo
  }
 ```
 
-## Usage
+## Basic Usage
 
-ToDo
+To
+
+```php
+<?php
+use WowApi\WowApi;
+use WowApi\Exceptions\WowApiException;
+
+$api = new WowApi('your mashery api key');
+$api->bossService->getBoss(24723);
+```
