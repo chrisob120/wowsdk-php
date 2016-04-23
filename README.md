@@ -14,10 +14,10 @@ ToDo
 
 ## Installation
 
-### Composer
+### Installing via Composer (recommended)
 
-The recommended way to install WoW SDK is through
-[Composer](http://getcomposer.org).
+You can download Composer
+[here](http://getcomposer.org).
 
 ```bash
 # Install Composer
