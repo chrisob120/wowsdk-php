@@ -32,7 +32,6 @@ ToDo
 To
 
 ```php
-<?php
 use WowApi\WowApi;
 use WowApi\Exceptions\WowApiException;
 
