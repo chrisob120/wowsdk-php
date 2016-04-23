@@ -184,16 +184,10 @@ abstract class BaseService {
         $fullUrl = $this->_baseUri . $url;
         $this->_cache = $this->isCached($fullUrl, $this->parameters);
 
-        /* See below. Disable for now.
-         *
         // check for current request cache
-        if ($this->_cache) {
-            $cacheContent = json_decode($this->_cache->getBody());
-
-            if (isset($cacheContent->lastModified)) {
-                $this->setHeader('If-Modified-Since', gmdate(DATE_RFC1123, ($cacheContent->lastModified/1000)));
-            }
-        }*/
+        if ($this->_cache && isset($this->_cache->lastModified)) {
+            $this->setHeader('If-Modified-Since', gmdate(DATE_RFC1123, ($this->_cache->lastModified/1000)));
+        }
 
         return new Request($method, $url, $this->headers);
     }
@@ -206,9 +200,14 @@ abstract class BaseService {
      * @throws WowApiException
      */
     protected function doRequest($request) {
+        date_default_timezone_set('GMT');
+
+        // do initial check for cache
         if ($this->_cache) {
-            //Helper::print_rci($this->_cache);
-            return $this->_cache;
+            // if the previous cache time was less than 5 minutes, return cache
+            if ((time() - $this->_cache->cachedTime / 60) < 5) {
+                return $this->_cache;
+            }
         }
 
         try {
@@ -217,22 +216,18 @@ abstract class BaseService {
             throw $this->toWowApiException([$e->getMessage(), 200]);
         }
 
-        $response = json_decode($response->getBody());
+        $returnResponse = json_decode($response->getBody());
+        $returnResponse->lastModified = isset($response->getHeaders()['Last-Modified']) ? strtotime($response->getHeaders()['Last-Modified'][0]) : 0;
+        $returnResponse->cachedTime = time();
 
-        //Helper::print_rci($response->getBody()->getContents());
-
-        /*
-         * Come back to this later. Won't be affected unless there are different kinds of caching
-         *
         // check if there was updates from the API. Code 304 means 'Not Modified', so return the cache
         if ($this->_cache && $response->getStatusCode() == 304) {
-            echo 'ya11';
             return $this->_cache;
-        }*/
+        }
 
-        $this->cacheResponse($this->_baseUri . $request->getUri(), $this->parameters, $response);
+        $this->cacheResponse($this->_baseUri . $request->getUri(), $this->parameters, $returnResponse);
 
-        return $response;
+        return $returnResponse;
     }
 
     /**
@@ -244,12 +239,7 @@ abstract class BaseService {
      */
     private function isCached($url, $params) {
         $cache = $this->_cacheEngine->getCache($url, $params);
-
-        if ($cache) {
-            return $cache;
-        }
-
-        return false;
+        return ($cache) ? $cache : false;
     }
 
     /**
@@ -260,7 +250,6 @@ abstract class BaseService {
      * @param mixed $response
      */
     private function cacheResponse($url, $params, $response) {
-        $response->cacheTime = time();
         $this->_cacheEngine->setCache($url, $params, $response);
     }
 
