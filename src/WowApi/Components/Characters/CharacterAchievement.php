@@ -30,11 +30,11 @@ class CharacterAchievement extends BaseComponent {
     /**
      * CharacterAchievement constructor - creates the CharacterAchievement object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return CharacterAchievement
      */
     public function __construct($jsonData) {
-        $characterAchievement = parent::assignValues($this, json_decode($jsonData));
+        $characterAchievement = parent::assignValues($this, $jsonData);
 
         // add if statement to account for some CharacterAchievements not having an achievement
         if (isset($characterAchievement->achievements)) $characterAchievement->achievements = $this->getAchievements($characterAchievement->achievements);
@@ -50,7 +50,7 @@ class CharacterAchievement extends BaseComponent {
         $returnArr = [];
 
         foreach ($achieveArr as $achieveObj) {
-            $returnArr[] = new Achievement(json_encode($achieveObj));
+            $returnArr[] = new Achievement($achieveObj);
         }
 
         return $returnArr;
@@ -60,15 +60,15 @@ class CharacterAchievement extends BaseComponent {
     /**
      * Gets an array of CharacterAchievement items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getCharacterAchievements($jsonData) {
         $returnArr = [];
-        $characterAchievements = json_decode($jsonData)->achievements;
+        $characterAchievements = $jsonData->achievements;
 
         foreach ($characterAchievements as $achievement) {
-            $returnArr[] = new CharacterAchievement(json_encode($achievement));
+            $returnArr[] = new CharacterAchievement($achievement);
         }
 
         return $returnArr;

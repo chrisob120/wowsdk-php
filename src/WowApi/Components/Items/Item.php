@@ -215,11 +215,11 @@ class Item extends BaseComponent {
     /**
      * Item constructor - creates the Item object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Item
      */
     public function __construct($jsonData) {
-        $itemObj = parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        $itemObj = parent::assignValues($this, $jsonData, null, $default = 'remove');
         if (isset($itemObj->itemSpells)) $itemObj->itemSpells = $this->getItemSpells($itemObj->itemSpells);
         if (isset($itemObj->itemSource)) $itemObj->itemSource = $this->getItemSource($itemObj->itemSource);
         if (isset($itemObj->bonusSummary)) $itemObj->bonusSummary = $this->getBonusSummary($itemObj->bonusSummary);
@@ -236,7 +236,7 @@ class Item extends BaseComponent {
 
         if (is_array($itemSpellArr)) {
             foreach ($itemSpellArr as $itemSpell) {
-                $returnArr[] = new ItemSpell(json_encode($itemSpell));
+                $returnArr[] = new ItemSpell($itemSpell);
             }
         }
 
@@ -248,7 +248,7 @@ class Item extends BaseComponent {
      * @return ItemSource
      */
     private function getItemSource($itemSourceObj) {
-        return new ItemSource(json_encode($itemSourceObj));
+        return new ItemSource($itemSourceObj);
     }
 
     /**
@@ -256,7 +256,7 @@ class Item extends BaseComponent {
      * @return BonusSummary
      */
     private function getBonusSummary($bonusSummaryObj) {
-        return new BonusSummary(json_encode($bonusSummaryObj));
+        return new BonusSummary($bonusSummaryObj);
     }
 
 }

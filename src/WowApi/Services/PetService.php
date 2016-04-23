@@ -31,7 +31,7 @@ class PetService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Pet::getPets($response->getBody());
+        return Pet::getPets($response);
     }
 
     /**
@@ -54,7 +54,7 @@ class PetService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new PetSpecies($response->getBody());
+        return new PetSpecies($response);
     }
 
     /**
@@ -81,7 +81,7 @@ class PetService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new PetSpeciesStats($response->getBody());
+        return new PetSpeciesStats($response);
     }
 
     /**
@@ -99,7 +99,7 @@ class PetService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return PetType::getPetTypes($response->getBody());
+        return PetType::getPetTypes($response);
     }
 
 }

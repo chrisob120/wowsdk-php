@@ -213,10 +213,11 @@ abstract class BaseService {
 
         try {
             $response = $this->_client->send($request, $this->parameters);
-            $response = json_decode($response->getBody());
         } catch (ConnectException $e) { // catch the timeout error
             throw $this->toWowApiException([$e->getMessage(), 200]);
         }
+
+        $response = json_decode($response->getBody());
 
         //Helper::print_rci($response->getBody()->getContents());
 

@@ -44,25 +44,25 @@ class PetType extends BaseComponent {
     /**
      * PetAbility constructor - creates the PetAbility object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return PetType
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
     /**
      * Gets an array of PetType items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getPetTypes($jsonData) {
         $returnArr = [];
-        $petTypes = json_decode($jsonData)->petTypes;
+        $petTypes = $jsonData->petTypes;
 
         foreach ($petTypes as $petType) {
-            $returnArr[] = new PetType(json_encode($petType));
+            $returnArr[] = new PetType($petType);
         }
 
         return $returnArr;

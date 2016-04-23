@@ -33,6 +33,6 @@ class SpellService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Spell($response->getBody());
+        return new Spell($response);
     }
 }

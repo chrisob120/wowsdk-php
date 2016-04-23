@@ -89,11 +89,11 @@ class Row extends BaseComponent {
     /**
      * Row constructor - creates the Row object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Row
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

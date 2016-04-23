@@ -33,6 +33,6 @@ class RecipeService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Recipe($response->getBody());
+        return new Recipe($response);
     }
 }

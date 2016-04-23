@@ -24,11 +24,11 @@ class ItemSource extends BaseComponent {
     /**
      * ItemSource constructor - creates the ItemSource object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return ItemSource
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

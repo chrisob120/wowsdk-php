@@ -49,11 +49,11 @@ class PetAbility extends BaseComponent {
     /**
      * PetAbility constructor - creates the PetAbility object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return PetAbility
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

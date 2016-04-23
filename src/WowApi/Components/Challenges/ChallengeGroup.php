@@ -53,7 +53,7 @@ class ChallengeGroup extends BaseComponent {
      * @return ChallengeGroup
      */
     public function __construct($jsonData) {
-        $groupObj = parent::assignValues($this, json_decode($jsonData));
+        $groupObj = parent::assignValues($this, $jsonData);
         $groupObj->time = $this->getTime($groupObj->time);
         if (isset($groupObj->members)) $groupObj->members = $this->getMembers($groupObj->members);
 
@@ -65,7 +65,7 @@ class ChallengeGroup extends BaseComponent {
      * @return ChallengeTime
      */
     private function getTime($timeObj) {
-        return new ChallengeTime(json_encode($timeObj));
+        return new ChallengeTime($timeObj);
     }
 
     /**
@@ -76,7 +76,7 @@ class ChallengeGroup extends BaseComponent {
         $returnArr = [];
 
         foreach ($memberArr as $member) {
-            $returnArr[] = new ChallengeGroupMember(json_encode($member));
+            $returnArr[] = new ChallengeGroupMember($member);
         }
 
         return $returnArr;

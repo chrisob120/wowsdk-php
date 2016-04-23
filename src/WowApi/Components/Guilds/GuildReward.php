@@ -40,7 +40,7 @@ class GuildReward extends BaseComponent {
      * @return GuildReward
      */
     public function __construct($jsonData) {
-        $guildReward = parent::assignValues($this, json_decode($jsonData));
+        $guildReward = parent::assignValues($this, $jsonData);
 
         // add if statement to account for some GuildRewards not having an achievement
         if (isset($guildReward->achievement)) $guildReward->achievement = $this->getAchievement($guildReward->achievement);
@@ -54,7 +54,7 @@ class GuildReward extends BaseComponent {
      * @return Achievement
      */
     private function getAchievement($achieveObj) {
-        return new Achievement(json_encode($achieveObj));
+        return new Achievement($achieveObj);
     }
 
     /**
@@ -62,21 +62,21 @@ class GuildReward extends BaseComponent {
      * @return Item
      */
     private function getItem($itemObj) {
-        return new Item(json_encode($itemObj));
+        return new Item($itemObj);
     }
 
     /**
      * Gets an array of GuildReward items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getGuildRewards($jsonData) {
         $returnArr = [];
-        $guildRewards = json_decode($jsonData)->rewards;
+        $guildRewards = $jsonData->rewards;
 
         foreach ($guildRewards as $reward) {
-            $returnArr[] = new GuildReward(json_encode($reward));
+            $returnArr[] = new GuildReward($reward);
         }
 
         return $returnArr;

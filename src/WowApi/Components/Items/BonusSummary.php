@@ -29,11 +29,11 @@ class BonusSummary extends BaseComponent {
     /**
      * BonusSummary constructor - creates the BonusSummary object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return BonusSummary
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData), null, $param = []);
+        return parent::assignValues($this, $jsonData, null, $param = []);
     }
 
 }

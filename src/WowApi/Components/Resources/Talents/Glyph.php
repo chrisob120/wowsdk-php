@@ -43,21 +43,21 @@ class Glyph extends BaseComponent {
      * @return Glyph
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
     /**
      * Gets an array of Glyph items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getGlyphs($jsonData) {
         $returnArr = [];
-        $glyphs = json_decode($jsonData)->glyphs;
+        $glyphs = $jsonData->glyphs;
 
         foreach ($glyphs as $glyph) {
-            $returnArr[] = new Glyph(json_encode($glyph));
+            $returnArr[] = new Glyph($glyph);
         }
 
         return $returnArr;

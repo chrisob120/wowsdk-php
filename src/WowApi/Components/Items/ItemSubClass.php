@@ -24,11 +24,11 @@ class ItemSubClass extends BaseComponent {
     /**
      * ItemSubClass constructor - creates the ItemSubClass object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return ItemSubClass
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

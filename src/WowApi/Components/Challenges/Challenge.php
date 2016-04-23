@@ -35,7 +35,7 @@ class Challenge extends BaseComponent {
      * @return Challenge
      */
     public function __construct($jsonData, $region = false) {
-        $challengeObj = parent::assignValues($this, json_decode($jsonData));
+        $challengeObj = parent::assignValues($this, $jsonData);
         $challengeObj->realm = $this->getRealm($challengeObj->realm);
         $challengeObj->map = $this->getMap($challengeObj->map);
         $challengeObj->groups = $this->getGroups($challengeObj->groups);
@@ -51,7 +51,7 @@ class Challenge extends BaseComponent {
      * @return Realm
      */
     private function getRealm($realmObj) {
-        return new Realm(json_encode($realmObj));
+        return new Realm($realmObj);
     }
 
     /**
@@ -59,7 +59,7 @@ class Challenge extends BaseComponent {
      * @return ChallengeMap
      */
     private function getMap($mapObj) {
-        return new ChallengeMap(json_encode($mapObj));
+        return new ChallengeMap($mapObj);
     }
 
     /**
@@ -71,7 +71,7 @@ class Challenge extends BaseComponent {
         
         if (is_array($groupArr)) {
             foreach ($groupArr as $group) {
-                $returnArr[] = new ChallengeGroup(json_encode($group));
+                $returnArr[] = new ChallengeGroup($group);
             }
         }
 
@@ -81,18 +81,18 @@ class Challenge extends BaseComponent {
     /**
      * Gets an array of Challenge items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @param bool $region
      * @return array
      */
     public static function getChallenges($jsonData, $region = false) {
         $returnArr = [];
-        $challenges = json_decode($jsonData)->challenge;
+        $challenges = $jsonData->challenge;
 
         // sometimes the results from Blizzard are empty
         if (!empty($challenges[0]->groups)) {
             foreach ($challenges as $challenge) {
-                $returnArr[] = new Challenge(json_encode($challenge), $region);
+                $returnArr[] = new Challenge($challenge, $region);
             }
         }
 

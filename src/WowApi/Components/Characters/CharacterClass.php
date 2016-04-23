@@ -34,25 +34,25 @@ class CharacterClass extends BaseComponent {
     /**
      * CharacterClass constructor - creates the CharacterClass object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return CharacterClass
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
     /**
      * Gets an array of CharacterClass items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getCharacterClasses($jsonData) {
         $returnArr = [];
-        $characterClasses = json_decode($jsonData)->classes;
+        $characterClasses = $jsonData->classes;
 
         foreach ($characterClasses as $class) {
-            $returnArr[] = new CharacterClass(json_encode($class));
+            $returnArr[] = new CharacterClass($class);
         }
 
         return $returnArr;

@@ -34,11 +34,11 @@ class Recipe extends BaseComponent {
     /**
      * Recipe constructor - creates the Recipe object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Recipe
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

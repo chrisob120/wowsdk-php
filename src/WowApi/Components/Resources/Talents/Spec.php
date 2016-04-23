@@ -49,7 +49,7 @@ class Spec extends BaseComponent {
      * @return Spec
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

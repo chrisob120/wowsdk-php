@@ -73,7 +73,7 @@ class Guild extends BaseComponent {
      * @return Guild
      */
     public function __construct($jsonData) {
-        $guild = parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        $guild = parent::assignValues($this, $jsonData, null, $default = 'remove');
         $guild->emblem = $this->getEmblem($guild->emblem);
 
         return $guild;
@@ -84,7 +84,7 @@ class Guild extends BaseComponent {
      * @return GuildEmblem
      */
     private function getEmblem($emblem) {
-        return new GuildEmblem(json_encode($emblem));
+        return new GuildEmblem($emblem);
     }
 
 }

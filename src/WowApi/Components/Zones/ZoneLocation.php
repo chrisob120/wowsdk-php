@@ -28,7 +28,7 @@ class ZoneLocation extends BaseComponent {
      * @return ZoneLocation
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

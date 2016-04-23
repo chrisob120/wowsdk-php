@@ -34,11 +34,11 @@ class ItemSet extends BaseComponent {
     /**
      * ItemSet constructor - creates the ItemSet object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return ItemSet
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

@@ -45,11 +45,11 @@ class ItemSpell extends BaseComponent {
     /**
      * ItemSpell constructor - creates the ItemSpell object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return ItemSpell
      */
     public function __construct($jsonData) {
-        $itemSpellObj = parent::assignValues($this, json_decode($jsonData));
+        $itemSpellObj = parent::assignValues($this, $jsonData);
         $itemSpellObj->spell = $this->getSpell($itemSpellObj->spell);
 
         return $itemSpellObj;
@@ -60,7 +60,7 @@ class ItemSpell extends BaseComponent {
      * @return Spell
      */
     private function getSpell($spellObj) {
-        return new Spell(json_encode($spellObj));
+        return new Spell($spellObj);
     }
 
 }

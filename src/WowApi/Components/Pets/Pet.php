@@ -64,11 +64,11 @@ class Pet extends BaseComponent {
     /**
      * Boss constructor - creates the Boss object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Pet
      */
     public function __construct($jsonData) {
-        $petObj = parent::assignValues($this, json_decode($jsonData));
+        $petObj = parent::assignValues($this, $jsonData);
         $petObj->stats = $this->getPetStats($petObj->stats);
 
         return $petObj;
@@ -79,21 +79,21 @@ class Pet extends BaseComponent {
      * @return PetSpeciesStats
      */
     private function getPetStats($petStatsObj) {
-        return new PetSpeciesStats(json_encode($petStatsObj));
+        return new PetSpeciesStats($petStatsObj);
     }
 
     /**
      * Gets an array of Pet items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getPets($jsonData) {
         $returnArr = [];
-        $pets = json_decode($jsonData)->pets;
+        $pets = $jsonData->pets;
 
         foreach ($pets as $pet) {
-            $returnArr[] = new Pet(json_encode($pet));
+            $returnArr[] = new Pet($pet);
         }
 
         return $returnArr;

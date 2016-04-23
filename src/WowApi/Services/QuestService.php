@@ -33,6 +33,6 @@ class QuestService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Quest($response->getBody());
+        return new Quest($response);
     }
 }

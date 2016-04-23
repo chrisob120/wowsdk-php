@@ -53,18 +53,18 @@ class ChallengeMap extends BaseComponent {
      * @return ChallengeMap
      */
     public function __construct($jsonData) {
-        $challengeMapObj = parent::assignValues($this, json_decode($jsonData));
+        $challengeMapObj = parent::assignValues($this, $jsonData);
         return $this->getChallengeTimeCriteria($challengeMapObj);
     }
 
     /**
-     * @var ChallengeMap $challengeObj
+     * @var object $challengeObj
      * @return ChallengeMap
      */
     private function getChallengeTimeCriteria($challengeObj) {
-        $challengeObj->bronzeCriteria = new ChallengeTime(json_encode($challengeObj->bronzeCriteria));
-        $challengeObj->silverCriteria = new ChallengeTime(json_encode($challengeObj->silverCriteria));
-        $challengeObj->goldCriteria = new ChallengeTime(json_encode($challengeObj->goldCriteria));
+        $challengeObj->bronzeCriteria = new ChallengeTime($challengeObj->bronzeCriteria);
+        $challengeObj->silverCriteria = new ChallengeTime($challengeObj->silverCriteria);
+        $challengeObj->goldCriteria = new ChallengeTime($challengeObj->goldCriteria);
 
         return $challengeObj;
     }

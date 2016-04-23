@@ -30,7 +30,7 @@ class ChallengeGroupMember extends BaseComponent {
      * @return ChallengeGroupMember
      */
     public function __construct($jsonData) {
-        $challengeGMObj = parent::assignValues($this, json_decode($jsonData));
+        $challengeGMObj = parent::assignValues($this, $jsonData);
         $challengeGMObj->character = $this->getCharacter($challengeGMObj->character);
         $challengeGMObj->spec = $this->getSpec($challengeGMObj->spec);
 
@@ -46,8 +46,8 @@ class ChallengeGroupMember extends BaseComponent {
         if (isset($characterObj)) {
             $charBackObj = clone $characterObj;
 
-            $characterObj = new Character(json_encode($characterObj));
-            if (isset($charBackObj->spec)) $characterObj->spec = new Spec(json_encode($charBackObj->spec));
+            $characterObj = new Character($characterObj);
+            if (isset($charBackObj->spec)) $characterObj->spec = new Spec($charBackObj->spec);
             if (isset($charBackObj->guild)) $characterObj->guild = $charBackObj->guild;
             if (isset($charBackObj->guildRealm)) $characterObj->guildRealm = $charBackObj->guildRealm;
         }
@@ -60,7 +60,7 @@ class ChallengeGroupMember extends BaseComponent {
      * @return Spec
      */
     private function getSpec($specObj) {
-        if (isset($specObj)) $specObj = new Spec(json_encode($specObj));
+        if (isset($specObj)) $specObj = new Spec($specObj);
         return $specObj;
     }
 

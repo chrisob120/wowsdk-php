@@ -14,15 +14,15 @@ class Leaderboard extends BaseComponent {
     /**
      * Gets an array of Row items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getLeaderboard($jsonData) {
         $returnArr = [];
-        $rows = json_decode($jsonData)->rows;
+        $rows = $jsonData->rows;
 
         foreach ($rows as $row) {
-            $returnArr[] = new Row(json_encode($row));
+            $returnArr[] = new Row($row);
         }
 
         return $returnArr;

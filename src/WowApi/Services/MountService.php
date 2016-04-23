@@ -28,7 +28,7 @@ class MountService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Mount::getMounts($response->getBody());
+        return Mount::getMounts($response);
     }
 
     /**

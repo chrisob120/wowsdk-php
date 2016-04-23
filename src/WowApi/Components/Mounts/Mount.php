@@ -63,21 +63,21 @@ class Mount extends BaseComponent {
      * @return Mount
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
     /**
      * Gets an array of Mount items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getMounts($jsonData) {
         $returnArr = [];
-        $mounts = json_decode($jsonData)->mounts;
+        $mounts = $jsonData->mounts;
 
         foreach ($mounts as $mount) {
-            $returnArr[] = new Mount(json_encode($mount));
+            $returnArr[] = new Mount($mount);
         }
 
         return $returnArr;

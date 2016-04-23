@@ -36,7 +36,7 @@ class ZoneService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Zone($response->getBody());
+        return new Zone($response);
     }
 
     /**
@@ -55,7 +55,7 @@ class ZoneService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Zone::getZones($response->getBody());
+        return Zone::getZones($response);
     }
 
 }

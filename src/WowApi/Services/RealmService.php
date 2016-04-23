@@ -105,7 +105,7 @@ class RealmService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Realm::getRealms($response->getBody());
+        return Realm::getRealms($response);
     }
 
     /**
@@ -128,10 +128,10 @@ class RealmService extends BaseService {
         }
 
         // if there is more than one result from a getRealm request, that means it was not found. the API returns all realms if the query string search does not find one
-        if (count(json_decode($response->getBody())->realms) > 1) {
+        if (count($response->realms) > 1) {
             throw parent::toWowApiException(['Realm Not Found', 404]);
         } else {
-            return new Realm($response->getBody());
+            return new Realm($response);
         }
     }
 

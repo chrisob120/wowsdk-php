@@ -41,7 +41,7 @@ class GuildService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Guild($response->getBody());
+        return new Guild($response);
     }
 
     /**
@@ -59,7 +59,7 @@ class GuildService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return GuildReward::getGuildRewards($response->getBody());
+        return GuildReward::getGuildRewards($response);
     }
 
     /**
@@ -77,7 +77,7 @@ class GuildService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return GuildPerk::getGuildPerks($response->getBody());
+        return GuildPerk::getGuildPerks($response);
     }
 
     /**
@@ -95,7 +95,7 @@ class GuildService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return GuildAchievement::getGuildAchievements($response->getBody());
+        return GuildAchievement::getGuildAchievements($response);
     }
 
 }

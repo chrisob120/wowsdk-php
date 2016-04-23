@@ -30,11 +30,11 @@ class ItemClass extends BaseComponent {
     /**
      * ItemClass constructor - creates the ItemClass object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return ItemClass
      */
     public function __construct($jsonData) {
-        $itemClass = parent::assignValues($this, json_decode($jsonData));
+        $itemClass = parent::assignValues($this, $jsonData);
         if (isset($itemClass->subclasses)) $itemClass->subclasses = $this->getSubClasses($itemClass->subclasses);
 
         return $itemClass;
@@ -48,7 +48,7 @@ class ItemClass extends BaseComponent {
         $returnArr = [];
 
         foreach ($subClassesArr as $subClass) {
-            $returnArr[] = new ItemSubClass(json_encode($subClass));
+            $returnArr[] = new ItemSubClass($subClass);
         }
 
         return $returnArr;
@@ -57,15 +57,15 @@ class ItemClass extends BaseComponent {
     /**
      * Gets an array of ItemClass items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getItemClasses($jsonData) {
         $returnArr = [];
-        $itemClasses = json_decode($jsonData)->classes;
+        $itemClasses = $jsonData->classes;
 
         foreach ($itemClasses as $itemClass) {
-            $returnArr[] = new ItemClass(json_encode($itemClass));
+            $returnArr[] = new ItemClass($itemClass);
         }
 
         return $returnArr;

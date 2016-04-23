@@ -29,7 +29,7 @@ class GuildPerk extends BaseComponent {
      * @return GuildPerk
      */
     public function __construct($jsonData) {
-        $guildPerk = parent::assignValues($this, json_decode($jsonData));
+        $guildPerk = parent::assignValues($this, $jsonData);
         $guildPerk->spell = $this->getSpell($guildPerk->spell);
 
         return $guildPerk;
@@ -40,21 +40,21 @@ class GuildPerk extends BaseComponent {
      * @return Spell
      */
     private function getSpell($spellObj) {
-        return new Spell(json_encode($spellObj));
+        return new Spell($spellObj);
     }
 
     /**
      * Gets an array of GuildPerk items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getGuildPerks($jsonData) {
         $returnArr = [];
-        $guildPerks = json_decode($jsonData)->perks;
+        $guildPerks = $jsonData->perks;
 
         foreach ($guildPerks as $perk) {
-            $returnArr[] = new GuildPerk(json_encode($perk));
+            $returnArr[] = new GuildPerk($perk);
         }
 
         return $returnArr;

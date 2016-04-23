@@ -24,7 +24,7 @@ class Auction extends BaseComponent {
     /**
      * Auction constructor - creates the Auction object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Auction
      */
     public function __construct($jsonData) {

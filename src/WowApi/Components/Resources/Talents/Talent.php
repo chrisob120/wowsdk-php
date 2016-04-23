@@ -39,7 +39,7 @@ class Talent extends BaseComponent {
      * @return Talent
      */
     public function __construct($jsonData) {
-        $talent = parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        $talent = parent::assignValues($this, $jsonData, null, $default = 'remove');
         $talent->spell = $this->getSpell($talent->spell);
         if (isset($talent->spec)) $talent->spec = $this->getSpec($talent->spec);
 
@@ -51,7 +51,7 @@ class Talent extends BaseComponent {
      * @return Spec
      */
     private function getSpell($spellObj) {
-        return new Spell(json_encode($spellObj));
+        return new Spell($spellObj);
     }
 
     /**
@@ -59,7 +59,7 @@ class Talent extends BaseComponent {
      * @return Spec
      */
     private function getSpec($specObj) {
-        return new Spec(json_encode($specObj));
+        return new Spec($specObj);
     }
 
 }

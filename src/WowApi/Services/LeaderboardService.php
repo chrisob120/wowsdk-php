@@ -35,6 +35,6 @@ class LeaderboardService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Leaderboard::getLeaderboard($response->getBody());
+        return Leaderboard::getLeaderboard($response);
     }
 }

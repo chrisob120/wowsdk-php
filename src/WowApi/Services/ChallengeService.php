@@ -25,7 +25,7 @@ class ChallengeService extends BaseService {
      */
     public function getLadder($realm) {
         // allow for longer timeout because it's a big call
-        $this->setTimeout(15);
+        $this->setTimeout(20);
 
         $url = $this->getPath('challenge/:realm', [
             'realm' => $realm
@@ -39,7 +39,7 @@ class ChallengeService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Challenge::getChallenges($response->getBody());
+        return Challenge::getChallenges($response);
     }
 
     /**
@@ -82,7 +82,7 @@ class ChallengeService extends BaseService {
      */
     public function getRegionLadder() {
         // allow for longer timeout because it's a big call
-        $this->setTimeout(15);
+        $this->setTimeout(20);
 
         $request = parent::createRequest('GET', 'challenge/region');
 
@@ -92,7 +92,7 @@ class ChallengeService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Challenge::getChallenges($response->getBody(), $region = true);
+        return Challenge::getChallenges($response, $region = true);
     }
 
 }

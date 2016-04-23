@@ -9,6 +9,7 @@ use WowApi\Components\Resources\Talents\TalentTree;
 use GuzzleHttp\Exception\ClientException;
 use WowApi\Exceptions\IllegalArgumentException;
 use WowApi\Exceptions\WowApiException;
+use WowApi\Util\Helper;
 
 /**
  * Resource services
@@ -35,7 +36,7 @@ class ResourceService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return Battlegroup::getBattlegroups($response->getBody());
+        return Battlegroup::getBattlegroups($response);
     }
 
     /**
@@ -54,7 +55,7 @@ class ResourceService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        $buildTree = $this->buildTalentTree(json_decode($response->getBody()));
+        $buildTree = $this->buildTalentTree($response);
 
         $talentTree = new TalentTree();
         $talentTree->tree = $buildTree;
@@ -73,10 +74,11 @@ class ResourceService extends BaseService {
 
         foreach ($talentTree as $branch) {
             $branchObj = new Branch();
-            $branchObj->glyphs = $this->getGlyphs($branch->glyphs);
-            $branchObj->talents = $this->getTalents($branch->talents);
-            $branchObj->class = $branch->class;
-            $branchObj->specs = $this->getSpecs($branch->specs);
+
+            $branchObj->glyphs = isset($branch->glyphs) ? $this->getGlyphs($branch->glyphs) : [];
+            $branchObj->talents = isset($branch->talents) ? $this->getTalents($branch->talents) : [];
+            $branchObj->class = isset($branch->class) ? $branch->class : '';
+            $branchObj->specs = isset($branch->specs) ? $this->getSpecs($branch->specs) : [];
 
             $branches[] = $branchObj;
         }
@@ -94,7 +96,7 @@ class ResourceService extends BaseService {
         $returnArr = [];
 
         foreach ($glyphArr as $glyph) {
-            $returnArr[] = new Glyph(json_encode($glyph));
+            $returnArr[] = new Glyph($glyph);
         }
 
         return $returnArr;
@@ -114,7 +116,7 @@ class ResourceService extends BaseService {
             foreach ($tier as $tierTalents) {
                 $talentArr = [];
                 foreach ($tierTalents as $talent) {
-                    $talentArr[] = new Talent(json_encode($talent));
+                    $talentArr[] = new Talent($talent);
                 }
                 $rTierArr[] = $talentArr;
             }
@@ -134,7 +136,7 @@ class ResourceService extends BaseService {
         $returnArr = [];
 
         foreach ($specArr as $spec) {
-            $returnArr[] = new Spec(json_encode($spec));
+            $returnArr[] = new Spec($spec);
         }
 
         return $returnArr;

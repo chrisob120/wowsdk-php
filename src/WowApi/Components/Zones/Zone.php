@@ -110,7 +110,7 @@ class Zone extends BaseComponent {
      */
     public function __construct($jsonData) {
         // checks which method the data is coming in from. if it's a multiple zone request, there will be no 'zones' property on the response object because it gets the Zone object one by one
-        $realObj = (!property_exists(json_decode($jsonData), 'zones')) ? json_decode($jsonData) : json_decode($jsonData)->zones[0];
+        $realObj = (!property_exists($jsonData, 'zones')) ? $jsonData : $jsonData->zones[0];
         $zoneObj = parent::assignValues($this, $realObj);
 
         $zoneObj->location = $this->getZoneLocation($zoneObj->location);
@@ -129,7 +129,7 @@ class Zone extends BaseComponent {
         $returnArr = [];
 
         foreach ($bossArr as $boss) {
-            $returnArr[] = new Boss(json_encode($boss));
+            $returnArr[] = new Boss($boss);
         }
 
         return $returnArr;
@@ -140,21 +140,21 @@ class Zone extends BaseComponent {
      * @return ZoneLocation
      */
     private function getZoneLocation($zoneLocObj) {
-        return new ZoneLocation(json_encode($zoneLocObj));
+        return new ZoneLocation($zoneLocObj);
     }
 
     /**
      * Gets an array of Zone items based on which zones were sent to the method
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getZones($jsonData) {
         $returnArr = [];
-        $zones = json_decode($jsonData)->zones;
+        $zones = $jsonData->zones;
 
         foreach ($zones as $zone) {
-            $returnArr[] = new Zone(json_encode($zone));
+            $returnArr[] = new Zone($zone);
         }
 
         return $returnArr;

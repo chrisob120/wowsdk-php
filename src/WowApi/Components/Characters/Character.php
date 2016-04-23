@@ -164,11 +164,11 @@ class Character extends BaseComponent {
     /**
      * Character constructor - creates the Character object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Character
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        return parent::assignValues($this, $jsonData, null, $default = 'remove');
     }
 
 }

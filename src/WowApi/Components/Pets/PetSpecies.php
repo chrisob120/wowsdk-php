@@ -59,11 +59,11 @@ class PetSpecies extends BaseComponent {
     /**
      * PetSpecies constructor - creates the PetSpecies object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return PetSpecies
      */
     public function __construct($jsonData) {
-        $speciesObj = parent::assignValues($this, json_decode($jsonData));
+        $speciesObj = parent::assignValues($this, $jsonData);
         if (count($speciesObj->abilities)) $speciesObj->abilities = $this->getAbilities($speciesObj->abilities);
 
         return $speciesObj;
@@ -79,7 +79,7 @@ class PetSpecies extends BaseComponent {
         $returnArr = [];
 
         foreach ($abilityArr as $ability) {
-            $returnArr[] = new PetAbility(json_encode($ability));
+            $returnArr[] = new PetAbility($ability);
         }
 
         return $returnArr;

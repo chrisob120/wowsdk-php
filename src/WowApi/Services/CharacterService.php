@@ -45,7 +45,7 @@ class CharacterService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Character($response->getBody());
+        return new Character($response);
     }
 
     /**
@@ -63,7 +63,7 @@ class CharacterService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return CharacterClass::getCharacterClasses($response->getBody());
+        return CharacterClass::getCharacterClasses($response);
     }
 
     /**
@@ -81,7 +81,7 @@ class CharacterService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return CharacterRace::getCharacterRaces($response->getBody());
+        return CharacterRace::getCharacterRaces($response);
     }
 
     /**
@@ -101,6 +101,6 @@ class CharacterService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return CharacterAchievement::getCharacterAchievements($response->getBody());
+        return CharacterAchievement::getCharacterAchievements($response);
     }
 }

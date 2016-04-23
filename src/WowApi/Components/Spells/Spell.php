@@ -54,11 +54,11 @@ class Spell extends BaseComponent {
     /**
      * Spell constructor - creates the Spell object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return Spell
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData), null, $default = 'remove');
+        return parent::assignValues($this, $jsonData, null, $default = 'remove');
     }
 
 }

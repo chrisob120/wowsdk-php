@@ -35,7 +35,7 @@ class ItemService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return new Item($response->getBody());
+        return new Item($response);
     }
 
     /**
@@ -58,7 +58,7 @@ class ItemService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        $itemSet = new ItemSet($response->getBody());
+        $itemSet = new ItemSet($response);
         $itemSet->items = $this->getItemSetItems($itemSet->items);
 
         return $itemSet;
@@ -97,6 +97,6 @@ class ItemService extends BaseService {
             throw parent::toWowApiException($e);
         }
         
-        return ItemClass::getItemClasses($response->getBody());
+        return ItemClass::getItemClasses($response);
     }
 }

@@ -43,7 +43,7 @@ class GuildEmblem extends BaseComponent {
      * @return GuildEmblem
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
 }

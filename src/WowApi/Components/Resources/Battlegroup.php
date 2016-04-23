@@ -28,21 +28,21 @@ class Battlegroup extends BaseComponent {
      * @return Battlegroup
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
     /**
      * Gets an array of Battlegroup items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getBattlegroups($jsonData) {
         $returnArr = [];
-        $battlegroups = json_decode($jsonData)->battlegroups;
+        $battlegroups = $jsonData->battlegroups;
 
         foreach ($battlegroups as $battlegroup) {
-            $returnArr[] = new Battlegroup(json_encode($battlegroup));
+            $returnArr[] = new Battlegroup($battlegroup);
         }
 
         return $returnArr;

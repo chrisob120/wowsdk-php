@@ -34,25 +34,25 @@ class CharacterRace extends BaseComponent {
     /**
      * CharacterRace constructor - creates the CharacterRace object based on the returned service data
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return CharacterRace
      */
     public function __construct($jsonData) {
-        return parent::assignValues($this, json_decode($jsonData));
+        return parent::assignValues($this, $jsonData);
     }
 
     /**
      * Gets an array of CharacterRace items
      *
-     * @param string $jsonData
+     * @param object $jsonData
      * @return array
      */
     public static function getCharacterRaces($jsonData) {
         $returnArr = [];
-        $characterRaces = json_decode($jsonData)->races;
+        $characterRaces = $jsonData->races;
 
         foreach ($characterRaces as $race) {
-            $returnArr[] = new CharacterRace(json_encode($race));
+            $returnArr[] = new CharacterRace($race);
         }
 
         return $returnArr;

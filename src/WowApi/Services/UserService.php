@@ -65,7 +65,7 @@ class UserService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        return $this->getCharacters($response->getBody());
+        return $this->getCharacters($response);
     }
 
     /**
@@ -83,8 +83,6 @@ class UserService extends BaseService {
         } catch (ClientException $e) {
             throw parent::toWowApiException($e);
         }
-
-        $response = json_decode($response->getBody());
 
         if (isset($response->id)) {
             return $response->id;
@@ -109,7 +107,6 @@ class UserService extends BaseService {
             throw parent::toWowApiException($e);
         }
 
-        $response = json_decode($response->getBody());
         if (isset($response->battletag)) {
             return $response->battletag;
         } else {
@@ -145,17 +142,17 @@ class UserService extends BaseService {
      * @return array
      */
     private function getCharacters($characterArr = []) {
-        $characterArr = json_decode($characterArr)->characters;
+        $characterArr = $characterArr->characters;
         $returnArr = [];
 
         if (count($characterArr)) {
             $cnt = 0;
 
             foreach ($characterArr as $characterObj) {
-                $returnArr[$cnt] = new Character(json_encode($characterObj));
+                $returnArr[$cnt] = new Character($characterObj);
 
                 // add extra Character object features
-                if (isset($characterArr[$cnt]->spec)) $returnArr[$cnt]->spec = new Spec(json_encode($characterArr[$cnt]->spec));
+                if (isset($characterArr[$cnt]->spec)) $returnArr[$cnt]->spec = new Spec($characterArr[$cnt]->spec);
                 if (isset($characterArr[$cnt]->guild)) $returnArr[$cnt]->guild = $characterArr[$cnt]->guild;
                 if (isset($characterArr[$cnt]->guildRealm)) $returnArr[$cnt]->guildRealm = $characterArr[$cnt]->guildRealm;
 
