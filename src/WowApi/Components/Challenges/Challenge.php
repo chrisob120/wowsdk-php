@@ -36,7 +36,7 @@ class Challenge extends BaseComponent {
      */
     public function __construct($jsonData, $region = false) {
         $challengeObj = parent::assignValues($this, $jsonData);
-        $challengeObj->realm = $this->getRealm($challengeObj->realm);
+        $challengeObj->realm = isset($challengeObj->realm) ? $this->getRealm($challengeObj->realm) : '';
         $challengeObj->map = $this->getMap($challengeObj->map);
         $challengeObj->groups = $this->getGroups($challengeObj->groups);
 
