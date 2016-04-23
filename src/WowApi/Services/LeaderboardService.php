@@ -21,7 +21,7 @@ class LeaderboardService extends BaseService {
      * @throws WowApiException
      */
     public function getLeaderboard($type) {
-        $this->setTimeout(20);
+        $this->setTimeout(25);
 
         $url = $this->getPath('leaderboard/:type', [
             'type' => $type
