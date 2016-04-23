@@ -23,7 +23,7 @@ abstract class CacheEngine implements CacheInterface {
      * Default first part of the cache key
      * @var string $cacheKey
      */
-    protected $cacheKey = 'api_cache';
+    protected $cacheKey = 'wowapi_cache';
 
     /**
      * Check the engine extension if necessary
