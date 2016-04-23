@@ -82,5 +82,4 @@ try {
     Helper::print_rci($z);
 } catch (WowApiException $ex) {
     echo $ex->getError();
-    //Helper::print_rci($ex->getError());
 }
