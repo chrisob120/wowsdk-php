@@ -31,17 +31,31 @@ ToDo
 
 The WowApi class contains the services that hold the methods which allow you to access the WoW API. Basic access is quite simple and only requires your mashery API key.
 
-### Access Boss Service with default parameters
+Access Boss Service with default parameters
 ```php
 use WowApi\WowApi;
 
 $api = new WowApi('your mashery api key');
 $api->bossService->getBoss(24723);
 ```
+All optional parameters default to the US region with the 'en_US' locale. These options can be adjusted as shown below. [Here](https://dev.battle.net/docs/read/community_apis) is a list of different regions and locales.
+```php
+use WowApi\WowApi;
+
+$options = [
+    'region' => 'eu',
+    'locale' => 'en_GB'
+];
+
+$api = new WowApi('your mashery api key', $options);
+$api->bossService->getBoss(24723);
+```
+
 
 For more information, check out the [wiki](https://github.com/chrisob120/wowsdk-php/wiki) which includes:
 * [Services](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Authentication](https://github.com/chrisob120/wowsdk-php/wiki)
+* [Optional Parameters](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Examples](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Caching](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Testing](https://github.com/chrisob120/wowsdk-php/wiki)
