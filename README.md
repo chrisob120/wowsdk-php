@@ -5,7 +5,7 @@ Overview
 
 **Note:** This library utilizes [GuzzlePHP](http://guzzle.readthedocs.org/) 
 
-## Main features
+## Main Features
 
 ToDo
 
@@ -29,9 +29,9 @@ ToDo
 
 ## Basic Usage
 
-The WowApi class contains the services that hold the methods which allow you to access the WoW API. Basic access 
+The WowApi class contains the services that hold the methods which allow you to access the WoW API. Basic access is quite simple and only requires your mashery API key.
 
-### Access Boss Service with Default Parameters
+### Access Boss Service with default parameters
 ```php
 use WowApi\WowApi;
 
