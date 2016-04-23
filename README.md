@@ -37,3 +37,5 @@ use WowApi\WowApi;
 $api = new WowApi('your mashery api key');
 $api->bossService->getBoss(24723);
 ```
+
+View more examples in the [wiki](https://github.com/chrisob120/wowsdk-php/wiki)
