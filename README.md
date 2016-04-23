@@ -26,7 +26,7 @@ ToDo
         "require": {
             "chrisob120/wowsdk-php": "1.0.*"
         }
-    }
+ }
 ```
 
 ## How To Use
