@@ -23,7 +23,7 @@ class Apc extends CacheEngine {
      * {@inheritdoc}
      */
     public function set($key, $val) {
-        apc_store($key, $val, ['ttl' => 3600]);
+        apc_store($key, $val, 3600);
     }
 
     /**
