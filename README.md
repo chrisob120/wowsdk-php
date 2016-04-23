@@ -29,8 +29,9 @@ ToDo
 
 ## Basic Usage
 
-To
+The WowApi class contains the services that hold the methods which allow you to access the WoW API. Basic access 
 
+### Access Boss Service with Default Parameters
 ```php
 use WowApi\WowApi;
 
@@ -40,7 +41,7 @@ $api->bossService->getBoss(24723);
 
 For more information, check out the [wiki](https://github.com/chrisob120/wowsdk-php/wiki) which includes:
 * [Services](https://github.com/chrisob120/wowsdk-php/wiki)
-* [Examples](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Authentication](https://github.com/chrisob120/wowsdk-php/wiki)
+* [Examples](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Caching](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Testing](https://github.com/chrisob120/wowsdk-php/wiki)
