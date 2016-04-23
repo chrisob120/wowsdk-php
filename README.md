@@ -1,6 +1,9 @@
-# PHP SDK for Blizzard's WoW API [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+# PHP SDK for Blizzard's WoW API
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
 Overview
+
+**Note:** This library utilizes [GuzzlePHP](http://guzzle.readthedocs.org/) 
 
 ## Main features
 
