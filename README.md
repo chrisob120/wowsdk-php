@@ -19,31 +19,16 @@ ToDo
 
 ### Installing via Composer (recommended)
 
-You can download Composer
-[here](http://getcomposer.org).
+Composer is a dependency management tool for PHP which will allow you to easily add WoW SDK to your project. You can download Composer
+[here](http://getcomposer.org). Simply add "chrisob120/wowsdk-php" to your project's composer.json file.
 
-```bash
-# Install Composer
-curl -sS https://getcomposer.org/installer | php
+```javascript
+ {
+        "require": {
+            "chrisob120/wowsdk-php": "1.0.*"
+        }
+    }
 ```
-
-Next, run the Composer command to install the latest stable version of WoW SDK:
-
-```bash
-php composer.phar require chrisob120/wowsdk-php
-```
-
-After installing, you need to require Composer's autoloader:
-
-```php
-require 'vendor/autoload.php';
-```
-
-You can then later update WoW SDK using composer:
-
- ```bash
-composer.phar update
- ```
 
 ## How To Use
 
