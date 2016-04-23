@@ -15,9 +15,7 @@ ToDo
 * cURL
 * JSON
 
-## Installation
-
-### Installing via Composer
+## Installing via Composer
 
 [Composer](http://getcomposer.org) is a dependency management tool for PHP which will allow you to easily add WoW SDK to your project. Simply add "chrisob120/wowsdk-php" to your project's composer.json file.
 
@@ -28,12 +26,6 @@ ToDo
         }
  }
 ```
-
-### Manual Installation
-
-Download and extract the contents and the resulting "blizzard" folder to your servers vendors directory.
-
-	https://github.com/chrisob120/wowsdk-php/archive/master.zip
 
 ## Usage
 
