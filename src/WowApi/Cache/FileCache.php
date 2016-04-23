@@ -1,7 +1,4 @@
 <?php namespace WowApi\Cache;
-use GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\ResponseInterface;
-use WowApi\Util\Helper;
 
 /**
  * File caching class
@@ -58,11 +55,6 @@ class FileCache extends CacheEngine {
 
         if (isset($this->_data[$key])) {
             return $this->_data[$key];
-        }
-
-        if (file_exists($file)) {
-            $f = unserialize(file_get_contents($file));
-            return $f;
         }
 
         return (file_exists($file)) ? unserialize(file_get_contents($file)) : null;
