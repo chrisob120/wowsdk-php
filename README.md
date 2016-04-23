@@ -2,23 +2,28 @@
 
 Overview
 
-## Main features ##
+## Main features
 
 ToDo
 
-## Requirements ##
+## Requirements
 
-* Curl Extension
-* JSON encode/decode Extension
+* PHP >= 5.6
+* cURL
+* JSON
 
-## Installing ##
+## Installation
 
-ToDo
+### Composer
 
-## How To Use ##
+The recommended way to install WoW SDK is through
+[Composer](http://getcomposer.org).
 
-ToDo
+```bash
+# Install Composer
+curl -sS https://getcomposer.org/installer | php
+```
 
-## Contributing ##
+## How To Use
 
 ToDo
