@@ -1,7 +1,7 @@
 # PHP SDK for Blizzard's WoW API
 [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
-Overview
+PHP WoW SDK is an SDK to interact the World of Warcraft API.
 
 **Note:** This library utilizes [GuzzlePHP](http://guzzle.readthedocs.org/) 
 
