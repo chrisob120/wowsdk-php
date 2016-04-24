@@ -60,4 +60,4 @@ For more information, check out the [wiki](https://github.com/chrisob120/wowsdk-
 
 ## Todo
 
-* Improve Services for Common Uses
+* Improve services for common uses
