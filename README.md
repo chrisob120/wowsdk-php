@@ -50,7 +50,6 @@ $api = new WowApi('your mashery api key', $options);
 $api->bossService->getBoss(24723);
 ```
 
-
 For more information, check out the [wiki](https://github.com/chrisob120/wowsdk-php/wiki) which includes:
 * [Services](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Authentication](https://github.com/chrisob120/wowsdk-php/wiki)
@@ -58,3 +57,7 @@ For more information, check out the [wiki](https://github.com/chrisob120/wowsdk-
 * [Examples](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Caching](https://github.com/chrisob120/wowsdk-php/wiki)
 * [Testing](https://github.com/chrisob120/wowsdk-php/wiki)
+
+## Todo
+
+* Improve Services for Common Uses
