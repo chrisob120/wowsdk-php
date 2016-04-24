@@ -3,11 +3,11 @@
 
 PHP WoW SDK is an SDK to interact the World of Warcraft API.
 
-**Note:** This library utilizes [GuzzlePHP](http://guzzle.readthedocs.org/) 
+This library utilizes [GuzzlePHP](http://guzzle.readthedocs.org/) 
 
 ## Main Features
 
-ToDo
+*
 
 ## Requirements
 
