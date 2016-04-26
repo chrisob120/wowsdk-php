@@ -52,7 +52,7 @@ $api->bossService->getBoss(24723);
 
 For more information, check out the [wiki](https://github.com/chrisob120/wowsdk-php/wiki) which includes:
 * [Caching](https://github.com/chrisob120/wowsdk-php/wiki/Caching)
-* [Examples](https://github.com/chrisob120/wowsdk-php/wiki)
+* [Examples](https://github.com/chrisob120/wowsdk-php/wiki/Examples)
 * [OAuth](https://github.com/chrisob120/wowsdk-php/wiki/OAuth)
 * [Parameters](https://github.com/chrisob120/wowsdk-php/wiki/Parameters)
 * [Services](https://github.com/chrisob120/wowsdk-php/wiki/Services)
