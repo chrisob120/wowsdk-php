@@ -25,7 +25,7 @@ PHP WoW SDK is an SDK to interact the World of Warcraft API.
     * Spell
     * Zone
 * Supports Blizzard's OAuth 2 authentication process to access user profile information
-* Utilizes GuzzlePHP's LastModified header option to with caching to decrease HTTP requests
+* Utilizes GuzzlePHP's LastModified header option with caching to decrease HTTP requests
 
 ## Requirements
 
