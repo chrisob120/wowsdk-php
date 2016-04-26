@@ -7,7 +7,7 @@ PHP WoW SDK is an SDK to interact the World of Warcraft API.
 
 ## Main Features
 
-* Works with all applicable APIs (https://dev.battle.net/io-docs)
+* Services work with all applicable APIs (https://dev.battle.net/io-docs)
     * Achievement
     * Auction
     * Boss
