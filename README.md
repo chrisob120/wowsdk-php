@@ -39,9 +39,9 @@ PHP WoW SDK is an SDK to interact the World of Warcraft API.
 
 ```javascript
  {
-        "require": {
-            "chrisob120/wowsdk-php": "1.0.*"
-        }
+    "require": {
+        "chrisob120/wowsdk-php": "1.0.*"
+    }
  }
 ```
 
